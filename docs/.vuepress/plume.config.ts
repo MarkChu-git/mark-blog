@@ -1,38 +1,61 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
 
+const navbarEN = [
+  { text: 'Home', link: '/' },
+  { text: 'Blog', link: '/blog/' },
+  { text: 'Tags', link: '/blog/tags/' },
+  { text: 'Archives', link: '/blog/archives/' },
+  { text: 'Notes', link: '/notes/' },
+  { text: 'Friends', link: '/more/friends/' },
+]
+
+const navbarZH = [
+  { text: '首页', link: '/zh/' },
+  { text: '博客', link: '/zh/blog/' },
+  { text: '标签', link: '/zh/blog/tags/' },
+  { text: '归档', link: '/zh/blog/archives/' },
+  { text: '笔记', link: '/zh/notes/' },
+  { text: '友链', link: '/zh/more/friends/' },
+]
+
 export default defineThemeConfig({
-  navbar: [
-    { text: '首页', link: '/' },
-    { text: '博客', link: '/blog/' },
-    { text: '归档', link: '/blog/archives/' },
-    { text: '关于', link: '/about/' },
-  ],
-  profile: {
-    name: 'Mark',
-    description: '写代码，也记录生活。',
-    circle: true,
-  },
+  logo: '/logo.svg',
   social: [
-    { icon: 'github', link: 'https://github.com/' },
+    { icon: 'github', link: 'https://github.com/your-github' },
   ],
   search: {
     provider: 'local',
   },
-  collections: [
-    {
-      type: 'post',
-      dir: 'blog',
-      title: '博客',
-      link: '/blog/',
-      pagination: 10,
-      tags: true,
-      archives: true,
-      categories: true,
-      postCover: 'right',
-    },
-  ],
+  autoFrontmatter: false,
+  blog: {
+    include: ['blog/**/*.md', 'zh/blog/**/*.md'],
+    pagination: 10,
+    link: '/blog/',
+    tags: true,
+    archives: true,
+    categories: false,
+    postCover: 'right',
+  },
+  navbar: navbarEN,
   footer: {
-    message: 'Built with VuePress + vuepress-theme-plume',
-    copyright: `Copyright © ${new Date().getFullYear()} Mark`,
+    message: 'Powered by <a target="_blank" href="https://v2.vuepress.vuejs.org/">VuePress</a> & <a target="_blank" href="https://theme-plume.vuejs.press">vuepress-theme-plume</a>',
+  },
+  locales: {
+    '/': {
+      selectLanguageName: 'English',
+      navbar: navbarEN,
+      homeText: 'Home',
+      blogText: 'Blog',
+      tagText: 'Tags',
+      archiveText: 'Archives',
+    },
+    '/zh/': {
+      selectLanguageName: '简体中文',
+      navbar: navbarZH,
+      homeText: '首页',
+      blogText: '博客',
+      tagText: '标签',
+      archiveText: '归档',
+    },
   },
 })

@@ -5,4 +5,4 @@ config:
     onlyOnce: true
 ---
 
-<HomeReplica />
+<HomeReplica lang="zh" />
