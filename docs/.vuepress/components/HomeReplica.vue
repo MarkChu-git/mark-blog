@@ -11,21 +11,54 @@ interface IntroStat {
 }
 
 interface CharacterTrait {
+  key: string
   title: string
   desc: string
+  detail: string
 }
 
 interface SkillItem {
+  key: string
   label: string
   icon: string
   color: string
+  group: string
+  detail: string
 }
 
 interface RoutineItem {
+  key: string
   label: string
   value: number
   color: string
+  detail: string
 }
+
+interface TabItem {
+  key: string
+  label: string
+  title: string
+  accent: string
+  desc: string
+  detail: string
+}
+
+interface FocusItem {
+  key: string
+  label: string
+  title: string
+  desc: string
+  ctaLabel: string
+  href: string
+}
+
+interface QuickAction {
+  label: string
+  href: string
+  icon: string
+}
+
+type CardKey = 'intro' | 'motto' | 'pursuit' | 'character' | 'skills' | 'routine'
 
 const props = withDefaults(defineProps<{ lang?: Lang }>(), {
   lang: 'en',
@@ -35,8 +68,22 @@ const isZh = computed(() => props.lang === 'zh')
 
 const avatar = computed(() => withBase('/avatar.png'))
 
+const links = computed(() => ({
+  blog: withBase(isZh.value ? '/zh/blog/' : '/blog/'),
+  notes: withBase(isZh.value ? '/zh/notes/' : '/notes/'),
+  tags: withBase(isZh.value ? '/zh/blog/tags/' : '/blog/tags/'),
+  archives: withBase(isZh.value ? '/zh/blog/archives/' : '/blog/archives/'),
+  friends: withBase(isZh.value ? '/zh/more/friends/' : '/more/friends/'),
+}))
+
 const nowText = ref('--:--')
 let clock = 0
+const activeCard = ref<CardKey>('intro')
+const activeMotto = ref('clarity')
+const activePursuit = ref('engineering')
+const activeTrait = ref('systems')
+const activeSkill = ref('typescript')
+const activeRoutine = ref('build')
 
 const updateClock = () => {
   const formatter = new Intl.DateTimeFormat(isZh.value ? 'zh-CN' : 'en-US', {
@@ -56,6 +103,17 @@ onBeforeUnmount(() => {
   if (clock)
     window.clearInterval(clock)
 })
+
+const activateCard = (card: CardKey) => {
+  activeCard.value = card
+}
+
+const onCardKeydown = (event: KeyboardEvent, card: CardKey) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    activateCard(card)
+  }
+}
 
 const t = computed(() => ({
   introLabel: isZh.value ? '你好，很高兴认识你。' : 'Hello, nice to meet you.',
@@ -91,6 +149,8 @@ const t = computed(() => ({
     ? '把时间分给构建、写作、阅读和思考，避免被噪音稀释。'
     : 'Time goes to building, writing, reading, and thinking instead of being diluted by noise.',
   routineCenterLabel: isZh.value ? '本周' : 'This Week',
+  interactiveHint: isZh.value ? '点击查看' : 'Tap to explore',
+  activeLabel: isZh.value ? '当前焦点' : 'Current Focus',
 }))
 
 const introStats = computed<IntroStat[]>(() => [
@@ -99,58 +159,254 @@ const introStats = computed<IntroStat[]>(() => [
   { label: t.value.localTimeLabel, value: nowText.value },
 ])
 
-const characterTraits = computed<CharacterTrait[]>(() => [
+const introActions = computed<QuickAction[]>(() => [
   {
-    title: isZh.value ? '系统化思考' : 'Systems thinking',
-    desc: isZh.value ? '关注结构，而不是只看表面结果。' : 'Structure first, surface details second.',
+    label: isZh.value ? '博客文章' : 'Open Blog',
+    href: links.value.blog,
+    icon: 'mdi:arrow-top-right',
   },
   {
-    title: isZh.value ? '工程化执行' : 'Engineering execution',
-    desc: isZh.value ? '追求稳定、清楚、可维护的交付。' : 'Stable, clear, maintainable outcomes matter.',
+    label: isZh.value ? '学习笔记' : 'Read Notes',
+    href: links.value.notes,
+    icon: 'mdi:notebook-outline',
   },
   {
-    title: isZh.value ? '写作即产品' : 'Writing as product',
-    desc: isZh.value ? '内容也应该有体验设计与质量标准。' : 'Content should meet the same quality bar as products.',
+    label: isZh.value ? '标签索引' : 'Browse Tags',
+    href: links.value.tags,
+    icon: 'mdi:sitemap-outline',
   },
 ])
 
-const skills = computed<SkillItem[]>(() => [
-  { label: 'VuePress', icon: 'mdi:application-braces-outline', color: '#7f95bd' },
-  { label: 'TypeScript', icon: 'mdi:language-typescript', color: '#7088d3' },
-  { label: 'Vue', icon: 'mdi:vuejs', color: '#6b9e92' },
-  { label: 'Python', icon: 'mdi:language-python', color: '#b8aa7a' },
-  { label: 'Node.js', icon: 'mdi:nodejs', color: '#7f9b7a' },
-  { label: 'PostgreSQL', icon: 'mdi:database-outline', color: '#7f93b6' },
-  { label: 'Linux', icon: 'mdi:linux', color: '#c3a17a' },
-  { label: 'Git', icon: 'mdi:git', color: '#c58c79' },
-  { label: 'C++', icon: 'mdi:language-cpp', color: '#8f85c2' },
-  { label: 'Writing', icon: 'mdi:draw-pen', color: '#77a5b0' },
-  { label: 'Math', icon: 'mdi:function-variant', color: '#828fc4' },
-  { label: 'Notes', icon: 'mdi:notebook-outline', color: '#7d9cbd' },
+const mottoTabs = computed<TabItem[]>(() => [
+  {
+    key: 'clarity',
+    label: isZh.value ? '清晰' : 'Clarity',
+    title: isZh.value ? '先把问题讲清楚。' : 'Make the problem legible.',
+    accent: isZh.value ? '表达服务于理解。' : 'Expression should serve understanding.',
+    desc: isZh.value ? '复杂内容也应该能被清楚地阅读。' : 'Complex ideas still need a readable surface.',
+    detail: isZh.value ? '适合文章、文档与首页叙事。' : 'The default standard for writing, docs, and homepage copy.',
+  },
+  {
+    key: 'systems',
+    label: isZh.value ? '结构' : 'Systems',
+    title: isZh.value ? '先搭结构，再谈规模。' : 'Structure before scale.',
+    accent: isZh.value ? '系统感比堆砌更重要。' : 'Systems beat accumulation.',
+    desc: isZh.value ? '用信息架构而不是信息堆叠来组织内容。' : 'Organize information through architecture instead of accumulation.',
+    detail: isZh.value ? '适合导航、索引、归档与知识地图。' : 'Useful for navigation, archives, and knowledge maps.',
+  },
+  {
+    key: 'delivery',
+    label: isZh.value ? '交付' : 'Delivery',
+    title: isZh.value ? '克制，也要可交付。' : 'Restraint still has to ship.',
+    accent: isZh.value ? '稳定比炫技更值钱。' : 'Reliability outruns novelty.',
+    desc: isZh.value ? '每次更新都应该可维护、可延续。' : 'Every update should remain maintainable and extendable.',
+    detail: isZh.value ? '适合工程实现、组件系统与长期维护。' : 'Applies directly to implementation and component systems.',
+  },
 ])
+
+const activeMottoTab = computed(() => {
+  return mottoTabs.value.find(item => item.key === activeMotto.value) ?? mottoTabs.value[0]
+})
+
+const pursuitItems = computed<FocusItem[]>(() => [
+  {
+    key: 'engineering',
+    label: isZh.value ? '工程' : 'Engineering',
+    title: isZh.value ? '把系统做稳。' : 'Build robust systems.',
+    desc: isZh.value
+      ? '关注架构、质量、性能和可维护性。'
+      : 'Focus on architecture, quality, performance, and maintainability.',
+    ctaLabel: isZh.value ? '查看博客文章' : 'Read related posts',
+    href: links.value.blog,
+  },
+  {
+    key: 'mathematics',
+    label: isZh.value ? '数学' : 'Mathematics',
+    title: isZh.value ? '用模型理解复杂性。' : 'Use models to understand complexity.',
+    desc: isZh.value
+      ? '把抽象能力带回工程与表达。'
+      : 'Bring abstraction back into engineering and communication.',
+    ctaLabel: isZh.value ? '查看标签索引' : 'Browse the index',
+    href: links.value.tags,
+  },
+  {
+    key: 'writing',
+    label: isZh.value ? '写作' : 'Writing',
+    title: isZh.value ? '把经验写成可复用知识。' : 'Turn experience into reusable knowledge.',
+    desc: isZh.value
+      ? '让内容不仅可读，也能长期被检索。'
+      : 'Make content not only readable, but worth returning to later.',
+    ctaLabel: isZh.value ? '打开笔记' : 'Open notes',
+    href: links.value.notes,
+  },
+])
+
+const activePursuitItem = computed(() => {
+  return pursuitItems.value.find(item => item.key === activePursuit.value) ?? pursuitItems.value[0]
+})
+
+const characterTraits = computed<CharacterTrait[]>(() => [
+  {
+    key: 'systems',
+    title: isZh.value ? '系统化思考' : 'Systems thinking',
+    desc: isZh.value ? '关注结构，而不是只看表面结果。' : 'Structure first, surface details second.',
+    detail: isZh.value ? '适合做信息架构、模块抽象和复杂系统拆解。' : 'Useful for information architecture, modular abstraction, and complex systems decomposition.',
+  },
+  {
+    key: 'execution',
+    title: isZh.value ? '工程化执行' : 'Engineering execution',
+    desc: isZh.value ? '追求稳定、清楚、可维护的交付。' : 'Stable, clear, maintainable outcomes matter.',
+    detail: isZh.value ? '强调可维护性、边界清晰和长期可迭代。' : 'Emphasizes maintainability, clear boundaries, and long-term iteration.',
+  },
+  {
+    key: 'writing',
+    title: isZh.value ? '写作即产品' : 'Writing as product',
+    desc: isZh.value ? '内容也应该有体验设计与质量标准。' : 'Content should meet the same quality bar as products.',
+    detail: isZh.value ? '写作不是记录，而是带有结构和判断的产品化表达。' : 'Writing should feel structured and product-grade, not merely recorded.',
+  },
+])
+
+const activeTraitItem = computed(() => {
+  return characterTraits.value.find(item => item.key === activeTrait.value) ?? characterTraits.value[0]
+})
+
+const skills = computed<SkillItem[]>(() => [
+  {
+    key: 'vuepress',
+    label: 'VuePress',
+    icon: 'mdi:application-braces-outline',
+    color: '#7f95bd',
+    group: isZh.value ? '发布' : 'Publishing',
+    detail: isZh.value ? '用于构建静态内容系统和结构化文档体验。' : 'Used to build the publishing system and structure the reading experience.',
+  },
+  {
+    key: 'typescript',
+    label: 'TypeScript',
+    icon: 'mdi:language-typescript',
+    color: '#7088d3',
+    group: isZh.value ? '工程' : 'Engineering',
+    detail: isZh.value ? '让组件、交互和数据结构保持明确边界。' : 'Keeps component logic, interactions, and data structures explicit.',
+  },
+  {
+    key: 'vue',
+    label: 'Vue',
+    icon: 'mdi:vuejs',
+    color: '#6b9e92',
+    group: isZh.value ? '前端' : 'Frontend',
+    detail: isZh.value ? '承担页面状态、交互细节和组件组合。' : 'Handles view state, interaction details, and component composition.',
+  },
+  {
+    key: 'python',
+    label: 'Python',
+    icon: 'mdi:language-python',
+    color: '#b8aa7a',
+    group: isZh.value ? '工具' : 'Tooling',
+    detail: isZh.value ? '适合自动化、脚本和后端实验。' : 'Useful for automation, scripting, and backend experimentation.',
+  },
+  {
+    key: 'nodejs',
+    label: 'Node.js',
+    icon: 'mdi:nodejs',
+    color: '#7f9b7a',
+    group: isZh.value ? '工程' : 'Engineering',
+    detail: isZh.value ? '支撑前端工作流和内容构建链路。' : 'Supports the frontend workflow and site build pipeline.',
+  },
+  {
+    key: 'postgresql',
+    label: 'PostgreSQL',
+    icon: 'mdi:database-outline',
+    color: '#7f93b6',
+    group: isZh.value ? '数据' : 'Data',
+    detail: isZh.value ? '用于结构化数据建模和更严谨的业务表达。' : 'Used when structured data and stronger modeling matter.',
+  },
+  {
+    key: 'linux',
+    label: 'Linux',
+    icon: 'mdi:linux',
+    color: '#c3a17a',
+    group: isZh.value ? '环境' : 'Systems',
+    detail: isZh.value ? '作为日常开发、部署和调试的基础环境。' : 'The day-to-day environment for development, deployment, and debugging.',
+  },
+  {
+    key: 'git',
+    label: 'Git',
+    icon: 'mdi:git',
+    color: '#c58c79',
+    group: isZh.value ? '协作' : 'Collaboration',
+    detail: isZh.value ? '保证迭代可追踪、可审查、可回滚。' : 'Keeps iteration traceable, reviewable, and recoverable.',
+  },
+  {
+    key: 'cpp',
+    label: 'C++',
+    icon: 'mdi:language-cpp',
+    color: '#8f85c2',
+    group: isZh.value ? '底层' : 'Low-level',
+    detail: isZh.value ? '用于理解性能、内存和更底层的系统行为。' : 'Useful when understanding performance and lower-level behavior matters.',
+  },
+  {
+    key: 'writing',
+    label: 'Writing',
+    icon: 'mdi:draw-pen',
+    color: '#77a5b0',
+    group: isZh.value ? '表达' : 'Communication',
+    detail: isZh.value ? '把经验组织成可读、可用、可复访的内容。' : 'Turns experience into readable, reusable, and revisit-worthy content.',
+  },
+  {
+    key: 'math',
+    label: 'Math',
+    icon: 'mdi:function-variant',
+    color: '#828fc4',
+    group: isZh.value ? '思维' : 'Reasoning',
+    detail: isZh.value ? '帮助把复杂问题抽象成可验证的模型。' : 'Helps turn complexity into models that can be reasoned about clearly.',
+  },
+  {
+    key: 'notes',
+    label: 'Notes',
+    icon: 'mdi:notebook-outline',
+    color: '#7d9cbd',
+    group: isZh.value ? '知识库' : 'Knowledge Base',
+    detail: isZh.value ? '把碎片整理成长期可检索的知识资产。' : 'Turns fragments into a searchable, durable knowledge base.',
+  },
+])
+
+const activeSkillItem = computed(() => {
+  return skills.value.find(item => item.key === activeSkill.value) ?? skills.value[0]
+})
 
 const routineItems = computed<RoutineItem[]>(() => [
   {
+    key: 'build',
     label: isZh.value ? '构建' : 'Build',
     value: 40,
     color: '#7187d8',
+    detail: isZh.value ? '主要投入在实现、重构和体验打磨。' : 'Most time goes into implementation, refactoring, and UX polish.',
   },
   {
+    key: 'writing',
     label: isZh.value ? '写作' : 'Writing',
     value: 26,
     color: '#83a7d6',
+    detail: isZh.value ? '把实践整理成文章、笔记和可复访内容。' : 'Practice gets turned into posts, notes, and revisit-worthy artifacts.',
   },
   {
+    key: 'reading',
     label: isZh.value ? '阅读' : 'Reading',
     value: 18,
     color: '#9dc4bb',
+    detail: isZh.value ? '通过输入保持视野和技术判断。' : 'Input time keeps perspective and technical judgment sharp.',
   },
   {
+    key: 'thinking',
     label: isZh.value ? '思考' : 'Thinking',
     value: 16,
     color: '#d7bc86',
+    detail: isZh.value ? '留出时间抽象问题，而不是只忙于执行。' : 'Reserve time for abstraction instead of only execution.',
   },
 ])
+
+const activeRoutineItem = computed(() => {
+  return routineItems.value.find(item => item.key === activeRoutine.value) ?? routineItems.value[0]
+})
 
 const routineGradient = computed(() => {
   let current = 0
@@ -172,12 +428,31 @@ const routineGradient = computed(() => {
     </div>
 
     <section class="tahoe-grid">
-      <article class="glass-card card-intro">
+      <article
+        class="glass-card card-intro interactive-card"
+        :class="{ active: activeCard === 'intro' }"
+        tabindex="0"
+        @click="activateCard('intro')"
+        @keydown="onCardKeydown($event, 'intro')"
+      >
         <div class="card-inner intro-layout">
           <div class="intro-copy">
             <p class="card-label">{{ t.introLabel }}</p>
             <h1>{{ t.introTitle }}</h1>
             <p class="card-desc">{{ t.introDesc }}</p>
+
+            <div class="action-row">
+              <a
+                v-for="item in introActions"
+                :key="item.label"
+                :href="item.href"
+                class="inline-action"
+                @click.stop
+              >
+                {{ item.label }}
+                <Icon :icon="item.icon" />
+              </a>
+            </div>
           </div>
 
           <div class="intro-avatar">
@@ -193,18 +468,49 @@ const routineGradient = computed(() => {
         </div>
       </article>
 
-      <article class="glass-card card-motto">
+      <article
+        class="glass-card card-motto interactive-card"
+        :class="{ active: activeCard === 'motto' }"
+        tabindex="0"
+        @click="activateCard('motto')"
+        @keydown="onCardKeydown($event, 'motto')"
+      >
         <div class="card-inner">
           <p class="card-label">{{ t.mottoLabel }}</p>
           <h2 class="motto-title">
-            <span>{{ t.mottoLead }}</span>
-            <span class="gradient-text">{{ t.mottoAccent }}</span>
+            <span>{{ activeMottoTab.title }}</span>
+            <span class="gradient-text">{{ activeMottoTab.accent }}</span>
           </h2>
-          <p class="card-desc">{{ t.mottoDesc }}</p>
+          <p class="card-desc">{{ activeMottoTab.desc }}</p>
+
+          <div class="chip-switch" @click.stop>
+            <button
+              v-for="item in mottoTabs"
+              :key="item.key"
+              type="button"
+              class="chip-button"
+              :class="{ selected: activeMotto === item.key }"
+              @click="activeMotto = item.key"
+            >
+              {{ item.label }}
+            </button>
+          </div>
+
+          <div class="detail-panel">
+            <span>{{ t.activeLabel }}</span>
+            <strong>{{ activeMottoTab.label }}</strong>
+            <p>{{ activeMottoTab.detail }}</p>
+          </div>
         </div>
       </article>
 
-      <article class="glass-card card-pursuit">
+      <article
+        class="glass-card card-pursuit interactive-card"
+        :class="{ active: activeCard === 'pursuit' }"
+        tabindex="0"
+        @click="activateCard('pursuit')"
+        @keydown="onCardKeydown($event, 'pursuit')"
+      >
         <div class="card-inner">
           <p class="card-label">{{ t.pursuitLabel }}</p>
 
@@ -221,10 +527,39 @@ const routineGradient = computed(() => {
           </h2>
 
           <p class="card-desc pursuit-desc">{{ t.pursuitDesc }}</p>
+
+          <div class="chip-switch" @click.stop>
+            <button
+              v-for="item in pursuitItems"
+              :key="item.key"
+              type="button"
+              class="chip-button"
+              :class="{ selected: activePursuit === item.key }"
+              @click="activePursuit = item.key"
+            >
+              {{ item.label }}
+            </button>
+          </div>
+
+          <div class="detail-panel pursuit-panel">
+            <span>{{ activePursuitItem.label }}</span>
+            <strong>{{ activePursuitItem.title }}</strong>
+            <p>{{ activePursuitItem.desc }}</p>
+            <a :href="activePursuitItem.href" class="text-link" @click.stop>
+              {{ activePursuitItem.ctaLabel }}
+              <Icon icon="mdi:arrow-right" />
+            </a>
+          </div>
         </div>
       </article>
 
-      <article class="glass-card card-character">
+      <article
+        class="glass-card card-character interactive-card"
+        :class="{ active: activeCard === 'character' }"
+        tabindex="0"
+        @click="activateCard('character')"
+        @keydown="onCardKeydown($event, 'character')"
+      >
         <div class="card-inner character-layout">
           <div class="character-copy">
             <p class="card-label">{{ t.characterLabel }}</p>
@@ -232,10 +567,23 @@ const routineGradient = computed(() => {
             <p class="character-accent">{{ t.characterAccent }}</p>
 
             <div class="trait-list">
-              <div v-for="item in characterTraits" :key="item.title" class="trait-item">
+              <button
+                v-for="item in characterTraits"
+                :key="item.key"
+                type="button"
+                class="trait-item"
+                :class="{ selected: activeTrait === item.key }"
+                @click.stop="activeTrait = item.key"
+              >
                 <strong>{{ item.title }}</strong>
                 <span>{{ item.desc }}</span>
-              </div>
+              </button>
+            </div>
+
+            <div class="detail-panel compact">
+              <span>{{ t.activeLabel }}</span>
+              <strong>{{ activeTraitItem.title }}</strong>
+              <p>{{ activeTraitItem.detail }}</p>
             </div>
           </div>
 
@@ -248,29 +596,50 @@ const routineGradient = computed(() => {
         </div>
       </article>
 
-      <article class="glass-card card-skills">
+      <article
+        class="glass-card card-skills interactive-card"
+        :class="{ active: activeCard === 'skills' }"
+        tabindex="0"
+        @click="activateCard('skills')"
+        @keydown="onCardKeydown($event, 'skills')"
+      >
         <div class="card-inner">
           <p class="card-label">{{ t.skillsLabel }}</p>
           <h2 class="section-title">{{ t.skillsTitle }}</h2>
           <p class="card-desc">{{ t.skillsDesc }}</p>
 
           <div class="skills-grid">
-            <div
+            <button
               v-for="item in skills"
-              :key="item.label"
+              :key="item.key"
+              type="button"
               class="skill-tile"
+              :class="{ selected: activeSkill === item.key }"
               :style="{ '--skill-color': item.color }"
+              @click.stop="activeSkill = item.key"
             >
               <span class="skill-icon">
                 <Icon :icon="item.icon" />
               </span>
               <span class="skill-name">{{ item.label }}</span>
-            </div>
+            </button>
+          </div>
+
+          <div class="detail-panel skills-panel">
+            <span>{{ activeSkillItem.group }}</span>
+            <strong>{{ activeSkillItem.label }}</strong>
+            <p>{{ activeSkillItem.detail }}</p>
           </div>
         </div>
       </article>
 
-      <article class="glass-card card-routine">
+      <article
+        class="glass-card card-routine interactive-card"
+        :class="{ active: activeCard === 'routine' }"
+        tabindex="0"
+        @click="activateCard('routine')"
+        @keydown="onCardKeydown($event, 'routine')"
+      >
         <div class="card-inner">
           <p class="card-label">{{ t.routineLabel }}</p>
           <h2 class="section-title">{{ t.routineTitle }}</h2>
@@ -280,21 +649,34 @@ const routineGradient = computed(() => {
             <div class="routine-ring-wrap">
               <div class="routine-ring" :style="{ '--routine-graphic': routineGradient }">
                 <div class="routine-ring-center">
-                  <span>{{ t.routineCenterLabel }}</span>
-                  <strong>100%</strong>
+                  <span>{{ activeRoutineItem.label }}</span>
+                  <strong>{{ activeRoutineItem.value }}%</strong>
                 </div>
               </div>
             </div>
 
             <div class="routine-legend">
-              <div v-for="item in routineItems" :key="item.label" class="legend-item">
+              <button
+                v-for="item in routineItems"
+                :key="item.key"
+                type="button"
+                class="legend-item"
+                :class="{ selected: activeRoutine === item.key }"
+                @click.stop="activeRoutine = item.key"
+              >
                 <span class="legend-dot" :style="{ background: item.color }"></span>
                 <div>
                   <strong>{{ item.label }}</strong>
                   <span>{{ item.value }}%</span>
                 </div>
-              </div>
+              </button>
             </div>
+          </div>
+
+          <div class="detail-panel compact">
+            <span>{{ t.routineCenterLabel }}</span>
+            <strong>{{ activeRoutineItem.label }}</strong>
+            <p>{{ activeRoutineItem.detail }}</p>
           </div>
         </div>
       </article>
