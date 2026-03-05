@@ -65,7 +65,7 @@ const t = computed(() => ({
   badge: isZh.value ? 'Liquid Glass Interface' : 'Liquid Glass Interface',
   title: isZh.value ? 'Mark 的个人知识博客' : 'Mark\'s Knowledge Blog',
   subtitle: isZh.value
-    ? '记录工程实践、数学思维与表达训练，用清晰结构沉淀长期价值。'
+    ? '记录工程实践、数学思维与写作表达，用清晰结构沉淀长期价值。'
     : 'A structured place for engineering practice, mathematical thinking, and expressive writing.',
   primary: isZh.value ? '进入博客' : 'Open Blog',
   secondary: isZh.value ? '查看笔记' : 'Read Notes',
@@ -133,8 +133,8 @@ const focusCards = computed<FocusCard[]>(() => [
     icon: 'mdi:function-variant',
   },
   {
-    title: isZh.value ? '写作与沟通' : 'Writing and Communication',
-    desc: isZh.value ? '把技术思考转化为可复用知识。' : 'Turning technical thinking into reusable knowledge.',
+    title: isZh.value ? '技术写作' : 'Writing and Communication',
+    desc: isZh.value ? '把经验沉淀为可复用知识。' : 'Turning technical thinking into reusable knowledge.',
     icon: 'mdi:message-text-outline',
   },
 ])
@@ -165,7 +165,7 @@ const timeline = computed(() => [
   },
   {
     label: isZh.value ? 'Later' : 'Later',
-    text: isZh.value ? '形成可持续增长的知识体系。' : 'Building a sustainable personal knowledge system.',
+    text: isZh.value ? '形成长期增长的知识体系。' : 'Building a sustainable personal knowledge system.',
   },
 ])
 </script>
