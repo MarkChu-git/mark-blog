@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { withBase } from 'vuepress/client'
+import LazyPerson from './LazyPerson.vue'
 
 type Lang = 'en' | 'zh'
 
@@ -71,8 +72,6 @@ const props = withDefaults(defineProps<{ lang?: Lang }>(), {
 })
 
 const isZh = computed(() => props.lang === 'zh')
-
-const avatar = computed(() => withBase('/avatar.png'))
 
 const links = computed(() => ({
   blog: withBase(isZh.value ? '/zh/blog/' : '/blog/'),
@@ -493,13 +492,13 @@ const routineGradient = computed(() => {
               {{ t.interactiveHint }}
             </span>
           </div>
-          <div class="intro-headline">
-            <h1>Mark.</h1>
-            <div class="intro-avatar">
-              <img :src="avatar" alt="Mark avatar">
+          <div class="intro-hero">
+            <div class="intro-copy">
+              <h1>Mark.</h1>
+              <p class="card-support intro-support">{{ t.introDesc }}</p>
             </div>
+            <LazyPerson class="intro-person" />
           </div>
-          <p class="card-support intro-support">{{ t.introDesc }}</p>
           <div class="micro-stats">
             <div class="micro-stat">
               <span>{{ t.statusLabel }}</span>

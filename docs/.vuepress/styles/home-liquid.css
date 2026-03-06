@@ -19,22 +19,22 @@
   --card-label-size: 0.76rem;
   --card-meta-size: 0.72rem;
   --card-hint-size: 0.72rem;
-  --card-title-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  --hero-title-size: clamp(2.4rem, 4.5vw, 4rem);
-  --pursuit-title-size: clamp(2.4rem, 4.5vw, 3.5rem);
+  --card-title-size: clamp(1.56rem, 3vw, 2.28rem);
+  --hero-title-size: clamp(2.02rem, 3.9vw, 3.2rem);
+  --pursuit-title-size: clamp(2rem, 3.9vw, 2.88rem);
   --card-title-line: 0.91;
   --card-title-track: -0.055em;
-  --card-body-size: 1rem;
-  --card-body-line: 1.5;
-  --card-value-size: 1.1rem;
-  --card-chip-size: 0.84rem;
-  --card-chip-height: 2.2rem;
-  --detail-title-size: 1.8rem;
-  --detail-body-size: 1rem;
-  --text-link-size: 0.96rem;
-  --ring-value-size: 1.3rem;
-  --legend-title-size: 0.9rem;
-  --legend-meta-size: 0.8rem;
+  --card-body-size: 0.92rem;
+  --card-body-line: 1.42;
+  --card-value-size: 0.98rem;
+  --card-chip-size: 0.76rem;
+  --card-chip-height: 1.96rem;
+  --detail-title-size: 1.56rem;
+  --detail-body-size: 0.92rem;
+  --text-link-size: 0.88rem;
+  --ring-value-size: 1.12rem;
+  --legend-title-size: 0.82rem;
+  --legend-meta-size: 0.72rem;
 }
 
 [data-theme='dark'] {
@@ -73,9 +73,9 @@
 
 .tahoe-home {
   position: relative;
-  width: min(1260px, calc(100% - 2rem));
+  width: min(1080px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: clamp(0.85rem, 1.3vw, 1.2rem) 0 2.8rem;
+  padding: clamp(0.55rem, 0.95vw, 0.85rem) 0 2rem;
   color: var(--tahoe-text);
   font-family: 'SF Pro Text', 'SF Pro Display', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   text-rendering: optimizeLegibility;
@@ -139,17 +139,17 @@
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 12px;
+  gap: 8px;
 }
 
 .glass-card {
   position: relative;
   overflow: hidden;
-  min-height: 192px;
-  border-radius: 20px;
+  min-height: 164px;
+  border-radius: 16px;
   border: 1px solid var(--tahoe-border);
   background: linear-gradient(180deg, var(--tahoe-card-top), var(--tahoe-card-bottom));
-  box-shadow: var(--tahoe-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+  box-shadow: 0 14px 34px rgba(43, 58, 92, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.42);
   backdrop-filter: blur(26px) saturate(165%);
   -webkit-backdrop-filter: blur(26px) saturate(165%);
 }
@@ -191,8 +191,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 1.2rem;
-  padding: 24px 26px;
+  gap: 0.82rem;
+  padding: 18px 19px;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
 }
 
@@ -205,7 +205,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.9rem;
+  gap: 0.62rem;
 }
 
 .card-label {
@@ -225,7 +225,7 @@
 }
 
 .card-support {
-  margin: 0.9rem 0 0;
+  margin: 0.58rem 0 0;
   color: color-mix(in srgb, var(--tahoe-text) 84%, white);
   font-size: var(--card-body-size);
   line-height: var(--card-body-line);
@@ -240,8 +240,8 @@
 .micro-stat {
   display: grid;
   gap: 0.22rem;
-  padding: 0.8rem 0.9rem;
-  border-radius: 14px;
+  padding: 0.64rem 0.72rem;
+  border-radius: 12px;
   border: 1px solid var(--tahoe-border);
   background: rgba(255, 255, 255, 0.16);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
@@ -437,7 +437,7 @@
 .section-title,
 .character-title,
 .motto-title {
-  margin: 0.8rem 0 0;
+  margin: 0.56rem 0 0;
   font-size: var(--card-title-size);
   line-height: 1.2;
   letter-spacing: var(--card-title-track);
@@ -447,7 +447,7 @@
 
 .card-intro {
   grid-column: span 7;
-  min-height: 280px;
+  min-height: 262px;
 }
 
 .card-intro::after {
@@ -460,57 +460,68 @@
   pointer-events: none;
 }
 
-.intro-headline {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 14px;
+.intro-base {
+  gap: 0.72rem;
+}
+
+.intro-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(180px, 26%, 235px);
+  align-items: start;
+  gap: clamp(0.62rem, 1.2vw, 1rem);
   margin-top: 0.1rem;
 }
 
-.intro-headline h1 {
+.intro-copy {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  max-width: 23rem;
+}
+
+.intro-copy h1 {
   margin: 0;
-  max-width: 6ch;
-  font-size: var(--hero-title-size);
-  line-height: 1.1;
-  letter-spacing: var(--card-title-track);
-  font-weight: 520;
+  max-width: none;
+  font-size: clamp(3.5rem, 6.2vw, 4.9rem);
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+  font-weight: 540;
 }
 
 .intro-support {
-  -webkit-line-clamp: 2;
-  max-width: 30rem;
+  margin: 0;
+  -webkit-line-clamp: 3;
+  max-width: 21rem;
+  font-size: calc(var(--card-body-size) + 0.02rem);
 }
 
-.intro-avatar {
-  width: 64px;
-  height: 64px;
-  padding: 4px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.32);
-  border: 1px solid var(--tahoe-border-strong);
-  box-shadow: var(--tahoe-shadow-soft);
+.intro-person {
+  width: min(100%, 198px);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 596 / 919;
+  flex: none;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  object-fit: contain;
+  justify-self: center;
+  align-self: center;
+  margin-right: 0;
   transition: transform 0.3s ease;
 }
 
-.interactive-card:hover .intro-avatar,
-.interactive-card.active .intro-avatar {
-  transform: rotate(-6deg) translateY(-4px) scale(1.05);
-}
-
-.intro-avatar img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-  object-fit: cover;
+.interactive-card:hover .intro-person,
+.interactive-card.active .intro-person {
+  transform: translateY(-2px) scale(1.02);
 }
 
 .intro-stats.compact {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 0.9rem;
+  gap: 6px;
+  margin-top: 0.6rem;
 }
 
 .stat-pill,
@@ -523,8 +534,8 @@
 }
 
 .stat-pill {
-  padding: 9px 10px;
-  border-radius: 14px;
+  padding: 7px 8px;
+  border-radius: 12px;
 }
 
 .stat-pill span {
@@ -538,7 +549,7 @@
 
 .stat-pill strong {
   display: block;
-  margin-top: 0.35rem;
+  margin-top: 0.22rem;
   font-size: calc(var(--card-value-size) - 0.12rem);
   line-height: 1.18;
   letter-spacing: -0.02em;
@@ -546,7 +557,7 @@
 
 .card-motto {
   grid-column: span 5;
-  min-height: 252px;
+  min-height: 198px;
 }
 
 .motto-title {
@@ -556,7 +567,7 @@
 .motto-compass {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.32rem;
   margin-top: auto;
 }
 
@@ -565,7 +576,7 @@
   display: inline-flex;
   align-items: center;
   min-height: var(--card-chip-height);
-  padding: 0.48rem 0.88rem;
+  padding: 0.36rem 0.72rem;
   border-radius: 999px;
   border: 1px solid var(--tahoe-border);
   background: rgba(255, 255, 255, 0.14);
@@ -605,13 +616,13 @@
 
 .card-pursuit {
   grid-column: span 7;
-  min-height: 420px;
+  min-height: 338px;
 }
 
 .pursuit-title {
-  margin: 0.8rem 0 0;
+  margin: 0.62rem 0 0;
   display: grid;
-  gap: clamp(0.6em, 2.5vw, 1em);
+  gap: clamp(0.52em, 2vw, 0.82em);
   line-height: 1.2;
   letter-spacing: var(--card-title-track);
   font-size: var(--pursuit-title-size) !important;
@@ -658,14 +669,14 @@
 
 .card-character {
   grid-column: span 5;
-  min-height: 252px;
+  min-height: 198px;
 }
 
 .character-base {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 12px 14px;
+  gap: 8px 10px;
 }
 
 .character-copy {
@@ -683,7 +694,7 @@
 .trait-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
+  gap: 0.32rem;
   margin-top: 0.1rem;
 }
 
@@ -693,8 +704,8 @@
 
 .character-figure {
   position: relative;
-  width: 118px;
-  height: 118px;
+  width: 92px;
+  height: 92px;
   margin-left: auto;
 }
 
@@ -754,19 +765,19 @@
 
 .card-skills {
   grid-column: span 7;
-  min-height: 252px;
+  min-height: 198px;
 }
 
 .skills-preview {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 48px));
-  gap: 10px;
-  margin-top: 0.88rem;
+  grid-template-columns: repeat(4, minmax(0, 40px));
+  gap: 7px;
+  margin-top: 0.62rem;
 }
 
 .skill-preview-tile {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   display: inline-grid;
   place-items: center;
   border-radius: 16px;
@@ -777,8 +788,8 @@
 }
 
 .skill-preview-tile .iconify {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   color: var(--skill-color);
 }
 
@@ -795,13 +806,13 @@
 .skills-grid.compact {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
 }
 
 .skill-tile {
   position: relative;
-  padding: 10px 10px 9px;
-  border-radius: 14px;
+  padding: 8px 8px 7px;
+  border-radius: 12px;
   transition: transform 0.22s ease;
 }
 
@@ -822,8 +833,8 @@
 }
 
 .skill-icon {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   display: inline-grid;
   place-items: center;
   border-radius: 12px;
@@ -832,13 +843,13 @@
 }
 
 .skill-icon .iconify {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
 }
 
 .skill-name {
   display: block;
-  margin-top: 0.52rem;
+  margin-top: 0.36rem;
   font-size: calc(var(--card-body-size) - 0.14rem);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -846,18 +857,18 @@
 
 .card-routine {
   grid-column: span 5;
-  min-height: 252px;
+  min-height: 198px;
 }
 
 .routine-ring-wrap {
   display: flex;
   justify-content: center;
-  margin-top: 0.84rem;
+  margin-top: 0.6rem;
 }
 
 .routine-ring {
   position: relative;
-  width: 150px;
+  width: 122px;
   aspect-ratio: 1;
   border-radius: 999px;
   background: var(--routine-graphic);
@@ -1177,7 +1188,7 @@
     padding: 20px 22px;
   }
 
-  .intro-headline h1,
+  .intro-copy h1,
   .motto-title,
   .pursuit-title,
   .section-title,
@@ -1185,9 +1196,13 @@
     max-width: 100%;
   }
 
-  .intro-avatar {
-    width: 72px;
-    height: 72px;
+  .intro-hero {
+    grid-template-columns: minmax(0, 1fr) clamp(190px, 36%, 260px);
+    gap: 0.85rem;
+  }
+
+  .intro-person {
+    width: min(100%, 224px);
   }
 
   .intro-stats.compact,
@@ -1234,6 +1249,10 @@
     --legend-meta-size: 0.78rem;
   }
 
+  .intro-person {
+    width: min(100%, 178px);
+  }
+
   .intro-stats.compact,
   .skills-grid.compact,
   .routine-legend.compact {
@@ -1252,8 +1271,9 @@
     padding: 12px;
   }
 
-  .intro-headline {
-    align-items: center;
+  .intro-hero {
+    grid-template-columns: minmax(0, 1fr) clamp(150px, 41%, 196px);
+    gap: 0.7rem;
   }
 
   .pursuit-title {
