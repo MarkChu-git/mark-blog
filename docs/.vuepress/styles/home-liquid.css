@@ -19,9 +19,9 @@
   --card-label-size: 0.82rem;
   --card-meta-size: 0.76rem;
   --card-hint-size: 0.78rem;
-  --card-title-size: clamp(3.25rem, 4.45vw, 5.15rem);
+  --card-title-size: clamp(3.75rem, 4.95vw, 5.85rem);
   --hero-title-size: clamp(4.15rem, 6.2vw, 6.8rem);
-  --pursuit-title-size: clamp(4.2rem, 5.75vw, 6.2rem);
+  --pursuit-title-size: clamp(4.8rem, 6.2vw, 6.95rem);
   --card-title-line: 0.91;
   --card-title-track: -0.055em;
   --card-body-size: 1.18rem;
@@ -550,7 +550,7 @@
 
 .motto-title {
   margin: 0.04rem 0 0;
-  max-width: 8ch;
+  max-width: 8.8ch;
 }
 
 .motto-compass {
@@ -613,7 +613,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.18em 0.46ch;
-  max-width: 12.1ch;
+  max-width: 12.6ch;
   font-size: var(--pursuit-title-size);
   line-height: 0.87;
 }
@@ -674,7 +674,7 @@
 }
 
 .character-title {
-  max-width: 8.6ch;
+  max-width: 9.4ch;
 }
 
 .character-topline {
@@ -689,7 +689,7 @@
 }
 
 .section-title {
-  max-width: 8.5ch;
+  max-width: 9ch;
 }
 
 .character-figure {
