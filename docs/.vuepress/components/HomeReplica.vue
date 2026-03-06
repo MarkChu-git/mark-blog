@@ -59,6 +59,12 @@ interface QuickAction {
 }
 
 type CardKey = 'intro' | 'motto' | 'pursuit' | 'character' | 'skills' | 'routine'
+type CardMotionStyle = {
+  '--spot-x': string
+  '--spot-y': string
+  '--tilt-x': string
+  '--tilt-y': string
+}
 
 const props = withDefaults(defineProps<{ lang?: Lang }>(), {
   lang: 'en',
@@ -78,12 +84,28 @@ const links = computed(() => ({
 
 const nowText = ref('--:--')
 let clock = 0
-const activeCard = ref<CardKey>('intro')
+const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')
 const activePursuit = ref('engineering')
 const activeTrait = ref('systems')
 const activeSkill = ref('typescript')
 const activeRoutine = ref('build')
+
+const createCardMotion = (): CardMotionStyle => ({
+  '--spot-x': '50%',
+  '--spot-y': '50%',
+  '--tilt-x': '0deg',
+  '--tilt-y': '0deg',
+})
+
+const cardMotion = ref<Record<CardKey, CardMotionStyle>>({
+  intro: createCardMotion(),
+  motto: createCardMotion(),
+  pursuit: createCardMotion(),
+  character: createCardMotion(),
+  skills: createCardMotion(),
+  routine: createCardMotion(),
+})
 
 const updateClock = () => {
   const formatter = new Intl.DateTimeFormat(isZh.value ? 'zh-CN' : 'en-US', {
@@ -105,7 +127,7 @@ onBeforeUnmount(() => {
 })
 
 const activateCard = (card: CardKey) => {
-  activeCard.value = card
+  activeCard.value = activeCard.value === card ? null : card
 }
 
 const onCardKeydown = (event: KeyboardEvent, card: CardKey) => {
@@ -114,6 +136,29 @@ const onCardKeydown = (event: KeyboardEvent, card: CardKey) => {
     activateCard(card)
   }
 }
+
+const updateCardMotion = (event: MouseEvent, card: CardKey) => {
+  const target = event.currentTarget
+
+  if (!(target instanceof HTMLElement))
+    return
+
+  const rect = target.getBoundingClientRect()
+  const x = (event.clientX - rect.left) / rect.width
+  const y = (event.clientY - rect.top) / rect.height
+  const state = cardMotion.value[card]
+
+  state['--spot-x'] = `${(x * 100).toFixed(2)}%`
+  state['--spot-y'] = `${(y * 100).toFixed(2)}%`
+  state['--tilt-x'] = `${((0.5 - y) * 5.8).toFixed(2)}deg`
+  state['--tilt-y'] = `${((x - 0.5) * 6.8).toFixed(2)}deg`
+}
+
+const resetCardMotion = (card: CardKey) => {
+  cardMotion.value[card] = createCardMotion()
+}
+
+const cardStyle = (card: CardKey) => cardMotion.value[card]
 
 const t = computed(() => ({
   introLabel: isZh.value ? '你好，很高兴认识你。' : 'Hello, nice to meet you.',
@@ -149,7 +194,7 @@ const t = computed(() => ({
     ? '把时间分给构建、写作、阅读和思考，避免被噪音稀释。'
     : 'Time goes to building, writing, reading, and thinking instead of being diluted by noise.',
   routineCenterLabel: isZh.value ? '本周' : 'This Week',
-  interactiveHint: isZh.value ? '点击查看' : 'Tap to explore',
+  interactiveHint: isZh.value ? '悬停 / 点击' : 'Hover / Click',
   activeLabel: isZh.value ? '当前焦点' : 'Current Focus',
 }))
 
@@ -373,6 +418,8 @@ const activeSkillItem = computed(() => {
   return skills.value.find(item => item.key === activeSkill.value) ?? skills.value[0]
 })
 
+const skillPreview = computed(() => skills.value.slice(0, 8))
+
 const routineItems = computed<RoutineItem[]>(() => [
   {
     key: 'build',
@@ -431,39 +478,63 @@ const routineGradient = computed(() => {
       <article
         class="glass-card card-intro interactive-card"
         :class="{ active: activeCard === 'intro' }"
+        :style="cardStyle('intro')"
         tabindex="0"
         @click="activateCard('intro')"
         @keydown="onCardKeydown($event, 'intro')"
+        @mousemove="updateCardMotion($event, 'intro')"
+        @mouseleave="resetCardMotion('intro')"
       >
-        <div class="card-inner intro-layout">
-          <div class="intro-copy">
+        <div class="card-base intro-base">
+          <div class="card-topline">
             <p class="card-label">{{ t.introLabel }}</p>
-            <h1>{{ t.introTitle }}</h1>
-            <p class="card-desc">{{ t.introDesc }}</p>
-
-            <div class="action-row">
-              <a
-                v-for="item in introActions"
-                :key="item.label"
-                :href="item.href"
-                class="inline-action"
-                @click.stop
-              >
-                {{ item.label }}
-                <Icon :icon="item.icon" />
-              </a>
+            <span class="card-hint">
+              <Icon icon="mdi:cursor-default-click-outline" />
+              {{ t.interactiveHint }}
+            </span>
+          </div>
+          <div class="intro-headline">
+            <h1>Mark.</h1>
+            <div class="intro-avatar">
+              <img :src="avatar" alt="Mark avatar">
             </div>
           </div>
-
-          <div class="intro-avatar">
-            <img :src="avatar" alt="Mark avatar">
+          <p class="card-support intro-support">{{ t.introDesc }}</p>
+          <div class="micro-stats">
+            <div class="micro-stat">
+              <span>{{ t.statusLabel }}</span>
+              <strong>{{ t.statusValue }}</strong>
+            </div>
+            <div class="micro-stat">
+              <span>{{ t.localTimeLabel }}</span>
+              <strong>{{ nowText }}</strong>
+            </div>
           </div>
         </div>
 
-        <div class="intro-stats">
-          <div v-for="item in introStats" :key="item.label" class="stat-pill">
-            <span>{{ item.label }}</span>
-            <strong>{{ item.value }}</strong>
+        <div class="card-reveal intro-reveal" @click.stop>
+          <button type="button" class="card-reveal-close" @click.stop="activateCard('intro')">
+            <Icon icon="mdi:close" />
+          </button>
+          <p class="card-detail">{{ t.introDesc }}</p>
+
+          <div class="intro-stats compact">
+            <div v-for="item in introStats" :key="item.label" class="stat-pill">
+              <span>{{ item.label }}</span>
+              <strong>{{ item.value }}</strong>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <a
+              v-for="item in introActions"
+              :key="item.label"
+              :href="item.href"
+              class="inline-action"
+            >
+              {{ item.label }}
+              <Icon :icon="item.icon" />
+            </a>
           </div>
         </div>
       </article>
@@ -471,19 +542,43 @@ const routineGradient = computed(() => {
       <article
         class="glass-card card-motto interactive-card"
         :class="{ active: activeCard === 'motto' }"
+        :style="cardStyle('motto')"
         tabindex="0"
         @click="activateCard('motto')"
         @keydown="onCardKeydown($event, 'motto')"
+        @mousemove="updateCardMotion($event, 'motto')"
+        @mouseleave="resetCardMotion('motto')"
       >
-        <div class="card-inner">
-          <p class="card-label">{{ t.mottoLabel }}</p>
+        <div class="card-base">
+          <div class="card-topline">
+            <p class="card-label">{{ t.mottoLabel }}</p>
+            <span class="card-hint">
+              <Icon icon="mdi:gesture-tap-button" />
+              {{ t.interactiveHint }}
+            </span>
+          </div>
           <h2 class="motto-title">
-            <span>{{ activeMottoTab.title }}</span>
-            <span class="gradient-text">{{ activeMottoTab.accent }}</span>
+            <span>{{ t.mottoLead }}</span>
+            <span class="gradient-text">{{ t.mottoAccent }}</span>
           </h2>
-          <p class="card-desc">{{ activeMottoTab.desc }}</p>
+          <p class="card-support">{{ t.mottoDesc }}</p>
+          <div class="motto-compass" aria-hidden="true">
+            <span
+              v-for="item in mottoTabs"
+              :key="item.key"
+              class="motto-chip"
+              :class="{ active: activeMotto === item.key }"
+            >
+              {{ item.label }}
+            </span>
+          </div>
+        </div>
 
-          <div class="chip-switch" @click.stop>
+        <div class="card-reveal" @click.stop>
+          <button type="button" class="card-reveal-close" @click.stop="activateCard('motto')">
+            <Icon icon="mdi:close" />
+          </button>
+          <div class="chip-switch">
             <button
               v-for="item in mottoTabs"
               :key="item.key"
@@ -498,7 +593,8 @@ const routineGradient = computed(() => {
 
           <div class="detail-panel">
             <span>{{ t.activeLabel }}</span>
-            <strong>{{ activeMottoTab.label }}</strong>
+            <strong>{{ activeMottoTab.title }}</strong>
+            <p>{{ activeMottoTab.desc }}</p>
             <p>{{ activeMottoTab.detail }}</p>
           </div>
         </div>
@@ -507,28 +603,43 @@ const routineGradient = computed(() => {
       <article
         class="glass-card card-pursuit interactive-card"
         :class="{ active: activeCard === 'pursuit' }"
+        :style="cardStyle('pursuit')"
         tabindex="0"
         @click="activateCard('pursuit')"
         @keydown="onCardKeydown($event, 'pursuit')"
+        @mousemove="updateCardMotion($event, 'pursuit')"
+        @mouseleave="resetCardMotion('pursuit')"
       >
-        <div class="card-inner">
-          <p class="card-label">{{ t.pursuitLabel }}</p>
-
+        <div class="card-base">
+          <div class="card-topline">
+            <p class="card-label">{{ t.pursuitLabel }}</p>
+            <span class="card-hint">
+              <Icon icon="mdi:arrow-expand-all" />
+              {{ t.interactiveHint }}
+            </span>
+          </div>
           <h2 class="pursuit-title" v-if="isZh">
-            在<span class="tone-cyan">工程</span>、<span class="tone-blue">数学</span>与<span class="tone-violet">写作</span>的交叉处，
-            理解复杂系统。
+            <span class="pursuit-token tone-cyan">工程</span>
+            <span class="pursuit-token tone-blue">数学</span>
+            <span class="pursuit-token tone-violet">写作</span>
           </h2>
-
           <h2 class="pursuit-title" v-else>
-            Exploring the intersection of
-            <span class="tone-cyan">engineering</span>,
-            <span class="tone-blue">mathematics</span>, and
-            <span class="tone-violet">writing</span> to understand complex systems.
+            <span class="pursuit-token tone-cyan">Engineering</span>
+            <span class="pursuit-token tone-blue">Mathematics</span>
+            <span class="pursuit-token tone-violet">Writing</span>
           </h2>
+          <p class="card-support">{{ activePursuitItem.desc }}</p>
+          <div class="card-inline-state">
+            <span>{{ activePursuitItem.label }}</span>
+            <strong>{{ activePursuitItem.title }}</strong>
+          </div>
+        </div>
 
-          <p class="card-desc pursuit-desc">{{ t.pursuitDesc }}</p>
-
-          <div class="chip-switch" @click.stop>
+        <div class="card-reveal" @click.stop>
+          <button type="button" class="card-reveal-close" @click.stop="activateCard('pursuit')">
+            <Icon icon="mdi:close" />
+          </button>
+          <div class="chip-switch">
             <button
               v-for="item in pursuitItems"
               :key="item.key"
@@ -545,7 +656,7 @@ const routineGradient = computed(() => {
             <span>{{ activePursuitItem.label }}</span>
             <strong>{{ activePursuitItem.title }}</strong>
             <p>{{ activePursuitItem.desc }}</p>
-            <a :href="activePursuitItem.href" class="text-link" @click.stop>
+            <a :href="activePursuitItem.href" class="text-link">
               {{ activePursuitItem.ctaLabel }}
               <Icon icon="mdi:arrow-right" />
             </a>
@@ -556,34 +667,34 @@ const routineGradient = computed(() => {
       <article
         class="glass-card card-character interactive-card"
         :class="{ active: activeCard === 'character' }"
+        :style="cardStyle('character')"
         tabindex="0"
         @click="activateCard('character')"
         @keydown="onCardKeydown($event, 'character')"
+        @mousemove="updateCardMotion($event, 'character')"
+        @mouseleave="resetCardMotion('character')"
       >
-        <div class="card-inner character-layout">
-          <div class="character-copy">
+        <div class="card-base character-base">
+          <div class="card-topline character-topline">
             <p class="card-label">{{ t.characterLabel }}</p>
-            <h2 class="character-title">{{ t.characterTitle }}</h2>
-            <p class="character-accent">{{ t.characterAccent }}</p>
+            <span class="card-hint">
+              <Icon icon="mdi:gesture-double-tap" />
+              {{ t.interactiveHint }}
+            </span>
+          </div>
 
-            <div class="trait-list">
-              <button
+          <div class="character-copy">
+            <h2 class="character-title">{{ t.characterTitle }}</h2>
+            <p class="card-support">{{ activeTraitItem.desc }}</p>
+            <div class="trait-pills" aria-hidden="true">
+              <span
                 v-for="item in characterTraits"
                 :key="item.key"
-                type="button"
-                class="trait-item"
-                :class="{ selected: activeTrait === item.key }"
-                @click.stop="activeTrait = item.key"
+                class="trait-pill"
+                :class="{ active: activeTrait === item.key }"
               >
-                <strong>{{ item.title }}</strong>
-                <span>{{ item.desc }}</span>
-              </button>
-            </div>
-
-            <div class="detail-panel compact">
-              <span>{{ t.activeLabel }}</span>
-              <strong>{{ activeTraitItem.title }}</strong>
-              <p>{{ activeTraitItem.detail }}</p>
+                {{ item.title }}
+              </span>
             </div>
           </div>
 
@@ -594,21 +705,74 @@ const routineGradient = computed(() => {
             <span class="figure-pulse"></span>
           </div>
         </div>
+
+        <div class="card-reveal" @click.stop>
+          <button type="button" class="card-reveal-close" @click.stop="activateCard('character')">
+            <Icon icon="mdi:close" />
+          </button>
+          <div class="trait-list compact">
+            <button
+              v-for="item in characterTraits"
+              :key="item.key"
+              type="button"
+              class="trait-item"
+              :class="{ selected: activeTrait === item.key }"
+              @click="activeTrait = item.key"
+            >
+              <strong>{{ item.title }}</strong>
+              <span>{{ item.desc }}</span>
+            </button>
+          </div>
+
+          <div class="detail-panel compact">
+            <span>{{ t.activeLabel }}</span>
+            <strong>{{ activeTraitItem.title }}</strong>
+            <p>{{ activeTraitItem.detail }}</p>
+          </div>
+        </div>
       </article>
 
       <article
         class="glass-card card-skills interactive-card"
         :class="{ active: activeCard === 'skills' }"
+        :style="cardStyle('skills')"
         tabindex="0"
         @click="activateCard('skills')"
         @keydown="onCardKeydown($event, 'skills')"
+        @mousemove="updateCardMotion($event, 'skills')"
+        @mouseleave="resetCardMotion('skills')"
       >
-        <div class="card-inner">
-          <p class="card-label">{{ t.skillsLabel }}</p>
+        <div class="card-base">
+          <div class="card-topline">
+            <p class="card-label">{{ t.skillsLabel }}</p>
+            <span class="card-hint">
+              <Icon icon="mdi:apps" />
+              {{ t.interactiveHint }}
+            </span>
+          </div>
           <h2 class="section-title">{{ t.skillsTitle }}</h2>
-          <p class="card-desc">{{ t.skillsDesc }}</p>
 
-          <div class="skills-grid">
+          <div class="skills-preview">
+            <span
+              v-for="item in skillPreview"
+              :key="item.key"
+              class="skill-preview-tile"
+              :style="{ '--skill-color': item.color }"
+            >
+              <Icon :icon="item.icon" />
+            </span>
+          </div>
+          <div class="card-inline-state skill-state">
+            <span>{{ activeSkillItem.group }}</span>
+            <strong>{{ activeSkillItem.label }}</strong>
+          </div>
+        </div>
+
+        <div class="card-reveal" @click.stop>
+          <button type="button" class="card-reveal-close" @click.stop="activateCard('skills')">
+            <Icon icon="mdi:close" />
+          </button>
+          <div class="skills-grid compact">
             <button
               v-for="item in skills"
               :key="item.key"
@@ -616,7 +780,7 @@ const routineGradient = computed(() => {
               class="skill-tile"
               :class="{ selected: activeSkill === item.key }"
               :style="{ '--skill-color': item.color }"
-              @click.stop="activeSkill = item.key"
+              @click="activeSkill = item.key"
             >
               <span class="skill-icon">
                 <Icon :icon="item.icon" />
@@ -636,45 +800,60 @@ const routineGradient = computed(() => {
       <article
         class="glass-card card-routine interactive-card"
         :class="{ active: activeCard === 'routine' }"
+        :style="cardStyle('routine')"
         tabindex="0"
         @click="activateCard('routine')"
         @keydown="onCardKeydown($event, 'routine')"
+        @mousemove="updateCardMotion($event, 'routine')"
+        @mouseleave="resetCardMotion('routine')"
       >
-        <div class="card-inner">
-          <p class="card-label">{{ t.routineLabel }}</p>
+        <div class="card-base">
+          <div class="card-topline">
+            <p class="card-label">{{ t.routineLabel }}</p>
+            <span class="card-hint">
+              <Icon icon="mdi:chart-donut" />
+              {{ t.interactiveHint }}
+            </span>
+          </div>
           <h2 class="section-title">{{ t.routineTitle }}</h2>
-          <p class="card-desc">{{ t.routineDesc }}</p>
 
-          <div class="routine-layout">
-            <div class="routine-ring-wrap">
-              <div class="routine-ring" :style="{ '--routine-graphic': routineGradient }">
-                <div class="routine-ring-center">
-                  <span>{{ activeRoutineItem.label }}</span>
-                  <strong>{{ activeRoutineItem.value }}%</strong>
-                </div>
+          <div class="routine-ring-wrap">
+            <div class="routine-ring" :style="{ '--routine-graphic': routineGradient }">
+              <div class="routine-ring-center">
+                <span>{{ activeRoutineItem.label }}</span>
+                <strong>{{ activeRoutineItem.value }}%</strong>
               </div>
             </div>
+          </div>
+          <div class="card-inline-state">
+            <span>{{ t.activeLabel }}</span>
+            <strong>{{ activeRoutineItem.label }}</strong>
+          </div>
+        </div>
 
-            <div class="routine-legend">
-              <button
-                v-for="item in routineItems"
-                :key="item.key"
-                type="button"
-                class="legend-item"
-                :class="{ selected: activeRoutine === item.key }"
-                @click.stop="activeRoutine = item.key"
-              >
-                <span class="legend-dot" :style="{ background: item.color }"></span>
-                <div>
-                  <strong>{{ item.label }}</strong>
-                  <span>{{ item.value }}%</span>
-                </div>
-              </button>
-            </div>
+        <div class="card-reveal" @click.stop>
+          <button type="button" class="card-reveal-close" @click.stop="activateCard('routine')">
+            <Icon icon="mdi:close" />
+          </button>
+          <div class="routine-legend compact">
+            <button
+              v-for="item in routineItems"
+              :key="item.key"
+              type="button"
+              class="legend-item"
+              :class="{ selected: activeRoutine === item.key }"
+              @click="activeRoutine = item.key"
+            >
+              <span class="legend-dot" :style="{ background: item.color }"></span>
+              <div>
+                <strong>{{ item.label }}</strong>
+                <span>{{ item.value }}%</span>
+              </div>
+            </button>
           </div>
 
           <div class="detail-panel compact">
-            <span>{{ t.routineCenterLabel }}</span>
+            <span>{{ t.activeLabel }}</span>
             <strong>{{ activeRoutineItem.label }}</strong>
             <p>{{ activeRoutineItem.detail }}</p>
           </div>
