@@ -1,6 +1,7 @@
 import { defineClientConfig } from 'vuepress/client'
 import FriendsReplica from './components/FriendsReplica.vue'
 import HomeReplica from './components/HomeReplica.vue'
+import './styles/article-float.css'
 import './styles/home-liquid.css'
 import './styles/replica.css'
 
