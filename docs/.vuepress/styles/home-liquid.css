@@ -16,25 +16,25 @@
   --tahoe-blue: #6b84cb;
   --tahoe-violet: #8f83c6;
   --tahoe-amber: #cbb27d;
-  --card-label-size: 0.82rem;
-  --card-meta-size: 0.76rem;
-  --card-hint-size: 0.78rem;
-  --card-title-size: clamp(3.75rem, 4.95vw, 5.85rem);
-  --hero-title-size: clamp(4.15rem, 6.2vw, 6.8rem);
-  --pursuit-title-size: clamp(4.8rem, 6.2vw, 6.95rem);
+  --card-label-size: 0.76rem;
+  --card-meta-size: 0.72rem;
+  --card-hint-size: 0.72rem;
+  --card-title-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  --hero-title-size: clamp(2.4rem, 4.5vw, 4rem);
+  --pursuit-title-size: clamp(2.4rem, 4.5vw, 3.5rem);
   --card-title-line: 0.91;
   --card-title-track: -0.055em;
-  --card-body-size: 1.18rem;
-  --card-body-line: 1.48;
-  --card-value-size: 1.3rem;
-  --card-chip-size: 0.94rem;
-  --card-chip-height: 2.7rem;
-  --detail-title-size: 2.36rem;
-  --detail-body-size: 1.14rem;
-  --text-link-size: 1.08rem;
-  --ring-value-size: 1.68rem;
-  --legend-title-size: 1rem;
-  --legend-meta-size: 0.9rem;
+  --card-body-size: 1rem;
+  --card-body-line: 1.5;
+  --card-value-size: 1.1rem;
+  --card-chip-size: 0.84rem;
+  --card-chip-height: 2.2rem;
+  --detail-title-size: 1.8rem;
+  --detail-body-size: 1rem;
+  --text-link-size: 0.96rem;
+  --ring-value-size: 1.3rem;
+  --legend-title-size: 0.9rem;
+  --legend-meta-size: 0.8rem;
 }
 
 [data-theme='dark'] {
@@ -191,8 +191,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 0.82rem;
-  padding: 18px 20px;
+  gap: 1.2rem;
+  padding: 24px 26px;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease;
 }
 
@@ -220,16 +220,16 @@
 .card-detail {
   margin: 0;
   color: var(--tahoe-text);
-  font-size: var(--card-body-size);
-  line-height: 1.62;
+  font-size: calc(var(--card-body-size) + 0.02rem);
+  line-height: 1.64;
 }
 
 .card-support {
-  margin: 0.78rem 0 0;
+  margin: 0.9rem 0 0;
   color: color-mix(in srgb, var(--tahoe-text) 84%, white);
   font-size: var(--card-body-size);
   line-height: var(--card-body-line);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.018em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -240,7 +240,7 @@
 .micro-stat {
   display: grid;
   gap: 0.22rem;
-  padding: 0.72rem 0.84rem;
+  padding: 0.8rem 0.9rem;
   border-radius: 14px;
   border: 1px solid var(--tahoe-border);
   background: rgba(255, 255, 255, 0.16);
@@ -263,8 +263,8 @@
 .card-inline-state strong,
 .micro-stat strong {
   font-size: var(--card-value-size);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  line-height: 1.12;
+  letter-spacing: -0.028em;
 }
 
 .micro-stats {
@@ -436,18 +436,18 @@
 
 .section-title,
 .character-title,
-.motto-title,
-.pursuit-title {
-  margin: 0.5rem 0 0;
+.motto-title {
+  margin: 0.8rem 0 0;
   font-size: var(--card-title-size);
-  line-height: var(--card-title-line);
+  line-height: 1.2;
   letter-spacing: var(--card-title-track);
+  font-weight: 520;
   text-wrap: balance;
 }
 
 .card-intro {
   grid-column: span 7;
-  min-height: 206px;
+  min-height: 280px;
 }
 
 .card-intro::after {
@@ -472,8 +472,9 @@
   margin: 0;
   max-width: 6ch;
   font-size: var(--hero-title-size);
-  line-height: 0.88;
-  letter-spacing: -0.07em;
+  line-height: 1.1;
+  letter-spacing: var(--card-title-track);
+  font-weight: 520;
 }
 
 .intro-support {
@@ -545,12 +546,11 @@
 
 .card-motto {
   grid-column: span 5;
-  min-height: 196px;
+  min-height: 252px;
 }
 
 .motto-title {
-  margin: 0.04rem 0 0;
-  max-width: 8.8ch;
+  margin: 0.08rem 0 0;
 }
 
 .motto-compass {
@@ -605,29 +605,28 @@
 
 .card-pursuit {
   grid-column: span 7;
-  min-height: 190px;
+  min-height: 420px;
 }
 
 .pursuit-title {
-  margin: 0.48rem 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.18em 0.46ch;
-  max-width: 12.6ch;
-  font-size: var(--pursuit-title-size);
-  line-height: 0.87;
+  margin: 0.8rem 0 0;
+  display: grid;
+  gap: clamp(0.6em, 2.5vw, 1em);
+  line-height: 1.2;
+  letter-spacing: var(--card-title-track);
+  font-size: var(--pursuit-title-size) !important;
+  font-weight: 520;
 }
 
 .pursuit-token {
-  display: inline-flex;
-  align-items: center;
+  display: block;
+  font-size: inherit !important;
+  font-weight: 520;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), filter 0.28s ease;
 }
 
 .pursuit-token:not(:last-child)::after {
-  content: '·';
-  margin-left: 0.35ch;
-  color: color-mix(in srgb, var(--tahoe-text) 54%, transparent);
+  display: none;
 }
 
 .card-pursuit:hover .pursuit-token:nth-child(1),
@@ -659,7 +658,7 @@
 
 .card-character {
   grid-column: span 5;
-  min-height: 190px;
+  min-height: 252px;
 }
 
 .character-base {
@@ -674,7 +673,7 @@
 }
 
 .character-title {
-  max-width: 9.4ch;
+  max-width: 10ch;
 }
 
 .character-topline {
@@ -689,7 +688,7 @@
 }
 
 .section-title {
-  max-width: 9ch;
+  max-width: 9.6ch;
 }
 
 .character-figure {
@@ -755,7 +754,7 @@
 
 .card-skills {
   grid-column: span 7;
-  min-height: 208px;
+  min-height: 252px;
 }
 
 .skills-preview {
@@ -847,7 +846,7 @@
 
 .card-routine {
   grid-column: span 5;
-  min-height: 208px;
+  min-height: 252px;
 }
 
 .routine-ring-wrap {
@@ -905,7 +904,7 @@
 
 .routine-ring-center strong {
   margin-top: 0.28rem;
-  font-size: var(--ring-value-size);
+  font-size: calc(var(--ring-value-size) + 0.08rem);
   line-height: 1;
   letter-spacing: -0.05em;
 }
@@ -965,13 +964,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.36rem;
-  padding: 0.66rem 0.92rem;
+  padding: 0.72rem 0.96rem;
   border-radius: 999px;
   border: 1px solid var(--tahoe-border);
   background: rgba(255, 255, 255, 0.18);
   text-decoration: none;
-  font-size: calc(var(--text-link-size) - 0.08rem);
-  font-weight: 600;
+  font-size: calc(var(--text-link-size) - 0.02rem);
+  font-weight: 640;
 }
 
 .inline-action .iconify,
@@ -1014,8 +1013,8 @@
 
 .trait-item strong {
   display: block;
-  font-size: calc(var(--card-body-size) - 0.02rem);
-  line-height: 1.2;
+  font-size: calc(var(--card-body-size) + 0.02rem);
+  line-height: 1.18;
 }
 
 .trait-item span {
@@ -1036,7 +1035,7 @@
 
 .detail-panel {
   margin-top: auto;
-  padding: 1.15rem 1.2rem;
+  padding: 1.2rem 1.24rem;
   border-radius: 18px;
   border: 1px solid var(--tahoe-border);
   background: rgba(255, 255, 255, 0.14);
@@ -1057,28 +1056,28 @@
 
 .detail-panel strong {
   display: block;
-  margin-top: 0.52rem;
+  margin-top: 0.58rem;
   font-size: var(--detail-title-size);
-  line-height: 0.98;
-  letter-spacing: -0.05em;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
 }
 
 .detail-panel p {
-  margin: 0.66rem 0 0;
+  margin: 0.72rem 0 0;
   color: var(--tahoe-muted);
   font-size: var(--detail-body-size);
-  line-height: 1.58;
+  line-height: 1.62;
 }
 
 .text-link {
   display: inline-flex;
   align-items: center;
   gap: 0.32rem;
-  margin-top: 0.9rem;
+  margin-top: 1rem;
   color: var(--tahoe-accent);
   text-decoration: none;
   font-size: var(--text-link-size);
-  font-weight: 600;
+  font-weight: 640;
 }
 
 .micro-stat,
@@ -1137,25 +1136,25 @@
   .tahoe-home {
     width: min(1400px, calc(100% - 1rem));
     padding-bottom: 2.4rem;
-    --card-label-size: 0.78rem;
-    --card-meta-size: 0.74rem;
-    --card-hint-size: 0.75rem;
-    --card-title-size: clamp(2.45rem, 7.2vw, 3.6rem);
-    --hero-title-size: clamp(3rem, 9vw, 4.2rem);
-    --pursuit-title-size: clamp(2.95rem, 8vw, 4rem);
+    --card-label-size: 0.76rem;
+    --card-meta-size: 0.72rem;
+    --card-hint-size: 0.74rem;
+    --card-title-size: clamp(1.6rem, 4.5vw, 2.4rem);
+    --hero-title-size: clamp(2rem, 5.5vw, 3.2rem);
+    --pursuit-title-size: clamp(2rem, 5.5vw, 3rem);
     --card-title-line: 0.94;
     --card-title-track: -0.045em;
-    --card-body-size: 1.06rem;
-    --card-body-line: 1.5;
-    --card-value-size: 1.16rem;
-    --card-chip-size: 0.9rem;
-    --card-chip-height: 2.5rem;
-    --detail-title-size: clamp(2rem, 6vw, 2.5rem);
-    --detail-body-size: 1.04rem;
+    --card-body-size: 1.02rem;
+    --card-body-line: 1.52;
+    --card-value-size: 1.14rem;
+    --card-chip-size: 0.88rem;
+    --card-chip-height: 2.3rem;
+    --detail-title-size: clamp(1.6rem, 4vw, 2rem);
+    --detail-body-size: 1.02rem;
     --text-link-size: 1rem;
-    --ring-value-size: 1.52rem;
-    --legend-title-size: 0.96rem;
-    --legend-meta-size: 0.86rem;
+    --ring-value-size: 1.4rem;
+    --legend-title-size: 0.94rem;
+    --legend-meta-size: 0.84rem;
   }
 
   .tahoe-grid {
@@ -1174,7 +1173,8 @@
   }
 
   .card-base {
-    padding: 20px;
+    gap: 1rem;
+    padding: 20px 22px;
   }
 
   .intro-headline h1,
@@ -1213,25 +1213,25 @@
   .tahoe-home {
     width: min(100%, calc(100% - 0.75rem));
     padding-bottom: 2rem;
-    --card-label-size: 0.76rem;
-    --card-meta-size: 0.72rem;
-    --card-hint-size: 0.72rem;
-    --card-title-size: clamp(2rem, 9vw, 2.7rem);
-    --hero-title-size: clamp(2.7rem, 11.8vw, 3.65rem);
-    --pursuit-title-size: clamp(2.45rem, 10.2vw, 3.2rem);
+    --card-label-size: 0.72rem;
+    --card-meta-size: 0.7rem;
+    --card-hint-size: 0.7rem;
+    --card-title-size: clamp(1.4rem, 5.5vw, 2rem);
+    --hero-title-size: clamp(1.8rem, 6.5vw, 2.6rem);
+    --pursuit-title-size: clamp(1.8rem, 6.5vw, 2.4rem);
     --card-title-line: 0.96;
     --card-title-track: -0.038em;
-    --card-body-size: 1rem;
-    --card-body-line: 1.54;
-    --card-value-size: 1.06rem;
-    --card-chip-size: 0.86rem;
-    --card-chip-height: 2.34rem;
-    --detail-title-size: clamp(1.72rem, 8vw, 2.1rem);
-    --detail-body-size: 0.98rem;
-    --text-link-size: 0.96rem;
-    --ring-value-size: 1.34rem;
-    --legend-title-size: 0.9rem;
-    --legend-meta-size: 0.82rem;
+    --card-body-size: 0.98rem;
+    --card-body-line: 1.56;
+    --card-value-size: 1.1rem;
+    --card-chip-size: 0.84rem;
+    --card-chip-height: 2.2rem;
+    --detail-title-size: clamp(1.4rem, 5.5vw, 1.8rem);
+    --detail-body-size: 0.96rem;
+    --text-link-size: 0.94rem;
+    --ring-value-size: 1.3rem;
+    --legend-title-size: 0.88rem;
+    --legend-meta-size: 0.78rem;
   }
 
   .intro-stats.compact,
@@ -1241,23 +1241,24 @@
   }
 
   .card-base {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .card-base {
-    padding-top: 16px;
+    gap: 0.9rem;
+    padding: 18px;
   }
 
   .card-reveal {
     left: 8px;
     right: 8px;
     bottom: 8px;
-    padding: 10px;
+    padding: 12px;
   }
 
   .intro-headline {
     align-items: center;
+  }
+
+  .pursuit-title {
+    gap: clamp(0.5em, 2vw, 0.8em);
+    line-height: 1.2;
   }
 }
 
