@@ -1,45 +1,139 @@
-html.layout-blog .vp-doc-container.is-blog {
-  padding-top: 36px;
-  padding-bottom: 56px;
+html.bg-gray body {
+  background:
+    linear-gradient(180deg, #f8f6ef 0%, #eff1ef 54%, #edf2f4 100%);
+  background-attachment: fixed;
 }
 
-html.layout-blog .vp-doc-container.is-blog .content-container {
-  padding: clamp(24px, 3vw, 38px);
-  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 88%, transparent);
-  border-radius: 28px;
-  background: var(--vp-c-bg-elv);
-  box-shadow:
-    0 26px 60px rgb(60 60 67 / 0.08),
-    0 8px 18px rgb(60 60 67 / 0.05);
+.vp-doc-container.is-blog {
+  position: relative;
+  padding-top: 44px;
+  padding-bottom: 76px;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-html.layout-blog .vp-doc-container.is-blog .vp-doc-footer {
-  margin-top: 56px;
+.vp-doc-container.is-blog::before,
+.vp-doc-container.is-blog::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
 }
 
-html.layout-blog .vp-doc-container.is-blog .vp-comment {
-  margin-top: 56px;
+.vp-doc-container.is-blog::before {
+  right: -8%;
+  bottom: 2%;
+  width: min(68vw, 920px);
+  height: min(31vw, 360px);
+  background:
+    radial-gradient(132% 92% at 72% 100%, rgb(206 224 231 / 0.68) 0 28%, transparent 29%),
+    radial-gradient(156% 98% at 71% 100%, transparent 51.8%, rgb(81 120 154 / 0.26) 52.2% 54%, transparent 54.8%),
+    radial-gradient(145% 90% at 69% 100%, transparent 40.2%, rgb(107 146 178 / 0.22) 40.8% 42.8%, transparent 43.6%),
+    radial-gradient(130% 82% at 67% 100%, transparent 29.2%, rgb(143 182 202 / 0.2) 29.8% 31.8%, transparent 32.6%);
+  opacity: 0.96;
 }
 
-[data-theme='dark'] html.layout-blog .vp-doc-container.is-blog .content-container,
-html[data-theme='dark'].layout-blog .vp-doc-container.is-blog .content-container {
-  box-shadow:
-    0 28px 72px rgb(0 0 0 / 0.34),
-    0 10px 24px rgb(0 0 0 / 0.18);
+.vp-doc-container.is-blog::after {
+  right: 18%;
+  bottom: 17%;
+  width: min(26vw, 300px);
+  height: min(10vw, 118px);
+  background:
+    radial-gradient(136% 100% at 50% 100%, transparent 54%, rgb(113 153 181 / 0.16) 55% 57.2%, transparent 58%),
+    radial-gradient(126% 86% at 52% 100%, transparent 39%, rgb(162 197 214 / 0.14) 40% 42%, transparent 43%);
+  opacity: 0.92;
+}
+
+.vp-doc-container.is-blog .content,
+.vp-doc-container.is-blog .content-container,
+.vp-doc-container.is-blog .main,
+.vp-doc-container.is-blog .vp-doc,
+.vp-doc-container.is-blog .vp-doc-footer,
+.vp-doc-container.is-blog .vp-comment {
+  position: relative;
+  z-index: 1;
+}
+
+.vp-doc-container.is-blog .content-container {
+  padding-inline: clamp(10px, 1.5vw, 18px);
+}
+
+.vp-doc-container.is-blog .vp-doc-footer,
+.vp-doc-container.is-blog .vp-comment {
+  margin-top: 52px;
+}
+
+.vp-doc-container.is-blog .prev-next {
+  padding-top: 28px;
+}
+
+.vp-doc-container.is-blog .pager-link {
+  border-radius: 16px;
+  background: rgb(255 255 255 / 0.56);
+  border-color: rgb(92 121 143 / 0.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.vp-doc-container.is-blog .pager-link:hover {
+  background: rgb(255 255 255 / 0.72);
+  border-color: rgb(88 130 159 / 0.3);
+}
+
+html[data-theme='dark'].bg-gray body {
+  background:
+    linear-gradient(180deg, #161d24 0%, #10161d 52%, #0d131a 100%);
+}
+
+html[data-theme='dark'] .vp-doc-container.is-blog::before {
+  background:
+    radial-gradient(132% 92% at 72% 100%, rgb(125 164 187 / 0.18) 0 28%, transparent 29%),
+    radial-gradient(156% 98% at 71% 100%, transparent 51.8%, rgb(123 176 214 / 0.24) 52.2% 54%, transparent 54.8%),
+    radial-gradient(145% 90% at 69% 100%, transparent 40.2%, rgb(89 141 187 / 0.21) 40.8% 42.8%, transparent 43.6%),
+    radial-gradient(130% 82% at 67% 100%, transparent 29.2%, rgb(73 112 154 / 0.18) 29.8% 31.8%, transparent 32.6%);
+}
+
+html[data-theme='dark'] .vp-doc-container.is-blog::after {
+  background:
+    radial-gradient(136% 100% at 50% 100%, transparent 54%, rgb(120 174 213 / 0.18) 55% 57.2%, transparent 58%),
+    radial-gradient(126% 86% at 52% 100%, transparent 39%, rgb(97 142 178 / 0.16) 40% 42%, transparent 43%);
+}
+
+html[data-theme='dark'] .vp-doc-container.is-blog .pager-link {
+  background: rgb(28 37 47 / 0.58);
+  border-color: rgb(124 170 199 / 0.12);
+}
+
+html[data-theme='dark'] .vp-doc-container.is-blog .pager-link:hover {
+  background: rgb(33 43 54 / 0.72);
+  border-color: rgb(124 170 199 / 0.22);
 }
 
 @media (max-width: 959px) {
-  html.layout-blog .vp-doc-container.is-blog {
-    padding: 24px 16px 40px;
+  .vp-doc-container.is-blog {
+    padding: 28px 16px 54px;
   }
 
-  html.layout-blog .vp-doc-container.is-blog .content-container {
-    padding: 20px 18px 24px;
-    border-radius: 22px;
+  .vp-doc-container.is-blog::before {
+    right: -38%;
+    bottom: 4%;
+    width: 760px;
+    height: 304px;
   }
 
-  html.layout-blog .vp-doc-container.is-blog .vp-doc-footer,
-  html.layout-blog .vp-doc-container.is-blog .vp-comment {
-    margin-top: 40px;
+  .vp-doc-container.is-blog::after {
+    right: 6%;
+    bottom: 17%;
+    width: 210px;
+    height: 90px;
+  }
+
+  .vp-doc-container.is-blog .content-container {
+    padding-inline: 0;
+  }
+
+  .vp-doc-container.is-blog .vp-doc-footer,
+  .vp-doc-container.is-blog .vp-comment {
+    margin-top: 42px;
   }
 }
