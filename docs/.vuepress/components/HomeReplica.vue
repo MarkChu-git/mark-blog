@@ -21,7 +21,6 @@ interface CharacterTrait {
 interface SkillItem {
   key: string
   label: string
-  icon: string
   color: string
   group: string
   detail: string
@@ -80,6 +79,7 @@ const links = computed(() => ({
 }))
 
 const nowText = ref('--:--')
+const timezoneText = ref('--')
 let clock = 0
 const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')
@@ -93,6 +93,44 @@ const createCardMotion = (): CardMotionStyle => ({
   '--tilt-y': '0deg',
 })
 
+const timeFormatter = computed(() => new Intl.DateTimeFormat(isZh.value ? 'zh-CN' : 'en-US', {
+  weekday: 'short',
+  hour: '2-digit',
+  minute: '2-digit',
+}))
+
+const formatUtcOffset = (date: Date) => {
+  const offsetMinutes = -date.getTimezoneOffset()
+  const sign = offsetMinutes >= 0 ? '+' : '-'
+  const absoluteMinutes = Math.abs(offsetMinutes)
+  const hours = Math.floor(absoluteMinutes / 60)
+  const minutes = absoluteMinutes % 60
+
+  if (minutes === 0)
+    return `UTC${sign}${hours}`
+
+  return `UTC${sign}${hours}:${String(minutes).padStart(2, '0')}`
+}
+
+const skillToken = (label: string) => {
+  if (label === 'C++' || label === 'C#' || label === 'R')
+    return label
+
+  const capitals = label.match(/[A-Z+#]/g)?.join('')
+  if (capitals && capitals.length > 1)
+    return capitals.slice(0, 2)
+
+  const words = label.split(/[\s./-]+/).filter(Boolean)
+  if (words.length > 1)
+    return words.map(word => word[0]).join('').toUpperCase().slice(0, 2)
+
+  const compact = label.replace(/[^A-Za-z0-9+#]/g, '').toUpperCase()
+  if (compact.length <= 2)
+    return compact
+
+  return compact.slice(0, 2)
+}
+
 const cardMotion = ref<Record<CardKey, CardMotionStyle>>({
   intro: createCardMotion(),
   motto: createCardMotion(),
@@ -103,12 +141,9 @@ const cardMotion = ref<Record<CardKey, CardMotionStyle>>({
 })
 
 const updateClock = () => {
-  const formatter = new Intl.DateTimeFormat(isZh.value ? 'zh-CN' : 'en-US', {
-    weekday: 'short',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-  nowText.value = formatter.format(new Date())
+  const now = new Date()
+  nowText.value = timeFormatter.value.format(now)
+  timezoneText.value = formatUtcOffset(now)
 }
 
 onMounted(() => {
@@ -193,7 +228,7 @@ const t = computed(() => ({
 
 const introStats = computed<IntroStat[]>(() => [
   { label: t.value.statusLabel, value: t.value.statusValue },
-  { label: t.value.timezoneLabel, value: 'UTC+8' },
+  { label: t.value.timezoneLabel, value: timezoneText.value },
   { label: t.value.localTimeLabel, value: nowText.value },
 ])
 
@@ -312,7 +347,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'typescript',
     label: 'TypeScript',
-    icon: 'mdi:language-typescript',
     color: '#7088d3',
     group: isZh.value ? '工程' : 'Engineering',
     detail: isZh.value ? '让组件、交互和数据结构保持明确边界。' : 'Keeps component logic, interactions, and data structures explicit.',
@@ -320,7 +354,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'javascript',
     label: 'JavaScript',
-    icon: 'mdi:language-javascript',
     color: '#d3b257',
     group: isZh.value ? '前端' : 'Frontend',
     detail: isZh.value ? '作为浏览器交互和运行时生态的基础语言。' : 'The base language behind browser interactions and the wider runtime ecosystem.',
@@ -328,7 +361,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'python',
     label: 'Python',
-    icon: 'mdi:language-python',
     color: '#b8aa7a',
     group: isZh.value ? '工具' : 'Tooling',
     detail: isZh.value ? '适合自动化、脚本和后端实验。' : 'Useful for automation, scripting, and backend experimentation.',
@@ -336,7 +368,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'linux',
     label: 'Linux',
-    icon: 'mdi:linux',
     color: '#c3a17a',
     group: isZh.value ? '环境' : 'Systems',
     detail: isZh.value ? '作为日常开发、部署和调试的基础环境。' : 'The day-to-day environment for development, deployment, and debugging.',
@@ -344,7 +375,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'html',
     label: 'HTML',
-    icon: 'mdi:language-html5',
     color: '#dd8c68',
     group: isZh.value ? '前端' : 'Frontend',
     detail: isZh.value ? '负责页面语义结构和可被解析的内容骨架。' : 'Provides the semantic structure and readable content skeleton of the web.',
@@ -352,7 +382,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'css',
     label: 'CSS',
-    icon: 'mdi:language-css3',
     color: '#6f97de',
     group: isZh.value ? '前端' : 'Frontend',
     detail: isZh.value ? '控制布局、层级、响应式和整体视觉表达。' : 'Controls layout, hierarchy, responsiveness, and visual presentation.',
@@ -360,7 +389,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'tailwindcss',
     label: 'Tailwind CSS',
-    icon: 'simple-icons:tailwindcss',
     color: '#67bfd3',
     group: isZh.value ? '前端' : 'Frontend',
     detail: isZh.value ? '适合快速组织界面样式、设计 token 和响应式细节。' : 'Useful for composing interface styling, design tokens, and responsive details quickly.',
@@ -368,7 +396,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'react',
     label: 'React',
-    icon: 'mdi:react',
     color: '#63b7cf',
     group: isZh.value ? '前端' : 'Frontend',
     detail: isZh.value ? '适合构建组件驱动的交互界面和复杂状态流。' : 'Useful for component-driven interfaces and more involved state flows.',
@@ -376,7 +403,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'nextjs',
     label: 'Next.js',
-    icon: 'simple-icons:nextdotjs',
     color: '#5f6570',
     group: isZh.value ? '全栈' : 'Full Stack',
     detail: isZh.value ? '用于整合 React、路由、渲染策略和内容交付。' : 'Combines React, routing, rendering strategy, and content delivery in one stack.',
@@ -384,7 +410,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'vue',
     label: 'Vue',
-    icon: 'mdi:vuejs',
     color: '#6b9e92',
     group: isZh.value ? '前端' : 'Frontend',
     detail: isZh.value ? '承担页面状态、交互细节和组件组合。' : 'Handles view state, interaction details, and component composition.',
@@ -392,7 +417,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'astro',
     label: 'Astro',
-    icon: 'simple-icons:astro',
     color: '#b47ff6',
     group: isZh.value ? '内容' : 'Content',
     detail: isZh.value ? '适合内容型站点、静态输出和轻量前端岛模式。' : 'Fits content-driven sites, static output, and lighter island-based frontends.',
@@ -400,7 +424,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'fastapi',
     label: 'FastAPI',
-    icon: 'simple-icons:fastapi',
     color: '#4db59a',
     group: isZh.value ? '后端' : 'Backend',
     detail: isZh.value ? '适合快速搭建类型清晰、接口明确的 Python 服务。' : 'Useful for building typed Python services with clear API boundaries quickly.',
@@ -408,7 +431,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'nodejs',
     label: 'Node.js',
-    icon: 'mdi:nodejs',
     color: '#7f9b7a',
     group: isZh.value ? '工程' : 'Engineering',
     detail: isZh.value ? '支撑前端工作流和内容构建链路。' : 'Supports the frontend workflow and site build pipeline.',
@@ -416,7 +438,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'npm',
     label: 'npm',
-    icon: 'mdi:npm',
     color: '#cf766a',
     group: isZh.value ? '工具' : 'Tooling',
     detail: isZh.value ? '用于依赖管理、脚本执行和 JavaScript 工具链组织。' : 'Handles dependency management, scripts, and the broader JavaScript toolchain.',
@@ -424,7 +445,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'go',
     label: 'Go',
-    icon: 'simple-icons:go',
     color: '#6db7c8',
     group: isZh.value ? '后端' : 'Backend',
     detail: isZh.value ? '适合构建高并发服务、工具链和更直接的系统程序。' : 'Useful for concurrent services, tooling, and more direct systems programming.',
@@ -432,7 +452,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'java',
     label: 'Java',
-    icon: 'mdi:language-java',
     color: '#d08b74',
     group: isZh.value ? '后端' : 'Backend',
     detail: isZh.value ? '适合构建稳定的服务端系统和传统业务服务。' : 'Useful for stable backend systems and long-lived business services.',
@@ -440,7 +459,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'kotlin',
     label: 'Kotlin',
-    icon: 'simple-icons:kotlin',
     color: '#a477d6',
     group: isZh.value ? '后端' : 'Backend',
     detail: isZh.value ? '在 JVM 生态里提供更现代的语言表达和开发体验。' : 'Brings a more modern language and workflow to the JVM ecosystem.',
@@ -448,7 +466,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'csharp',
     label: 'C#',
-    icon: 'simple-icons:csharp',
     color: '#7b6fcd',
     group: isZh.value ? '后端' : 'Backend',
     detail: isZh.value ? '适合 .NET 生态里的应用开发、服务实现和工程化交付。' : 'Useful for .NET application work, service development, and structured delivery.',
@@ -456,7 +473,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'postgresql',
     label: 'PostgreSQL',
-    icon: 'mdi:database-outline',
     color: '#7f93b6',
     group: isZh.value ? '数据' : 'Data',
     detail: isZh.value ? '用于结构化数据建模和更严谨的业务表达。' : 'Used when structured data and stronger modeling matter.',
@@ -464,7 +480,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'supabase',
     label: 'Supabase',
-    icon: 'simple-icons:supabase',
     color: '#5fbf98',
     group: isZh.value ? '数据' : 'Data',
     detail: isZh.value ? '适合快速搭建数据库、鉴权、存储和实时能力一体化的后端底座。' : 'Useful for standing up database, auth, storage, and realtime backend primitives quickly.',
@@ -472,7 +487,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'docker',
     label: 'Docker',
-    icon: 'mdi:docker',
     color: '#6fa5dc',
     group: isZh.value ? '部署' : 'DevOps',
     detail: isZh.value ? '用于打包开发环境、服务依赖和可复现部署。' : 'Packages environments, service dependencies, and reproducible deployments.',
@@ -480,7 +494,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'kubernetes',
     label: 'Kubernetes',
-    icon: 'mdi:kubernetes',
     color: '#6f89de',
     group: isZh.value ? '部署' : 'DevOps',
     detail: isZh.value ? '适合编排容器服务、扩缩容和线上集群管理。' : 'Useful for container orchestration, scaling, and cluster operations.',
@@ -488,7 +501,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'homebrew',
     label: 'Homebrew',
-    icon: 'simple-icons:homebrew',
     color: '#d79a63',
     group: isZh.value ? '环境' : 'Systems',
     detail: isZh.value ? '方便管理 macOS 上的开发工具链和本地依赖。' : 'Keeps the macOS toolchain and local developer dependencies tidy.',
@@ -496,7 +508,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'zsh',
     label: 'Zsh',
-    icon: 'simple-icons:gnubash',
     color: '#7a9b74',
     group: isZh.value ? '终端' : 'Terminal',
     detail: isZh.value ? '承担日常命令行工作流、别名组织和环境配置。' : 'Drives daily shell workflows, aliases, and environment setup.',
@@ -504,7 +515,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'bash',
     label: 'Bash',
-    icon: 'mdi:console',
     color: '#8ba572',
     group: isZh.value ? '终端' : 'Terminal',
     detail: isZh.value ? '适合脚本自动化、部署命令和基础运维流程。' : 'Useful for scripting, deployment commands, and routine automation.',
@@ -512,7 +522,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'git',
     label: 'Git',
-    icon: 'mdi:git',
     color: '#c58c79',
     group: isZh.value ? '协作' : 'Collaboration',
     detail: isZh.value ? '保证迭代可追踪、可审查、可回滚。' : 'Keeps iteration traceable, reviewable, and recoverable.',
@@ -520,7 +529,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'cpp',
     label: 'C++',
-    icon: 'mdi:language-cpp',
     color: '#8f85c2',
     group: isZh.value ? '底层' : 'Low-level',
     detail: isZh.value ? '用于理解性能、内存和更底层的系统行为。' : 'Useful when understanding performance and lower-level behavior matters.',
@@ -528,7 +536,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'latex',
     label: 'LaTeX',
-    icon: 'devicon:latex',
     color: '#6f9aa8',
     group: isZh.value ? '写作' : 'Writing',
     detail: isZh.value ? '适合排版公式、技术文档和更严谨的学术表达。' : 'Fits mathematical typesetting, technical docs, and more rigorous writing.',
@@ -536,7 +543,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'r',
     label: 'R',
-    icon: 'simple-icons:r',
     color: '#7489c5',
     group: isZh.value ? '数据' : 'Data',
     detail: isZh.value ? '适合数据分析、统计建模和实验性探索。' : 'Useful for data analysis, statistical modeling, and exploratory work.',
@@ -544,7 +550,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'writing',
     label: 'Writing',
-    icon: 'mdi:draw-pen',
     color: '#77a5b0',
     group: isZh.value ? '表达' : 'Communication',
     detail: isZh.value ? '把经验组织成可读、可用、可复访的内容。' : 'Turns experience into readable, reusable, and revisit-worthy content.',
@@ -552,7 +557,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'math',
     label: 'Math',
-    icon: 'mdi:function-variant',
     color: '#828fc4',
     group: isZh.value ? '思维' : 'Reasoning',
     detail: isZh.value ? '帮助把复杂问题抽象成可验证的模型。' : 'Helps turn complexity into models that can be reasoned about clearly.',
@@ -560,7 +564,6 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'notes',
     label: 'Notes',
-    icon: 'mdi:notebook-outline',
     color: '#7d9cbd',
     group: isZh.value ? '知识库' : 'Knowledge Base',
     detail: isZh.value ? '把碎片整理成长期可检索的知识资产。' : 'Turns fragments into a searchable, durable knowledge base.',
@@ -912,7 +915,7 @@ const routineGradient = computed(() => {
               class="skill-preview-tile"
               :style="{ '--skill-color': item.color }"
             >
-              <Icon :icon="item.icon" />
+              <span class="skill-preview-token">{{ skillToken(item.label) }}</span>
             </span>
           </div>
           <div class="card-inline-state skill-state">
@@ -936,7 +939,7 @@ const routineGradient = computed(() => {
               @click="activeSkill = item.key"
             >
               <span class="skill-icon">
-                <Icon :icon="item.icon" />
+                <span class="skill-token">{{ skillToken(item.label) }}</span>
               </span>
               <span class="skill-name">{{ item.label }}</span>
             </button>

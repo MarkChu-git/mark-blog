@@ -1,5 +1,7 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
 
+const githubLink = process.env.SITE_GITHUB_URL?.trim() || 'https://github.com/MarkChu-git/mark-blog'
+
 const navbarEN = [
   { text: 'Home', link: '/' },
   { text: 'Blog', link: '/blog/' },
@@ -21,7 +23,7 @@ const navbarZH = [
 export default defineThemeConfig({
   logo: '/site-avatar.png',
   social: [
-    { icon: 'github', link: 'https://github.com/your-github' },
+    { icon: 'github', link: githubLink },
   ],
   search: {
     provider: 'local',
