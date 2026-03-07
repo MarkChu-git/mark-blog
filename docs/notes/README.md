@@ -1,5 +1,6 @@
 ---
 title: Notes
+pageLayout: page
 ---
 
-A place for short notes and drafts.
+<NotesCatalog locale="en" />

@@ -159,16 +159,19 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.34), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.26), transparent 26%);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.2) 18%, rgba(255, 255, 255, 0.07) 32%, rgba(255, 255, 255, 0) 48%),
+    radial-gradient(110% 78% at 50% 6%, rgba(255, 255, 255, 0.22), transparent 52%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 28%);
   pointer-events: none;
-  transition: background 0.18s ease;
+  opacity: 0.82;
+  transition: opacity 0.18s ease, transform 0.22s ease;
 }
 
 [data-theme='dark'] .glass-card::before {
   background:
-    radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(122, 162, 255, 0.14), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 30%);
+    linear-gradient(135deg, rgba(149, 180, 255, 0.15) 0%, rgba(118, 153, 235, 0.08) 20%, rgba(118, 153, 235, 0.02) 36%, rgba(118, 153, 235, 0) 50%),
+    radial-gradient(110% 82% at 50% 4%, rgba(122, 162, 255, 0.14), transparent 54%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%);
 }
 
 .glass-card::after {
@@ -373,6 +376,12 @@
 .interactive-card:hover,
 .interactive-card.active {
   box-shadow: 0 24px 52px rgba(43, 58, 92, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.44);
+}
+
+.interactive-card:hover::before,
+.interactive-card.active::before {
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
 .interactive-card.active .card-reveal {

@@ -61,8 +61,6 @@ interface QuickAction {
 
 type CardKey = 'intro' | 'motto' | 'pursuit' | 'character' | 'skills' | 'routine'
 type CardMotionStyle = {
-  '--spot-x': string
-  '--spot-y': string
   '--tilt-x': string
   '--tilt-y': string
 }
@@ -91,8 +89,6 @@ const activeSkill = ref('typescript')
 const activeRoutine = ref('build')
 
 const createCardMotion = (): CardMotionStyle => ({
-  '--spot-x': '50%',
-  '--spot-y': '50%',
   '--tilt-x': '0deg',
   '--tilt-y': '0deg',
 })
@@ -147,8 +143,6 @@ const updateCardMotion = (event: MouseEvent, card: CardKey) => {
   const y = (event.clientY - rect.top) / rect.height
   const state = cardMotion.value[card]
 
-  state['--spot-x'] = `${(x * 100).toFixed(2)}%`
-  state['--spot-y'] = `${(y * 100).toFixed(2)}%`
   state['--tilt-x'] = `${((0.5 - y) * 5.8).toFixed(2)}deg`
   state['--tilt-y'] = `${((x - 0.5) * 6.8).toFixed(2)}deg`
 }
@@ -332,6 +326,22 @@ const skills = computed<SkillItem[]>(() => [
     detail: isZh.value ? '作为浏览器交互和运行时生态的基础语言。' : 'The base language behind browser interactions and the wider runtime ecosystem.',
   },
   {
+    key: 'python',
+    label: 'Python',
+    icon: 'mdi:language-python',
+    color: '#b8aa7a',
+    group: isZh.value ? '工具' : 'Tooling',
+    detail: isZh.value ? '适合自动化、脚本和后端实验。' : 'Useful for automation, scripting, and backend experimentation.',
+  },
+  {
+    key: 'linux',
+    label: 'Linux',
+    icon: 'mdi:linux',
+    color: '#c3a17a',
+    group: isZh.value ? '环境' : 'Systems',
+    detail: isZh.value ? '作为日常开发、部署和调试的基础环境。' : 'The day-to-day environment for development, deployment, and debugging.',
+  },
+  {
     key: 'html',
     label: 'HTML',
     icon: 'mdi:language-html5',
@@ -386,14 +396,6 @@ const skills = computed<SkillItem[]>(() => [
     color: '#b47ff6',
     group: isZh.value ? '内容' : 'Content',
     detail: isZh.value ? '适合内容型站点、静态输出和轻量前端岛模式。' : 'Fits content-driven sites, static output, and lighter island-based frontends.',
-  },
-  {
-    key: 'python',
-    label: 'Python',
-    icon: 'mdi:language-python',
-    color: '#b8aa7a',
-    group: isZh.value ? '工具' : 'Tooling',
-    detail: isZh.value ? '适合自动化、脚本和后端实验。' : 'Useful for automation, scripting, and backend experimentation.',
   },
   {
     key: 'fastapi',
@@ -460,6 +462,14 @@ const skills = computed<SkillItem[]>(() => [
     detail: isZh.value ? '用于结构化数据建模和更严谨的业务表达。' : 'Used when structured data and stronger modeling matter.',
   },
   {
+    key: 'supabase',
+    label: 'Supabase',
+    icon: 'simple-icons:supabase',
+    color: '#5fbf98',
+    group: isZh.value ? '数据' : 'Data',
+    detail: isZh.value ? '适合快速搭建数据库、鉴权、存储和实时能力一体化的后端底座。' : 'Useful for standing up database, auth, storage, and realtime backend primitives quickly.',
+  },
+  {
     key: 'docker',
     label: 'Docker',
     icon: 'mdi:docker',
@@ -474,14 +484,6 @@ const skills = computed<SkillItem[]>(() => [
     color: '#6f89de',
     group: isZh.value ? '部署' : 'DevOps',
     detail: isZh.value ? '适合编排容器服务、扩缩容和线上集群管理。' : 'Useful for container orchestration, scaling, and cluster operations.',
-  },
-  {
-    key: 'linux',
-    label: 'Linux',
-    icon: 'mdi:linux',
-    color: '#c3a17a',
-    group: isZh.value ? '环境' : 'Systems',
-    detail: isZh.value ? '作为日常开发、部署和调试的基础环境。' : 'The day-to-day environment for development, deployment, and debugging.',
   },
   {
     key: 'homebrew',
@@ -526,7 +528,7 @@ const skills = computed<SkillItem[]>(() => [
   {
     key: 'latex',
     label: 'LaTeX',
-    icon: 'simple-icons:latex',
+    icon: 'devicon:latex',
     color: '#6f9aa8',
     group: isZh.value ? '写作' : 'Writing',
     detail: isZh.value ? '适合排版公式、技术文档和更严谨的学术表达。' : 'Fits mathematical typesetting, technical docs, and more rigorous writing.',

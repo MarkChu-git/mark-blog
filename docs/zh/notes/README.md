@@ -1,5 +1,6 @@
 ---
 title: 笔记
+pageLayout: page
 ---
 
-这里放一些短笔记和草稿。
+<NotesCatalog locale="zh" />

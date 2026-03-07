@@ -1,139 +1,97 @@
-html.bg-gray body {
-  background:
-    linear-gradient(180deg, #f8f6ef 0%, #eff1ef 54%, #edf2f4 100%);
-  background-attachment: fixed;
+html.bg-gray body,
+html.layout-doc body {
+  background-color: #fbfcfd;
 }
 
-.vp-doc-container.is-blog {
+.vp-doc-container {
   position: relative;
+  isolation: isolate;
   padding-top: 44px;
   padding-bottom: 76px;
-  overflow: hidden;
-  isolation: isolate;
+  background-color: rgb(255 255 255 / 0.46);
+  background-image:
+    linear-gradient(30deg, rgb(182 207 233 / 0.068) 12%, transparent 12.5%, transparent 87%, rgb(182 207 233 / 0.068) 87.5%, rgb(182 207 233 / 0.068)),
+    linear-gradient(150deg, rgb(182 207 233 / 0.068) 12%, transparent 12.5%, transparent 87%, rgb(182 207 233 / 0.068) 87.5%, rgb(182 207 233 / 0.068)),
+    linear-gradient(30deg, rgb(182 207 233 / 0.068) 12%, transparent 12.5%, transparent 87%, rgb(182 207 233 / 0.068) 87.5%, rgb(182 207 233 / 0.068)),
+    linear-gradient(150deg, rgb(182 207 233 / 0.068) 12%, transparent 12.5%, transparent 87%, rgb(182 207 233 / 0.068) 87.5%, rgb(182 207 233 / 0.068)),
+    linear-gradient(60deg, rgb(211 226 241 / 0.061) 25%, transparent 25.5%, transparent 75%, rgb(211 226 241 / 0.061) 75%, rgb(211 226 241 / 0.061)),
+    linear-gradient(60deg, rgb(211 226 241 / 0.061) 25%, transparent 25.5%, transparent 75%, rgb(211 226 241 / 0.061) 75%, rgb(211 226 241 / 0.061));
+  background-size: 148px 256px;
+  background-position: 0 0, 0 0, 74px 128px, 74px 128px, 0 0, 74px 128px;
 }
 
-.vp-doc-container.is-blog::before,
-.vp-doc-container.is-blog::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
+.vp-doc-container .content-container {
+  padding-inline: clamp(10px, 1.5vw, 18px);
 }
 
-.vp-doc-container.is-blog::before {
-  right: -8%;
-  bottom: 2%;
-  width: min(68vw, 920px);
-  height: min(31vw, 360px);
-  background:
-    radial-gradient(132% 92% at 72% 100%, rgb(206 224 231 / 0.68) 0 28%, transparent 29%),
-    radial-gradient(156% 98% at 71% 100%, transparent 51.8%, rgb(81 120 154 / 0.26) 52.2% 54%, transparent 54.8%),
-    radial-gradient(145% 90% at 69% 100%, transparent 40.2%, rgb(107 146 178 / 0.22) 40.8% 42.8%, transparent 43.6%),
-    radial-gradient(130% 82% at 67% 100%, transparent 29.2%, rgb(143 182 202 / 0.2) 29.8% 31.8%, transparent 32.6%);
-  opacity: 0.96;
-}
-
-.vp-doc-container.is-blog::after {
-  right: 18%;
-  bottom: 17%;
-  width: min(26vw, 300px);
-  height: min(10vw, 118px);
-  background:
-    radial-gradient(136% 100% at 50% 100%, transparent 54%, rgb(113 153 181 / 0.16) 55% 57.2%, transparent 58%),
-    radial-gradient(126% 86% at 52% 100%, transparent 39%, rgb(162 197 214 / 0.14) 40% 42%, transparent 43%);
-  opacity: 0.92;
-}
-
-.vp-doc-container.is-blog .content,
-.vp-doc-container.is-blog .content-container,
-.vp-doc-container.is-blog .main,
-.vp-doc-container.is-blog .vp-doc,
-.vp-doc-container.is-blog .vp-doc-footer,
-.vp-doc-container.is-blog .vp-comment {
+.vp-doc-container .main,
+.vp-doc-container .vp-doc-footer,
+.vp-doc-container .vp-comment {
   position: relative;
   z-index: 1;
 }
 
-.vp-doc-container.is-blog .content-container {
-  padding-inline: clamp(10px, 1.5vw, 18px);
-}
-
-.vp-doc-container.is-blog .vp-doc-footer,
-.vp-doc-container.is-blog .vp-comment {
+.vp-doc-container .vp-doc-footer,
+.vp-doc-container .vp-comment {
   margin-top: 52px;
 }
 
-.vp-doc-container.is-blog .prev-next {
+.vp-doc-container .prev-next {
   padding-top: 28px;
 }
 
-.vp-doc-container.is-blog .pager-link {
+.vp-doc-container .pager-link {
   border-radius: 16px;
-  background: rgb(255 255 255 / 0.56);
-  border-color: rgb(92 121 143 / 0.16);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgb(255 255 255 / 0.76);
+  border-color: rgb(110 143 180 / 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.vp-doc-container.is-blog .pager-link:hover {
-  background: rgb(255 255 255 / 0.72);
-  border-color: rgb(88 130 159 / 0.3);
+.vp-doc-container .pager-link:hover {
+  background: rgb(255 255 255 / 0.9);
+  border-color: rgb(110 143 180 / 0.2);
 }
 
-html[data-theme='dark'].bg-gray body {
-  background:
-    linear-gradient(180deg, #161d24 0%, #10161d 52%, #0d131a 100%);
+html[data-theme='dark'].bg-gray body,
+html[data-theme='dark'].layout-doc body {
+  background-color: #151b22;
 }
 
-html[data-theme='dark'] .vp-doc-container.is-blog::before {
-  background:
-    radial-gradient(132% 92% at 72% 100%, rgb(125 164 187 / 0.18) 0 28%, transparent 29%),
-    radial-gradient(156% 98% at 71% 100%, transparent 51.8%, rgb(123 176 214 / 0.24) 52.2% 54%, transparent 54.8%),
-    radial-gradient(145% 90% at 69% 100%, transparent 40.2%, rgb(89 141 187 / 0.21) 40.8% 42.8%, transparent 43.6%),
-    radial-gradient(130% 82% at 67% 100%, transparent 29.2%, rgb(73 112 154 / 0.18) 29.8% 31.8%, transparent 32.6%);
+html[data-theme='dark'] .vp-doc-container {
+  background-color: rgb(24 31 39 / 0.32);
+  background-image:
+    linear-gradient(30deg, rgb(88 119 154 / 0.092) 12%, transparent 12.5%, transparent 87%, rgb(88 119 154 / 0.092) 87.5%, rgb(88 119 154 / 0.092)),
+    linear-gradient(150deg, rgb(88 119 154 / 0.092) 12%, transparent 12.5%, transparent 87%, rgb(88 119 154 / 0.092) 87.5%, rgb(88 119 154 / 0.092)),
+    linear-gradient(30deg, rgb(88 119 154 / 0.092) 12%, transparent 12.5%, transparent 87%, rgb(88 119 154 / 0.092) 87.5%, rgb(88 119 154 / 0.092)),
+    linear-gradient(150deg, rgb(88 119 154 / 0.092) 12%, transparent 12.5%, transparent 87%, rgb(88 119 154 / 0.092) 87.5%, rgb(88 119 154 / 0.092)),
+    linear-gradient(60deg, rgb(61 85 112 / 0.082) 25%, transparent 25.5%, transparent 75%, rgb(61 85 112 / 0.082) 75%, rgb(61 85 112 / 0.082)),
+    linear-gradient(60deg, rgb(61 85 112 / 0.082) 25%, transparent 25.5%, transparent 75%, rgb(61 85 112 / 0.082) 75%, rgb(61 85 112 / 0.082));
 }
 
-html[data-theme='dark'] .vp-doc-container.is-blog::after {
-  background:
-    radial-gradient(136% 100% at 50% 100%, transparent 54%, rgb(120 174 213 / 0.18) 55% 57.2%, transparent 58%),
-    radial-gradient(126% 86% at 52% 100%, transparent 39%, rgb(97 142 178 / 0.16) 40% 42%, transparent 43%);
+html[data-theme='dark'] .vp-doc-container .pager-link {
+  background: rgb(25 34 43 / 0.72);
+  border-color: rgb(126 165 205 / 0.12);
 }
 
-html[data-theme='dark'] .vp-doc-container.is-blog .pager-link {
-  background: rgb(28 37 47 / 0.58);
-  border-color: rgb(124 170 199 / 0.12);
-}
-
-html[data-theme='dark'] .vp-doc-container.is-blog .pager-link:hover {
-  background: rgb(33 43 54 / 0.72);
-  border-color: rgb(124 170 199 / 0.22);
+html[data-theme='dark'] .vp-doc-container .pager-link:hover {
+  background: rgb(31 41 52 / 0.84);
+  border-color: rgb(126 165 205 / 0.22);
 }
 
 @media (max-width: 959px) {
-  .vp-doc-container.is-blog {
+  .vp-doc-container {
     padding: 28px 16px 54px;
+    background-size: 112px 194px;
+    background-position: 0 0, 0 0, 56px 97px, 56px 97px, 0 0, 56px 97px;
   }
 
-  .vp-doc-container.is-blog::before {
-    right: -38%;
-    bottom: 4%;
-    width: 760px;
-    height: 304px;
-  }
-
-  .vp-doc-container.is-blog::after {
-    right: 6%;
-    bottom: 17%;
-    width: 210px;
-    height: 90px;
-  }
-
-  .vp-doc-container.is-blog .content-container {
+  .vp-doc-container .content-container {
     padding-inline: 0;
   }
 
-  .vp-doc-container.is-blog .vp-doc-footer,
-  .vp-doc-container.is-blog .vp-comment {
+  .vp-doc-container .vp-doc-footer,
+  .vp-doc-container .vp-comment {
     margin-top: 42px;
   }
 }
