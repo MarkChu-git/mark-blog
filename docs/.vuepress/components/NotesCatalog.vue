@@ -13,6 +13,7 @@ type NoteCard = {
   href: string
   icon: { svg: string }
   cta: string
+  accent: string
 }
 
 const iconMathFunction = {
@@ -86,6 +87,7 @@ const copy = computed(() => {
           href: './theory-of-computation.md',
           icon: iconMathFunction,
           cta: '现在可读',
+          accent: '#5f8cff',
         },
         {
           title: '并行计算',
@@ -93,6 +95,7 @@ const copy = computed(() => {
           href: './parallel-computing.md',
           icon: iconCpu,
           cta: '现在可读',
+          accent: '#29b7a6',
         },
         {
           title: '编程范式',
@@ -100,6 +103,7 @@ const copy = computed(() => {
           href: './programming-paradigms.md',
           icon: iconBrackets,
           cta: '现在可读',
+          accent: '#7c74ff',
         },
         {
           title: '人工智能',
@@ -107,6 +111,7 @@ const copy = computed(() => {
           href: './artificial-intelligence.md',
           icon: iconBrain,
           cta: '现在可读',
+          accent: '#f08b54',
         },
         {
           title: '算法与数据结构',
@@ -114,6 +119,7 @@ const copy = computed(() => {
           href: './algorithms-data-structures.md',
           icon: iconHierarchy,
           cta: '现在可读',
+          accent: '#3971ff',
         },
         {
           title: '前端开发',
@@ -121,6 +127,7 @@ const copy = computed(() => {
           href: './front-end-development.md',
           icon: iconBrowser,
           cta: '现在可读',
+          accent: '#14a8d8',
         },
         {
           title: '计算机中的连续数学',
@@ -128,6 +135,7 @@ const copy = computed(() => {
           href: './continuous-mathematics-for-cs.md',
           icon: iconIntegral,
           cta: '现在可读',
+          accent: '#8c6df5',
         },
         {
           title: '计算机科学导论',
@@ -135,6 +143,7 @@ const copy = computed(() => {
           href: './introduction-to-cs.md',
           icon: iconLaptop,
           cta: '现在可读',
+          accent: '#6b8f3d',
         },
       ] satisfies NoteCard[],
     }
@@ -150,6 +159,7 @@ const copy = computed(() => {
         href: './theory-of-computation.md',
         icon: iconMathFunction,
         cta: 'Available Now',
+        accent: '#5f8cff',
       },
       {
         title: 'Parallel Computing',
@@ -157,6 +167,7 @@ const copy = computed(() => {
         href: './parallel-computing.md',
         icon: iconCpu,
         cta: 'Available Now',
+        accent: '#29b7a6',
       },
       {
         title: 'Programming Paradigms',
@@ -164,6 +175,7 @@ const copy = computed(() => {
         href: './programming-paradigms.md',
         icon: iconBrackets,
         cta: 'Available Now',
+        accent: '#7c74ff',
       },
       {
         title: 'Artificial Intelligence',
@@ -171,6 +183,7 @@ const copy = computed(() => {
         href: './artificial-intelligence.md',
         icon: iconBrain,
         cta: 'Available Now',
+        accent: '#f08b54',
       },
       {
         title: 'Algorithms & Data Structures',
@@ -178,6 +191,7 @@ const copy = computed(() => {
         href: './algorithms-data-structures.md',
         icon: iconHierarchy,
         cta: 'Available Now',
+        accent: '#3971ff',
       },
       {
         title: 'Front-end Development',
@@ -185,6 +199,7 @@ const copy = computed(() => {
         href: './front-end-development.md',
         icon: iconBrowser,
         cta: 'Available Now',
+        accent: '#14a8d8',
       },
       {
         title: 'Continuous Mathematics for CS',
@@ -192,6 +207,7 @@ const copy = computed(() => {
         href: './continuous-mathematics-for-cs.md',
         icon: iconIntegral,
         cta: 'Available Now',
+        accent: '#8c6df5',
       },
       {
         title: 'Introduction to Computer Science',
@@ -199,6 +215,7 @@ const copy = computed(() => {
         href: './introduction-to-cs.md',
         icon: iconLaptop,
         cta: 'Available Now',
+        accent: '#6b8f3d',
       },
     ] satisfies NoteCard[],
   }
@@ -217,6 +234,7 @@ const copy = computed(() => {
         v-for="card in copy.cards"
         :key="card.href"
         class="notes-topic-card"
+        :style="{ '--note-accent': card.accent }"
         @pointermove="onCardPointerMove"
         @pointerleave="resetCardTilt"
       >
