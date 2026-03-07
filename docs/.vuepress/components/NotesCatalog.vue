@@ -47,131 +47,158 @@ const iconLaptop = {
   svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19h18M5 7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/></svg>',
 }
 
+function onCardPointerMove(event: PointerEvent) {
+  if (event.pointerType === 'touch')
+    return
+
+  const card = event.currentTarget as HTMLElement | null
+  if (!card)
+    return
+
+  const rect = card.getBoundingClientRect()
+  const px = (event.clientX - rect.left) / rect.width
+  const py = (event.clientY - rect.top) / rect.height
+  const tiltY = ((px - 0.5) * 12).toFixed(2)
+  const tiltX = ((0.5 - py) * 12).toFixed(2)
+
+  card.style.setProperty('--note-tilt-x', `${tiltX}deg`)
+  card.style.setProperty('--note-tilt-y', `${tiltY}deg`)
+}
+
+function resetCardTilt(event: PointerEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card)
+    return
+
+  card.style.setProperty('--note-tilt-x', '0deg')
+  card.style.setProperty('--note-tilt-y', '0deg')
+}
+
 const copy = computed(() => {
   if (props.locale === 'zh') {
     return {
-      title: '知识笔记',
-      desc: '按主题整理计算机科学学习资料、概念地图与长期维护的文档记录。',
+      title: '程序员的田野笔记',
+      desc: '这里放的是我整理过的计算机科学笔记。它更像一份长期更新的个人知识底稿，记录概念总结、实现经验，以及那些真正把问题想通的瞬间。',
       cards: [
         {
-          title: '算法与数据结构',
-          desc: '系统整理算法、数据结构与计算思维的核心方法。',
-          href: './algorithms-data-structures.md',
-          icon: iconHierarchy,
-          cta: '探索',
-        },
-        {
-          title: '数学基础',
-          desc: '把微积分、线性代数、概率与优化放回计算问题中理解。',
-          href: './continuous-mathematics-for-cs.md',
-          icon: iconIntegral,
-          cta: '探索',
+          title: '计算理论',
+          desc: '整理自动机、形式语言、可计算性与复杂度，让抽象概念落到可理解的结构上。',
+          href: './theory-of-computation.md',
+          icon: iconMathFunction,
+          cta: '现在可读',
         },
         {
           title: '并行计算',
-          desc: '整理并发编程、并行算法与分布式系统的关键框架。',
+          desc: '记录并行架构、同步机制、并发模型与性能分析时常用的理解框架。',
           href: './parallel-computing.md',
           icon: iconCpu,
-          cta: '探索',
-        },
-        {
-          title: '计算理论',
-          desc: '梳理自动机、形式语言、可计算性与复杂度的核心结构。',
-          href: './theory-of-computation.md',
-          icon: iconMathFunction,
-          cta: '探索',
+          cta: '现在可读',
         },
         {
           title: '编程范式',
-          desc: '对比函数式、面向对象与声明式编程中的真实取舍。',
+          desc: '把函数式、面向对象、逻辑式与声明式思路放在同一张图里理解取舍。',
           href: './programming-paradigms.md',
           icon: iconBrackets,
-          cta: '探索',
+          cta: '现在可读',
         },
         {
           title: '人工智能',
-          desc: '聚焦机器学习直觉、模型评估与智能系统的工程落地。',
+          desc: '聚焦机器学习直觉、模型评估、神经网络基础，以及智能系统的工程落地。',
           href: './artificial-intelligence.md',
           icon: iconBrain,
-          cta: '探索',
+          cta: '现在可读',
+        },
+        {
+          title: '算法与数据结构',
+          desc: '沉淀题型、分析方法、优化套路，以及写出更稳健解法时真正有用的抽象。',
+          href: './algorithms-data-structures.md',
+          icon: iconHierarchy,
+          cta: '现在可读',
         },
         {
           title: '前端开发',
-          desc: '围绕界面架构、渲染策略与交互细节整理工程笔记。',
+          desc: '围绕界面架构、渲染策略、CSS 体系与交互细节，整理更偏工程实感的笔记。',
           href: './front-end-development.md',
           icon: iconBrowser,
-          cta: '探索',
+          cta: '现在可读',
+        },
+        {
+          title: '计算机中的连续数学',
+          desc: '把微积分、线性代数、概率与优化放回计算问题中理解，而不是只背公式。',
+          href: './continuous-mathematics-for-cs.md',
+          icon: iconIntegral,
+          cta: '现在可读',
         },
         {
           title: '计算机科学导论',
-          desc: '给初学者的一张底层地图，帮助建立完整的计算机科学认知。',
+          desc: '给初学者的底层地图：问题拆解、语言、系统、网络与计算思维如何彼此连通。',
           href: './introduction-to-cs.md',
           icon: iconLaptop,
-          cta: '探索',
+          cta: '现在可读',
         },
       ] satisfies NoteCard[],
     }
   }
 
   return {
-    title: 'Knowledge Notes',
-    desc: 'Explore different areas of organized learning resources and long-term technical documentation.',
+    title: 'A Coder\'s Field Notes',
+    desc: 'Welcome to my personal collection of computer science notes. This is where I keep compact summaries, implementation patterns, and the small conceptual links that make hard topics click.',
     cards: [
       {
-        title: 'Algorithms & Data Structures',
-        desc: 'Comprehensive notes on algorithms, data structures, and computational thinking.',
-        href: './algorithms-data-structures.md',
-        icon: iconHierarchy,
-        cta: 'Explore',
-      },
-      {
-        title: 'Mathematics',
-        desc: 'Pure mathematics, applied math, and mathematical foundations for computing.',
-        href: './continuous-mathematics-for-cs.md',
-        icon: iconIntegral,
-        cta: 'Explore',
+        title: 'Theory of Computation',
+        desc: 'Automata, formal languages, computability, and complexity notes that keep the abstractions readable.',
+        href: './theory-of-computation.md',
+        icon: iconMathFunction,
+        cta: 'Available Now',
       },
       {
         title: 'Parallel Computing',
-        desc: 'Concurrent programming, parallel algorithms, and distributed systems.',
+        desc: 'Architectures, concurrency models, synchronization patterns, and performance intuition for parallel systems.',
         href: './parallel-computing.md',
         icon: iconCpu,
-        cta: 'Explore',
-      },
-      {
-        title: 'Theory of Computation',
-        desc: 'Automata, formal languages, computability, and complexity made more readable.',
-        href: './theory-of-computation.md',
-        icon: iconMathFunction,
-        cta: 'Explore',
+        cta: 'Available Now',
       },
       {
         title: 'Programming Paradigms',
-        desc: 'Functional, object-oriented, logic, and declarative approaches in one map.',
+        desc: 'Functional, object-oriented, logic, and declarative patterns with an emphasis on tradeoffs in real code.',
         href: './programming-paradigms.md',
         icon: iconBrackets,
-        cta: 'Explore',
+        cta: 'Available Now',
       },
       {
         title: 'Artificial Intelligence',
-        desc: 'Model intuition, evaluation basics, and practical notes on intelligent systems.',
+        desc: 'Machine learning concepts, model intuition, evaluation basics, and practical notes on intelligent systems.',
         href: './artificial-intelligence.md',
         icon: iconBrain,
-        cta: 'Explore',
+        cta: 'Available Now',
+      },
+      {
+        title: 'Algorithms & Data Structures',
+        desc: 'Core techniques for problem solving, analysis, optimization, and building durable computational instincts.',
+        href: './algorithms-data-structures.md',
+        icon: iconHierarchy,
+        cta: 'Available Now',
       },
       {
         title: 'Front-end Development',
-        desc: 'Interface architecture, rendering patterns, CSS systems, and product detail work.',
+        desc: 'Interface architecture, rendering patterns, CSS systems, and small implementation details that improve product feel.',
         href: './front-end-development.md',
         icon: iconBrowser,
-        cta: 'Explore',
+        cta: 'Available Now',
+      },
+      {
+        title: 'Continuous Mathematics for CS',
+        desc: 'Calculus, linear algebra, probability, and optimization notes aimed at actual computer science use cases.',
+        href: './continuous-mathematics-for-cs.md',
+        icon: iconIntegral,
+        cta: 'Available Now',
       },
       {
         title: 'Introduction to Computer Science',
-        desc: 'Beginner-friendly notes on core ideas, systems, languages, and how they connect.',
+        desc: 'Beginner-friendly notes on core ideas, problem decomposition, languages, systems, and how everything fits together.',
         href: './introduction-to-cs.md',
         icon: iconLaptop,
-        cta: 'Explore',
+        cta: 'Available Now',
       },
     ] satisfies NoteCard[],
   }
@@ -190,6 +217,8 @@ const copy = computed(() => {
         v-for="card in copy.cards"
         :key="card.href"
         class="notes-topic-card"
+        @pointermove="onCardPointerMove"
+        @pointerleave="resetCardTilt"
       >
         <template #title>
           <span class="notes-topic-card__icon">
