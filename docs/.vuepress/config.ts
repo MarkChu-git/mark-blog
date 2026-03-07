@@ -2,8 +2,21 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
 
+function normalizeBase(rawBase: string | undefined): string {
+  if (!rawBase || rawBase === '/') {
+    return '/'
+  }
+
+  const trimmed = rawBase.replace(/^\/+|\/+$/g, '')
+  return `/${trimmed}/`
+}
+
+const base = normalizeBase(process.env.SITE_BASE)
+const withBase = (path: string): string =>
+  base === '/' ? path : `${base.slice(0, -1)}${path}`
+
 export default defineUserConfig({
-  base: '/blog/',
+  base,
   lang: 'en-US',
   title: 'Mark Blog',
   description: 'Mark\'s static blog website',
@@ -13,7 +26,7 @@ export default defineUserConfig({
       {
         rel: 'icon',
         type: 'image/png',
-        href: '/blog/site-avatar.png',
+        href: withBase('/site-avatar.png'),
       },
     ],
   ],
