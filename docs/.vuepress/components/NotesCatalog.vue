@@ -212,7 +212,7 @@ const copy = computed(() => {
       <p>{{ copy.desc }}</p>
     </header>
 
-    <VPCardGrid class="notes-catalog__grid" :cols="{ sm: 1, md: 2, lg: 4 }">
+    <div class="notes-catalog__grid">
       <VPCard
         v-for="card in copy.cards"
         :key="card.href"
@@ -232,6 +232,6 @@ const copy = computed(() => {
           <span class="notes-topic-card__cta-arrow" aria-hidden="true">→</span>
         </VPLink>
       </VPCard>
-    </VPCardGrid>
+    </div>
   </div>
 </template>
