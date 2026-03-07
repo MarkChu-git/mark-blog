@@ -840,12 +840,10 @@
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
 }
 
-.skill-preview-token {
+.skill-preview-tile .iconify {
+  width: 30px;
+  height: 30px;
   color: var(--skill-color);
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .card-skills:hover .skill-preview-tile:nth-child(odd),
@@ -897,11 +895,9 @@
   color: var(--skill-color);
 }
 
-.skill-token {
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.skill-icon .iconify {
+  width: 17px;
+  height: 17px;
 }
 
 .skill-name {
@@ -1301,8 +1297,9 @@
     border-radius: 22px;
   }
 
-  .skill-preview-token {
-    font-size: 0.92rem;
+  .skill-preview-tile .iconify {
+    width: 26px;
+    height: 26px;
   }
 
   .character-figure {
@@ -1364,8 +1361,9 @@
     border-radius: 24px;
   }
 
-  .skill-preview-token {
-    font-size: 1rem;
+  .skill-preview-tile .iconify {
+    width: 32px;
+    height: 32px;
   }
 
   .card-base {
