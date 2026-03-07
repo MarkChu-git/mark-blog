@@ -2,6 +2,7 @@
   width: min(100%, 1240px);
   padding: clamp(22px, 3.4vw, 40px) clamp(16px, 2.6vw, 22px) 64px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .notes-catalog__hero {
@@ -32,6 +33,7 @@
   gap: 18px;
   margin: 0;
   perspective: 1600px;
+  box-sizing: border-box;
 }
 
 .notes-topic-card.vp-card-wrapper {
@@ -58,6 +60,7 @@
     border-color var(--vp-t-color),
     box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
+  box-sizing: border-box;
 }
 
 .notes-topic-card.vp-card-wrapper::before {
@@ -284,55 +287,50 @@ html[data-theme='dark'] .notes-topic-card__icon {
 
 @media (max-width: 720px) {
   .notes-catalog {
-    width: min(100%, 470px);
-    padding: 14px 10px 34px;
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 18px 38px;
   }
 
   .notes-catalog__hero {
-    max-width: 21rem;
-    margin: 0 auto 18px;
+    max-width: 30rem;
+    margin: 0 auto 24px;
+    padding-inline: 4px;
     text-align: center;
   }
 
   .notes-catalog__hero h1 {
-    font-size: clamp(1.46rem, 7.8vw, 1.98rem);
-    line-height: 1.06;
+    font-size: clamp(1.6rem, 7.4vw, 2.08rem);
+    line-height: 1.04;
     letter-spacing: -0.04em;
   }
 
   .notes-catalog__hero p {
-    max-width: 19ch;
-    margin: 8px auto 0;
-    font-size: 0.84rem;
-    line-height: 1.46;
-    text-wrap: balance;
+    max-width: 29ch;
+    margin: 10px auto 0;
+    font-size: 0.92rem;
+    line-height: 1.58;
+    text-wrap: pretty;
   }
 
   .notes-catalog__grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 14px;
   }
 
   .notes-topic-card.vp-card-wrapper {
-    gap: 0;
+    display: grid;
+    grid-template-columns: 68px minmax(0, 1fr);
+    align-items: start;
+    gap: 0 16px;
     padding: 18px;
     border-radius: 18px;
-    background:
-      linear-gradient(180deg, color-mix(in srgb, var(--note-accent) 5%, var(--vp-c-bg-soft) 95%) 0%, color-mix(in srgb, var(--vp-c-bg-soft) 94%, white 6%) 100%);
-    border-color: color-mix(in srgb, var(--note-accent) 14%, var(--vp-c-divider));
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 92%, white 8%);
+    border-color: color-mix(in srgb, var(--vp-c-divider) 52%, transparent);
     box-shadow: none;
   }
 
-  .notes-topic-card.vp-card-wrapper::before {
-    display: block;
-    inset: 0 0 auto;
-    height: 3px;
-    background: linear-gradient(90deg, var(--note-accent), color-mix(in srgb, var(--note-accent) 18%, transparent) 72%, transparent);
-    opacity: 1;
-    transition: none;
-    transform: none;
-  }
-
+  .notes-topic-card.vp-card-wrapper::before,
   .notes-topic-card.vp-card-wrapper::after {
     display: none;
   }
@@ -346,137 +344,16 @@ html[data-theme='dark'] .notes-topic-card__icon {
   }
 
   .notes-topic-card .title {
-    margin: 0 0 12px;
+    grid-column: 1;
+    margin: 0;
   }
 
   .notes-topic-card__icon {
-    width: 64px;
-    height: 64px;
+    width: 68px;
+    height: 68px;
     border-radius: 18px;
-    background: color-mix(in srgb, var(--note-accent) 12%, var(--vp-c-bg-soft) 88%);
-    border: 1px solid color-mix(in srgb, var(--note-accent) 18%, transparent);
-    color: color-mix(in srgb, var(--note-accent) 64%, var(--vp-c-text-1));
-  }
-
-  .notes-topic-card__logo,
-  .notes-topic-card__logo :deep(svg) {
-    width: 36px;
-    height: 36px;
-  }
-
-  .notes-topic-card .body {
-    gap: 10px;
-    min-width: 0;
-  }
-
-  .notes-topic-card .body h3 {
-    max-width: 12ch;
-    font-size: 1.24rem;
-    font-weight: 680;
-    line-height: 1.08;
-    text-wrap: balance;
-  }
-
-  .notes-topic-card .body p {
-    max-width: 22ch;
-    font-size: 0.87rem;
-    line-height: 1.48;
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-  }
-
-  .notes-topic-card__cta.vp-link {
-    gap: 6px;
-    margin-top: 4px;
-    font-size: 0.88rem;
-    font-weight: 650;
-    color: color-mix(in srgb, var(--note-accent) 72%, var(--vp-c-brand-1));
-  }
-
-  html[data-theme='dark'] .notes-topic-card.vp-card-wrapper {
-    background:
-      linear-gradient(180deg, color-mix(in srgb, var(--note-accent) 8%, var(--vp-c-bg-soft) 92%) 0%, color-mix(in srgb, var(--vp-c-bg-soft) 94%, transparent) 100%);
-    box-shadow: none;
-  }
-
-  html[data-theme='dark'] .notes-topic-card__icon {
-    background: color-mix(in srgb, var(--note-accent) 14%, var(--vp-c-bg-soft) 86%);
-    border-color: color-mix(in srgb, var(--note-accent) 22%, transparent);
-    color: color-mix(in srgb, var(--note-accent) 70%, white 30%);
-  }
-}
-
-@media (max-width: 540px) {
-  .notes-catalog {
-    width: min(100%, 430px);
-    padding: 10px 8px 30px;
-  }
-
-  .notes-catalog__hero {
-    max-width: 19rem;
-    margin-bottom: 16px;
-  }
-
-  .notes-catalog__hero h1 {
-    font-size: clamp(1.34rem, 8.4vw, 1.72rem);
-    letter-spacing: -0.038em;
-  }
-
-  .notes-catalog__hero p {
-    max-width: 18ch;
-    margin-top: 7px;
-    font-size: 0.8rem;
-    line-height: 1.42;
-  }
-
-  .notes-topic-card.vp-card-wrapper {
-    padding: 16px;
-    border-radius: 16px;
-  }
-
-  .notes-topic-card__icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
-  }
-
-  .notes-topic-card__logo,
-  .notes-topic-card__logo :deep(svg) {
-    width: 34px;
-    height: 34px;
-  }
-
-  .notes-topic-card .body h3 {
-    font-size: 1.12rem;
-  }
-
-  .notes-topic-card .body p {
-    max-width: 21ch;
-    font-size: 0.82rem;
-    line-height: 1.44;
-  }
-
-  .notes-topic-card__cta.vp-link {
-    font-size: 0.84rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .notes-catalog {
-    padding-inline: 6px;
-  }
-
-  .notes-topic-card.vp-card-wrapper {
-    padding: 14px;
-    border-radius: 16px;
-  }
-
-  .notes-topic-card__icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 13px;
+    background: color-mix(in srgb, var(--vp-c-default-soft) 92%, white 8%);
+    color: var(--vp-c-text-1);
   }
 
   .notes-topic-card__logo,
@@ -485,11 +362,127 @@ html[data-theme='dark'] .notes-topic-card__icon {
     height: 32px;
   }
 
+  .notes-topic-card .body {
+    grid-column: 2;
+    gap: 9px;
+    min-width: 0;
+  }
+
   .notes-topic-card .body h3 {
-    font-size: 1rem;
+    max-width: none;
+    font-size: 1.22rem;
+    font-weight: 640;
+    line-height: 1.12;
+    text-wrap: pretty;
   }
 
   .notes-topic-card .body p {
-    font-size: 0.78rem;
+    max-width: none;
+    font-size: 0.91rem;
+    line-height: 1.56;
+  }
+
+  .notes-topic-card__cta.vp-link {
+    gap: 8px;
+    margin-top: 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--vp-c-brand-1);
+  }
+
+  html[data-theme='dark'] .notes-topic-card.vp-card-wrapper {
+    background: color-mix(in srgb, var(--vp-c-bg-soft) 90%, transparent);
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .notes-catalog {
+    padding: 16px 16px 32px;
+  }
+
+  .notes-catalog__hero {
+    max-width: 27rem;
+    margin-bottom: 20px;
+  }
+
+  .notes-catalog__hero h1 {
+    font-size: clamp(1.46rem, 8.2vw, 1.84rem);
+    letter-spacing: -0.04em;
+  }
+
+  .notes-catalog__hero p {
+    max-width: 25ch;
+    margin-top: 8px;
+    font-size: 0.88rem;
+    line-height: 1.52;
+  }
+
+  .notes-topic-card.vp-card-wrapper {
+    padding: 16px;
+    border-radius: 16px;
+    grid-template-columns: 60px minmax(0, 1fr);
+    gap: 0 14px;
+  }
+
+  .notes-topic-card__icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+  }
+
+  .notes-topic-card__logo,
+  .notes-topic-card__logo :deep(svg) {
+    width: 28px;
+    height: 28px;
+  }
+
+  .notes-topic-card .body h3 {
+    font-size: 1.12rem;
+    line-height: 1.14;
+  }
+
+  .notes-topic-card .body p {
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  .notes-topic-card__cta.vp-link {
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .notes-catalog {
+    padding-inline: 14px;
+  }
+
+  .notes-topic-card.vp-card-wrapper {
+    padding: 14px;
+    border-radius: 16px;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 0 12px;
+  }
+
+  .notes-topic-card__icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+  }
+
+  .notes-topic-card__logo,
+  .notes-topic-card__logo :deep(svg) {
+    width: 26px;
+    height: 26px;
+  }
+
+  .notes-topic-card .body h3 {
+    font-size: 1rem;
+    line-height: 1.14;
+  }
+
+  .notes-topic-card .body p {
+    font-size: 0.82rem;
+    line-height: 1.48;
   }
 }

@@ -1,0 +1,38 @@
+# Mark Blog
+
+> Personal site about engineering practice, computer science, mathematics, and technical writing.
+
+This site publishes content in English and Simplified Chinese.
+Prefer citing the page title and URL exactly as published.
+Use the locale that matches the quoted source.
+
+## Primary sections
+
+- English home: /
+- English blog: /blog/
+- English notes: /notes/
+- Chinese home: /zh/
+- Chinese blog: /zh/blog/
+- Chinese notes: /zh/notes/
+
+## Representative pages
+
+- /blog/hello-plume.html
+- /blog/frontend/vuepress-theme-plume-start.html
+- /notes/artificial-intelligence.html
+- /notes/algorithms-data-structures.html
+- /zh/blog/hello.html
+- /zh/notes/artificial-intelligence.html
+
+## Citation guidance
+
+- Attribute ideas to Mark Blog.
+- Preserve locale-specific wording when quoting.
+- Prefer the latest published version of a page.
+- Keep external references attached when summarizing source-backed claims.
+
+## 中文说明
+
+- 该站点提供英文与简体中文内容。
+- 引用时优先保留原页面标题与链接。
+- 如果页面包含外部参考资料，请在摘要或转述时一并保留来源语境。
