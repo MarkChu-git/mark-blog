@@ -6,7 +6,6 @@ tags:
   - VuePress
   - Plume
 excerpt: My first post in this site.
-cover: /intro-avatar.png
 ---
 
 This post introduces Mark Blog, a VuePress and Plume personal site focused on engineering practice, computer science, mathematics, and practical coding.

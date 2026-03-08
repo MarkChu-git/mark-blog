@@ -6,7 +6,6 @@ tags:
   - Frontend
   - VuePress
 excerpt: A minimal setup for a personal blog.
-cover: /intro-avatar.png
 ---
 
 This note records the minimal file set needed to launch this VuePress and Plume blog and explains which files control site config, theme config, and custom homepage components.

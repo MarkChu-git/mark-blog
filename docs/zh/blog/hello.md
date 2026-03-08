@@ -6,7 +6,6 @@ tags:
   - VuePress
   - 博客
 excerpt: 这是中文目录下的第一篇文章。
-cover: /intro-avatar.png
 ---
 
 这篇文章介绍 Mark Blog：一个使用 VuePress 与 Plume 搭建的双语个人站点，主要记录工程实践、计算机科学、数学学习与项目复盘。
