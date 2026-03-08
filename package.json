@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Static blog with VuePress and vuepress-theme-plume",
   "scripts": {
+    "dev": "npm run docs:dev",
+    "build": "npm run docs:build",
+    "preview": "npm run docs:preview",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache",
@@ -16,6 +19,8 @@
   "devDependencies": {
     "@iconify/json": "^2.2.447",
     "@vuepress/bundler-vite": "^2.0.0-rc.24",
+    "@vuepress/plugin-seo": "2.0.0-rc.112",
+    "@vuepress/plugin-sitemap": "2.0.0-rc.112",
     "katex": "^0.16.33",
     "typescript": "^5.9.3",
     "vuepress": "^2.0.0-rc.24",

@@ -16,14 +16,18 @@ function normalizeBase(rawBase: string | undefined): string {
 function normalizeSiteUrl(rawSiteUrl: string | undefined): string {
   const fallback = 'https://markchu-git.github.io/mark-blog/'
   const value = rawSiteUrl?.trim() || fallback
+  const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`
 
-  return value.endsWith('/') ? value : `${value}/`
+  return withProtocol.endsWith('/') ? withProtocol : `${withProtocol}/`
 }
 
 type HeadEntry = [string, Record<string, string>, string?]
 
 const siteUrl = normalizeSiteUrl(
   process.env.SITE_URL?.trim()
+  || process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim()
+  || process.env.VERCEL_BRANCH_URL?.trim()
+  || process.env.VERCEL_URL?.trim()
   || process.env.URL?.trim()
   || process.env.DEPLOY_PRIME_URL?.trim()
   || process.env.DEPLOY_URL?.trim(),

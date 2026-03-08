@@ -18,6 +18,12 @@ npm run docs:build
 npm run docs:preview
 ```
 
+## Vercel 部署
+
+- 默认构建命令：`npm run build`
+- 默认输出目录：`docs/.vuepress/dist`
+- 如需固定生产站点域名用于 canonical / sitemap，建议在 Vercel 项目环境变量中设置 `SITE_URL=https://你的域名`
+
 ## 目录结构
 
 - `docs/.vuepress/config.ts`：VuePress 主配置
