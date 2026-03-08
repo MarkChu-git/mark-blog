@@ -59,7 +59,7 @@ interface SocialItem {
   title: string
   detail: string
   href?: string
-  icon: string
+  iconSrc: string
   accent: string
   external?: boolean
 }
@@ -236,7 +236,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '适合放职业背景、项目经历和长期方向。'
       : 'Best for career context, project history, and longer-form professional signal.',
     href: socialProfiles.linkedin || undefined,
-    icon: 'mdi:linkedin',
+    iconSrc: withBase('/social-icons/linkedin.png'),
     accent: '#5a84da',
     external: true,
   },
@@ -248,7 +248,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '代码、实验和持续构建的记录。'
       : 'Code, experiments, and a running log of what gets built.',
     href: socialProfiles.github,
-    icon: 'mdi:github',
+    iconSrc: withBase('/social-icons/github.png'),
     accent: '#78829a',
     external: true,
   },
@@ -260,7 +260,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '更轻一点的日常切片、镜头感和生活感。'
       : 'A lighter stream of daily snapshots, visual fragments, and mood.',
     href: socialProfiles.instagram || undefined,
-    icon: 'mdi:instagram',
+    iconSrc: withBase('/social-icons/instagram.png'),
     accent: '#d67ca8',
     external: true,
   },
@@ -272,7 +272,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '最快的直接联系渠道。'
       : 'The fastest direct channel when you want to reach out.',
     href: socialProfiles.email,
-    icon: 'mdi:email-outline',
+    iconSrc: withBase('/social-icons/email.png'),
     accent: '#c88b68',
   },
 ])
@@ -739,9 +739,7 @@ const routineGradient = computed(() => {
               :style="{ '--social-accent': item.accent }"
               @click.stop
             >
-              <span class="social-dock-icon">
-                <Icon :icon="item.icon" />
-              </span>
+              <img class="social-dock-icon" :src="item.iconSrc" :alt="item.label" />
               <span class="social-dock-label">{{ item.label }}</span>
             </component>
           </div>
@@ -767,9 +765,7 @@ const routineGradient = computed(() => {
               @click.stop
             >
               <div class="contact-panel-head">
-                <span class="contact-panel-icon">
-                  <Icon :icon="item.icon" />
-                </span>
+                <img class="contact-panel-icon" :src="item.iconSrc" :alt="item.label" />
                 <span class="contact-panel-label">{{ item.label }}</span>
               </div>
               <strong>{{ item.title }}</strong>
