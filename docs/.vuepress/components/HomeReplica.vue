@@ -53,10 +53,15 @@ interface FocusItem {
   href: string
 }
 
-interface QuickAction {
+interface SocialItem {
+  key: string
   label: string
-  href: string
+  title: string
+  detail: string
+  href?: string
   icon: string
+  accent: string
+  external?: boolean
 }
 
 type CardKey = 'intro' | 'motto' | 'pursuit' | 'character' | 'skills' | 'routine'
@@ -78,6 +83,14 @@ const links = computed(() => ({
   archives: withBase(isZh.value ? '/zh/blog/archives/' : '/blog/archives/'),
   friends: withBase(isZh.value ? '/zh/more/friends/' : '/more/friends/'),
 }))
+
+// Fill in the missing profile URLs here when you have the final links.
+const socialProfiles = {
+  linkedin: 'https://www.linkedin.com/in/hanyang-chu-8836252a7',
+  github: 'https://github.com/MarkChu-git',
+  instagram: 'https://www.instagram.com/fahreheitmark/',
+  email: 'mailto:markchu2022@gmail.com',
+} as const
 
 const nowText = ref('--:--')
 const timezoneText = ref('--')
@@ -214,21 +227,53 @@ const introStats = computed<IntroStat[]>(() => [
   { label: t.value.localTimeLabel, value: nowText.value },
 ])
 
-const introActions = computed<QuickAction[]>(() => [
+const socialLinks = computed<SocialItem[]>(() => [
   {
-    label: isZh.value ? '博客文章' : 'Open Blog',
-    href: links.value.blog,
-    icon: 'mdi:arrow-top-right',
+    key: 'linkedin',
+    label: 'LinkedIn',
+    title: isZh.value ? '职业轨迹' : 'Professional track',
+    detail: isZh.value
+      ? '适合放职业背景、项目经历和长期方向。'
+      : 'Best for career context, project history, and longer-form professional signal.',
+    href: socialProfiles.linkedin || undefined,
+    icon: 'mdi:linkedin',
+    accent: '#5a84da',
+    external: true,
   },
   {
-    label: isZh.value ? '学习笔记' : 'Read Notes',
-    href: links.value.notes,
-    icon: 'mdi:notebook-outline',
+    key: 'github',
+    label: 'GitHub',
+    title: '@MarkChu-git',
+    detail: isZh.value
+      ? '代码、实验和持续构建的记录。'
+      : 'Code, experiments, and a running log of what gets built.',
+    href: socialProfiles.github,
+    icon: 'mdi:github',
+    accent: '#78829a',
+    external: true,
   },
   {
-    label: isZh.value ? '标签索引' : 'Browse Tags',
-    href: links.value.tags,
-    icon: 'mdi:sitemap-outline',
+    key: 'instagram',
+    label: 'Instagram',
+    title: isZh.value ? '视觉片段' : 'Visual notes',
+    detail: isZh.value
+      ? '更轻一点的日常切片、镜头感和生活感。'
+      : 'A lighter stream of daily snapshots, visual fragments, and mood.',
+    href: socialProfiles.instagram || undefined,
+    icon: 'mdi:instagram',
+    accent: '#d67ca8',
+    external: true,
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    title: 'markchu2022@gmail.com',
+    detail: isZh.value
+      ? '最快的直接联系渠道。'
+      : 'The fastest direct channel when you want to reach out.',
+    href: socialProfiles.email,
+    icon: 'mdi:email-outline',
+    accent: '#c88b68',
   },
 ])
 
@@ -667,18 +712,38 @@ const routineGradient = computed(() => {
             <div class="intro-copy">
               <h1>Mark.</h1>
               <p class="card-support intro-support">{{ t.introDesc }}</p>
+              <div class="intro-meta-row">
+                <div class="intro-meta-pill">
+                  <span>{{ t.statusLabel }}</span>
+                  <strong>{{ t.statusValue }}</strong>
+                </div>
+                <div class="intro-meta-pill">
+                  <span>{{ t.localTimeLabel }}</span>
+                  <strong>{{ nowText }}</strong>
+                </div>
+              </div>
             </div>
             <LazyPerson class="intro-person" />
           </div>
-          <div class="micro-stats">
-            <div class="micro-stat">
-              <span>{{ t.statusLabel }}</span>
-              <strong>{{ t.statusValue }}</strong>
-            </div>
-            <div class="micro-stat">
-              <span>{{ t.localTimeLabel }}</span>
-              <strong>{{ nowText }}</strong>
-            </div>
+
+          <div class="intro-social-dock" @click.stop>
+            <component
+              :is="item.href ? 'a' : 'div'"
+              v-for="item in socialLinks"
+              :key="item.key"
+              class="social-dock-item"
+              :class="{ 'is-link': !!item.href, 'is-disabled': !item.href }"
+              :href="item.href"
+              :target="item.external ? '_blank' : undefined"
+              :rel="item.external ? 'noreferrer' : undefined"
+              :style="{ '--social-accent': item.accent }"
+              @click.stop
+            >
+              <span class="social-dock-icon">
+                <Icon :icon="item.icon" />
+              </span>
+              <span class="social-dock-label">{{ item.label }}</span>
+            </component>
           </div>
         </div>
 
@@ -688,23 +753,35 @@ const routineGradient = computed(() => {
           </button>
           <p class="card-detail">{{ t.introDesc }}</p>
 
+          <div class="intro-contact-grid" @click.stop>
+            <component
+              :is="item.href ? 'a' : 'div'"
+              v-for="item in socialLinks"
+              :key="item.key"
+              class="contact-panel"
+              :class="{ 'is-link': !!item.href, 'is-disabled': !item.href }"
+              :href="item.href"
+              :target="item.external ? '_blank' : undefined"
+              :rel="item.external ? 'noreferrer' : undefined"
+              :style="{ '--social-accent': item.accent }"
+              @click.stop
+            >
+              <div class="contact-panel-head">
+                <span class="contact-panel-icon">
+                  <Icon :icon="item.icon" />
+                </span>
+                <span class="contact-panel-label">{{ item.label }}</span>
+              </div>
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.detail }}</p>
+            </component>
+          </div>
+
           <div class="intro-stats compact">
             <div v-for="item in introStats" :key="item.label" class="stat-pill">
               <span>{{ item.label }}</span>
               <strong>{{ item.value }}</strong>
             </div>
-          </div>
-
-          <div class="action-row">
-            <a
-              v-for="item in introActions"
-              :key="item.label"
-              :href="item.href"
-              class="inline-action"
-            >
-              {{ item.label }}
-              <Icon :icon="item.icon" />
-            </a>
           </div>
         </div>
       </article>
