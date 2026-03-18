@@ -3,6 +3,7 @@ import { Icon } from '@iconify/vue'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { withBase } from 'vuepress/client'
 import LazyPerson from './LazyPerson.vue'
+import TypewriterText from './TypewriterText.vue'
 
 type Lang = 'en' | 'zh'
 
@@ -94,6 +95,7 @@ const socialProfiles = {
 
 const nowText = ref('--:--')
 const timezoneText = ref('--')
+const typewriterWords = ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack.', 'Algorithms.', 'Quant.', 'AI.']
 let clock = 0
 const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')
@@ -710,7 +712,7 @@ const routineGradient = computed(() => {
           </div>
           <div class="intro-hero">
             <div class="intro-copy">
-              <h1>Mark.</h1>
+              <h1><TypewriterText :words="typewriterWords" /></h1>
               <p class="card-support intro-support">{{ t.introDesc }}</p>
               <div class="intro-meta-row">
                 <div class="intro-meta-pill">
