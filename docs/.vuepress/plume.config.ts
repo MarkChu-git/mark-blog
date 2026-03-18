@@ -41,27 +41,47 @@ export default defineThemeConfig({
     postCover: 'right',
   },
   sidebar: {
-    '/blog/git-and-github/': [
+    '/blog/git-and-github/zh/': [
       {
-        text: 'Git and GitHub',
-        prefix: 'zh',
-        items: 'auto',
+        text: 'Git 与 GitHub',
+        link: 'README.md',
       },
       {
-        text: 'Git and GitHub (EN)',
-        prefix: 'en',
+        text: '目录',
+        prefix: 'chapters',
         items: 'auto',
       },
     ],
-    '/blog/typora-and-markdown/': [
+    '/blog/git-and-github/en/': [
       {
-        text: 'Typora and Markdown',
-        prefix: 'zh',
-        items: 'auto',
+        text: 'Git and GitHub',
+        link: 'README.md',
       },
       {
-        text: 'Typora and Markdown (EN)',
-        prefix: 'en',
+        text: 'Chapters',
+        prefix: 'chapters',
+        items: 'auto',
+      },
+    ],
+    '/blog/typora-and-markdown/zh/': [
+      {
+        text: 'Typora 与 Markdown',
+        link: 'README.md',
+      },
+      {
+        text: '目录',
+        prefix: 'chapters',
+        items: 'auto',
+      },
+    ],
+    '/blog/typora-and-markdown/en/': [
+      {
+        text: 'Typora and Markdown',
+        link: 'README.md',
+      },
+      {
+        text: 'Chapters',
+        prefix: 'chapters',
         items: 'auto',
       },
     ],
