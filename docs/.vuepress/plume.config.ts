@@ -30,13 +30,29 @@ export default defineThemeConfig({
   },
   autoFrontmatter: false,
   blog: {
-    include: ['blog/**/*.md', 'zh/blog/**/*.md'],
+    include: ['blog/**/*.md', 'zh/blog/**/*.md', 'notes/**/*.md', 'notes/**/chapters/*.md'],
     pagination: 10,
     link: '/blog/',
     tags: true,
     archives: true,
     categories: false,
     postCover: 'right',
+  },
+  sidebar: {
+    '/notes/git-and-github/': [
+      {
+        text: 'Git and GitHub',
+        prefix: 'chapters',
+        items: 'auto',
+      },
+    ],
+    '/notes/typora-and-markdown/': [
+      {
+        text: 'Typora and Markdown',
+        prefix: 'chapters',
+        items: 'auto',
+      },
+    ],
   },
   navbar: navbarEN,
   footer: {
