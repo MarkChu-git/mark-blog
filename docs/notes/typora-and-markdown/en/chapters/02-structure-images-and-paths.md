@@ -1,3 +1,12 @@
+---
+title: Writing Documents for Long-Term Maintenance — Directory Structure, Images, Relative Paths, and Repository Organization
+tags:
+  - markdown
+  - file-structure
+  - paths
+  - images
+---
+
 # Chapter 2: Writing Documents for Long-Term Maintenance — Directory Structure, Images, Relative Paths, and Repository Organization
 
 > Language / 语言：[中文](../../zh/chapters/02-structure-images-and-paths.md) | **English**

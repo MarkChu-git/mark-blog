@@ -1,3 +1,12 @@
+---
+title: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features
+tags:
+  - markdown
+  - tables
+  - mermaid
+  - advanced
+---
+
 # Chapter 4: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features
 
 > Language / 语言：**English** | [中文](../../zh/chapters/04-advanced-markdown-features.md)

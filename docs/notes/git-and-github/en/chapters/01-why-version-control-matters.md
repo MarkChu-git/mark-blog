@@ -1,3 +1,11 @@
+---
+title: First Understand What Problem Version Control Is Actually Solving
+tags:
+  - git
+  - version-control
+  - concepts
+---
+
 # Chapter 1: First Understand What Problem Version Control Is Actually Solving
 
 > Language / 语言：[中文](../../zh/chapters/01-why-version-control-matters.md) | **English**

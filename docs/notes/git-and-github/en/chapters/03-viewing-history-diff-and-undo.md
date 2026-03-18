@@ -1,3 +1,12 @@
+---
+title: Looking Back and Undoing — How to View History, Compare Differences, and Safely Undo
+tags:
+  - git
+  - git-commands
+  - diff
+  - undo
+---
+
 # Chapter 3: Looking Back and Undoing — How to View History, Compare Differences, and Safely Undo
 
 > Language / 语言：**English** | [中文](../../zh/chapters/03-viewing-history-diff-and-undo.md)

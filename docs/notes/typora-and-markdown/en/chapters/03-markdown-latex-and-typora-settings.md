@@ -1,3 +1,12 @@
+---
+title: Getting Started with Real Writing — Markdown Basics, LaTeX Formulas, and Typora Settings
+tags:
+  - markdown
+  - latex
+  - typora
+  - syntax
+---
+
 # Chapter 3: Getting Started with Real Writing — Markdown Basics, LaTeX Formulas, and Typora Settings
 
 > Language / 语言：[中文](../../zh/chapters/03-markdown-latex-and-typora-settings.md) | **English**

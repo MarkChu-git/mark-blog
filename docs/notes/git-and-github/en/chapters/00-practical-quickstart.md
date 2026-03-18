@@ -1,3 +1,12 @@
+---
+title: Practical Quick Start — Get Git and GitHub Working Fast
+tags:
+  - git
+  - github
+  - quickstart
+  - beginner
+---
+
 # Chapter 0: Practical Quick Start — Get Git and GitHub Working Fast
 
 > Language / 语言：[中文](../../zh/chapters/00-practical-quickstart.md) | **English**

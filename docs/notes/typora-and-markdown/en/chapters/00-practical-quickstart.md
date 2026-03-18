@@ -1,3 +1,11 @@
+---
+title: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast
+tags:
+  - typora
+  - markdown
+  - beginner
+---
+
 # Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast
 
 > Language / 语言：[中文](../../zh/chapters/00-practical-quickstart.md) | **English**

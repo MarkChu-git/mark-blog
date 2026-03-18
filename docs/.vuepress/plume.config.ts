@@ -30,7 +30,7 @@ export default defineThemeConfig({
   },
   autoFrontmatter: false,
   blog: {
-    include: ['blog/**/*.md', 'zh/blog/**/*.md', 'notes/**/*.md', 'notes/**/chapters/*.md'],
+    include: ['blog/**/*.md', 'zh/blog/**/*.md', 'notes/**/*.md', 'zh/notes/**/*.md'],
     pagination: 10,
     link: '/blog/',
     tags: true,
@@ -49,6 +49,20 @@ export default defineThemeConfig({
     '/notes/typora-and-markdown/': [
       {
         text: 'Typora and Markdown',
+        prefix: 'chapters',
+        items: 'auto',
+      },
+    ],
+    '/zh/notes/git-and-github/': [
+      {
+        text: 'Git 与 GitHub',
+        prefix: 'chapters',
+        items: 'auto',
+      },
+    ],
+    '/zh/notes/typora-and-markdown/': [
+      {
+        text: 'Typora 与 Markdown',
         prefix: 'chapters',
         items: 'auto',
       },
