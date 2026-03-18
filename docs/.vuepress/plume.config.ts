@@ -7,7 +7,8 @@ const navbarEN = [
   { text: 'Blog', link: '/blog/' },
   { text: 'Tags', link: '/blog/tags/' },
   { text: 'Archives', link: '/blog/archives/' },
-  { text: 'Notes', link: '/notes/' },
+  { text: 'Git & GitHub', link: '/blog/git-and-github/zh/' },
+  { text: 'Typora & MD', link: '/blog/typora-and-markdown/zh/' },
   { text: 'Friends', link: '/more/friends/' },
 ]
 
@@ -16,7 +17,8 @@ const navbarZH = [
   { text: '博客', link: '/zh/blog/' },
   { text: '标签', link: '/zh/blog/tags/' },
   { text: '归档', link: '/zh/blog/archives/' },
-  { text: '笔记', link: '/zh/notes/' },
+  { text: 'Git 与 GitHub', link: '/zh/blog/git-and-github/zh/' },
+  { text: 'Typora 与 MD', link: '/zh/blog/typora-and-markdown/zh/' },
   { text: '友链', link: '/zh/more/friends/' },
 ]
 
@@ -30,7 +32,7 @@ export default defineThemeConfig({
   },
   autoFrontmatter: false,
   blog: {
-    include: ['blog/**/*.md', 'zh/blog/**/*.md', 'notes/**/*.md', 'zh/notes/**/*.md'],
+    include: ['blog/**/*.md'],
     pagination: 10,
     link: '/blog/',
     tags: true,
@@ -39,31 +41,27 @@ export default defineThemeConfig({
     postCover: 'right',
   },
   sidebar: {
-    '/notes/git-and-github/': [
+    '/blog/git-and-github/': [
       {
         text: 'Git and GitHub',
-        prefix: 'chapters',
+        prefix: 'zh',
+        items: 'auto',
+      },
+      {
+        text: 'Git and GitHub (EN)',
+        prefix: 'en',
         items: 'auto',
       },
     ],
-    '/notes/typora-and-markdown/': [
+    '/blog/typora-and-markdown/': [
       {
         text: 'Typora and Markdown',
-        prefix: 'chapters',
+        prefix: 'zh',
         items: 'auto',
       },
-    ],
-    '/zh/notes/git-and-github/': [
       {
-        text: 'Git 与 GitHub',
-        prefix: 'chapters',
-        items: 'auto',
-      },
-    ],
-    '/zh/notes/typora-and-markdown/': [
-      {
-        text: 'Typora 与 Markdown',
-        prefix: 'chapters',
+        text: 'Typora and Markdown (EN)',
+        prefix: 'en',
         items: 'auto',
       },
     ],

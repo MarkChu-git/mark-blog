@@ -1,0 +1,106 @@
+---
+title: Typora 与 Markdown
+createTime: 2026/01/10 10:00:00
+description: 一本关于 Typora 与 Markdown 的教材，系统讲解文档写作、格式语法与长期维护
+tags:
+  - typora
+  - markdown
+  - writing
+excerpt: 这本教材的目标是系统讲清楚如何用 Markdown 和 Typora 建立长期可维护的文档写作系统。
+---
+
+# 《Typora 与 Markdown》
+
+> 语言 / Language：**中文** | [English](../en/README.md)
+
+这是教材合集中的第一册。
+
+这一册的目标，不是把 Markdown 写成一张语法小抄，也不是把 Typora 写成一篇软件推荐帖，而是把下面这些核心问题系统讲清楚：
+
+- 为什么要这样写文档
+- 为什么很多人学了语法却仍然写不好
+- Typora 在这条路上究竟解决了什么问题
+- 如何把 Markdown、图片、目录、LaTeX、Git 工作流真正接成一个长期可维护的文档系统
+
+因此，这一册既会讲基础概念，也会讲工作流；既会讲语法，也会讲规范差异；既会讲工具功能，也会讲长期维护文档时真正决定质量的习惯。
+
+## 适合谁读
+
+这册教材主要面向以下三类读者：
+
+- **第一类**：从来没有认真学过 Markdown，但已经意识到自己需要更稳定写作方式的人。
+- **第二类**：已经会一点 Markdown 语法，却仍然经常在排版、路径、导出和平台兼容性上踩坑的人。
+- **第三类**：想把 Typora 作为长期知识整理工具来用，而不是只把它当作一个“能写 Markdown 的编辑器”的人。
+
+## 这册现在新增了什么
+
+为了让新手更快进入状态，这一册现在增加了一条**快学实战线**：
+
+- 先给出一份面向新手的快学章节
+- 强调最常用语法、LaTeX 基础、图片路径、Typora 设置、Git 配合文档写作
+- 让读者先能写、先能用，再回头读完整教材
+
+同时，英文内容不再维持“简略入口页”策略，而是会逐步向**中英内容等量、只语言不同**的方向补齐。
+
+## 写作范围
+
+本册将逐步覆盖以下内容：
+
+1. Markdown 的设计思想与写作观。
+2. Typora 的基本界面、输入逻辑与写作体验。
+3. Markdown、CommonMark、GitHub Flavored Markdown 与 Typora 支持集之间的关系。
+4. 标题、段落、列表、引用、代码块、链接、图片、表格、脚注、公式等核心写法。
+5. 图片路径、相对路径、目录结构、文件命名与文档组织。
+6. YAML Front Matter、导出、PDF/HTML、GitHub 展示差异。
+7. 从单篇文档写作走向长期教材和知识库维护的方法。
+8. 面向新手的快学实战工作流。
+
+## 当前章节
+
+### 快学实战
+
+- [第零章：新手快学版——先把 Typora、Markdown、LaTeX 真正用起来](chapters/00-practical-quickstart.md) ([English](chapters/00-practical-quickstart.en.md))
+
+### 第一章
+
+- [第一章：像写作一样使用 Typora 与 Markdown](chapters/01-typora-and-markdown.md) ([English](chapters/01-typora-and-markdown.en.md))
+
+### 第二章
+
+- [第二章：把文档写成可以长期维护的样子——目录、图片、相对路径与仓库组织](chapters/02-structure-images-and-paths.md) ([English](chapters/02-structure-images-and-paths.en.md))
+
+### 第三章
+
+- [第三章：真正开始写文档——Markdown 基础语法、LaTeX 公式与 Typora 设置](chapters/03-markdown-latex-and-typora-settings.md) ([English](chapters/03-markdown-latex-and-typora-settings.en.md))
+
+## 推荐阅读顺序
+
+### 路线 A：完全新手 / 想马上上手
+
+1. 先读第零章快学版
+2. 再读第一章，建立长期写作观
+3. 再读第二章，把目录、图片、路径结构打稳
+4. 最后读第三章，把 Markdown / LaTeX / Typora 设置系统补齐
+
+### 路线 B：已经会一点 Markdown，但工作流很乱
+
+1. 先读第二章
+2. 再回头读第零章和第三章
+3. 最后配合《Git 与 GitHub》分册建立版本控制习惯
+
+## 研究资料
+
+为了避免把这一册写成经验口述，当前已经整理了一份资料地图，用来说明正文背后的主要依据：
+
+- [资料地图](research/source-map.md)
+
+后续随着章节增加，这里还会继续补充更细的章节级资料说明与专题参考。
+
+## 当前阶段目标
+
+现阶段最重要的工作重点是：
+
+- 持续扩写成体系的教材正文
+- 同时补足新手快学版，让“先上手、再深入”成为可执行路线
+- 持续补齐英文内容，使中英文在信息量上尽量一致
+- 把这一册真正写成既能入门、又能长期复习的文档工作流教材
