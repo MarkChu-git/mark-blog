@@ -47,6 +47,14 @@ const iconLaptop = {
   svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19h18M5 7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/></svg>',
 }
 
+const iconGit = {
+  svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v6m0 0l-3-3m3 3l3-3M5 12h14m-7 10v-6m0 0l3 3m-3-3l-3 3"/></svg>',
+}
+
+const iconMarkdown = {
+  svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M3 12h12m0 0l3-3m-3 3l3 3M15 18h6"/></svg>',
+}
+
 function onCardPointerMove(event: PointerEvent) {
   if (event.pointerType === 'touch')
     return
@@ -136,6 +144,20 @@ const copy = computed(() => {
           icon: iconLaptop,
           cta: '现在可读',
         },
+        {
+          title: 'Git 与 GitHub',
+          desc: '系统讲解版本控制的概念、工作线和操作方法，包含新手入门和实战指南。',
+          href: './git-and-github/zh/',
+          icon: iconGit,
+          cta: '现在可读',
+        },
+        {
+          title: 'Typora 与 Markdown',
+          desc: '学习用 Markdown 和 Typora 建立长期可维护的文档写作系统。',
+          href: './typora-and-markdown/zh/',
+          icon: iconMarkdown,
+          cta: '现在可读',
+        },
       ] satisfies NoteCard[],
     }
   }
@@ -198,6 +220,20 @@ const copy = computed(() => {
         desc: 'Beginner-friendly notes on core ideas, problem decomposition, languages, systems, and how everything fits together.',
         href: './introduction-to-cs.md',
         icon: iconLaptop,
+        cta: 'Available Now',
+      },
+      {
+        title: 'Git and GitHub',
+        desc: 'A textbook about Git and GitHub, systematically explaining version control concepts and operations.',
+        href: './git-and-github/en/',
+        icon: iconGit,
+        cta: 'Available Now',
+      },
+      {
+        title: 'Typora and Markdown',
+        desc: 'Learn how to build a long-term maintainable document writing system with Markdown and Typora.',
+        href: './typora-and-markdown/en/',
+        icon: iconMarkdown,
         cta: 'Available Now',
       },
     ] satisfies NoteCard[],

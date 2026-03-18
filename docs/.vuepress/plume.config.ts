@@ -5,20 +5,18 @@ const githubLink = 'https://github.com/MarkChu-git'
 const navbarEN = [
   { text: 'Home', link: '/' },
   { text: 'Blog', link: '/blog/' },
+  { text: 'Notes', link: '/notes/' },
   { text: 'Tags', link: '/blog/tags/' },
   { text: 'Archives', link: '/blog/archives/' },
-  { text: 'Git & GitHub', link: '/blog/git-and-github/zh/' },
-  { text: 'Typora & MD', link: '/blog/typora-and-markdown/zh/' },
   { text: 'Friends', link: '/more/friends/' },
 ]
 
 const navbarZH = [
   { text: '首页', link: '/zh/' },
   { text: '博客', link: '/zh/blog/' },
+  { text: '笔记', link: '/zh/notes/' },
   { text: '标签', link: '/zh/blog/tags/' },
   { text: '归档', link: '/zh/blog/archives/' },
-  { text: 'Git 与 GitHub', link: '/zh/blog/git-and-github/zh/' },
-  { text: 'Typora 与 MD', link: '/zh/blog/typora-and-markdown/zh/' },
   { text: '友链', link: '/zh/more/friends/' },
 ]
 
@@ -41,7 +39,7 @@ export default defineThemeConfig({
     postCover: 'right',
   },
   sidebar: {
-    '/blog/git-and-github/zh/': [
+    '/notes/git-and-github/zh/': [
       {
         text: 'Git 与 GitHub',
         link: 'README.md',
@@ -52,7 +50,7 @@ export default defineThemeConfig({
         items: 'auto',
       },
     ],
-    '/blog/git-and-github/en/': [
+    '/notes/git-and-github/en/': [
       {
         text: 'Git and GitHub',
         link: 'README.md',
@@ -63,7 +61,7 @@ export default defineThemeConfig({
         items: 'auto',
       },
     ],
-    '/blog/typora-and-markdown/zh/': [
+    '/notes/typora-and-markdown/zh/': [
       {
         text: 'Typora 与 Markdown',
         link: 'README.md',
@@ -74,7 +72,7 @@ export default defineThemeConfig({
         items: 'auto',
       },
     ],
-    '/blog/typora-and-markdown/en/': [
+    '/notes/typora-and-markdown/en/': [
       {
         text: 'Typora and Markdown',
         link: 'README.md',
