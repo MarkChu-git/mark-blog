@@ -1,5 +1,5 @@
 ---
-title: Git and GitHub
+title: "Git and GitHub"
 createTime: 2026/01/15 10:00:00
 description: A textbook about Git and GitHub, systematically explaining version control concepts and operations
 tags:

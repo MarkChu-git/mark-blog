@@ -1,5 +1,5 @@
 ---
-title: Chapter 2: Writing Documents for Long-Term Maintenance — Directory Structure, Images, Relative Paths, and Repository Organization
+title: "Chapter 2: Writing Documents for Long-Term Maintenance - Directory Structure, Images, Relative Paths, and Repository Organization"
 createTime: 2026/01/12 10:00:00
 description: Learn how to organize multiple documents for long-term maintainability
 tags:

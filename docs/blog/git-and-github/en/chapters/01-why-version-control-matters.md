@@ -1,5 +1,5 @@
 ---
-title: Chapter 1: First Understand What Problem Version Control Is Actually Solving
+title: "Chapter 1: First Understand What Problem Version Control Is Actually Solving"
 createTime: 2026/01/16 10:00:00
 description: Deeply understand version control concepts and build a clear mental model
 tags:

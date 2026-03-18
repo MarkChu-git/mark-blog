@@ -1,5 +1,5 @@
 ---
-title: Typora and Markdown
+title: "Typora and Markdown"
 createTime: 2026/01/10 10:00:00
 description: A textbook about Typora and Markdown, systematically explaining document writing, syntax, and long-term maintenance
 tags:

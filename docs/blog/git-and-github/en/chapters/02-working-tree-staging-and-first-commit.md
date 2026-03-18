@@ -1,7 +1,7 @@
 ---
-title: Chapter 2: Start Using Git for Real — Working Tree, Staging Area, and Your First Reliable Commit
+title: "Chapter 2: Start Using Git for Real - Working Tree, Staging Area, and Your First Reliable Commit"
 createTime: 2026/01/17 10:00:00
-description: Deeply understand Git's three-layer working model: working tree, staging area, and commit history
+description: "Deeply understand Git's three-layer working model: working tree, staging area, and commit history"
 tags:
   - git
   - git-commands

@@ -1,5 +1,5 @@
 ---
-title: 第零章：新手快学版——先把 Git 和 GitHub 用起来
+title: "第零章：新手快学版 - 先把 Git 和 GitHub 用起来"
 createTime: 2026/01/15 10:30:00
 description: 让一个几乎没系统学过 Git 的新手，在最短时间里跑通最常用的版本控制闭环
 tags:

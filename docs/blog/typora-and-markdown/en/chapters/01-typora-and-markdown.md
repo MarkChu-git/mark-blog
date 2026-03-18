@@ -1,7 +1,7 @@
 ---
-title: Chapter 1: Using Typora and Markdown Like Real Writing
+title: "Chapter 1: Using Typora and Markdown Like Real Writing"
 createTime: 2026/01/11 10:00:00
-description: Deeply understand Markdown's core philosophy: readability, writability, and content-first
+description: "Deeply understand Markdown's core philosophy: readability, writability, and content-first"
 tags:
   - typora
   - markdown

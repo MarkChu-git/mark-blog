@@ -1,5 +1,5 @@
 ---
-title: Typora 与 Markdown
+title: "Typora 与 Markdown"
 createTime: 2026/01/10 10:00:00
 description: 一本关于 Typora 与 Markdown 的教材，系统讲解文档写作、格式语法与长期维护
 tags:

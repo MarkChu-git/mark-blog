@@ -1,5 +1,5 @@
 ---
-title: Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast
+title: "Chapter 0: Practical Quick Start - Get Typora, Markdown, and LaTeX Working Fast"
 createTime: 2026/01/10 10:30:00
 description: Help a complete beginner build a usable writing workflow with Typora, Markdown, LaTeX, and Git in the shortest time
 tags:

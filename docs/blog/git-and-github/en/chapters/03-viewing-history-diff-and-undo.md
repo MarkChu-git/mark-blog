@@ -1,5 +1,5 @@
 ---
-title: Chapter 3: Looking Back and Undoing — How to View History, Compare Differences, and Safely Undo
+title: "Chapter 3: Looking Back and Undoing - How to View History, Compare Differences, and Safely Undo"
 createTime: 2026/01/18 10:00:00
 description: Learn git log, git diff, git restore, git reset, git revert for viewing history and undoing operations
 tags:

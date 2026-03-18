@@ -1,5 +1,5 @@
 ---
-title: Git 与 GitHub
+title: "Git 与 GitHub"
 createTime: 2026/01/15 10:00:00
 description: 一本关于 Git 与 GitHub 的教材，系统讲解版本控制的概念、工作线和操作方法
 tags:

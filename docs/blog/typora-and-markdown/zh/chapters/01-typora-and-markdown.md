@@ -1,5 +1,5 @@
 ---
-title: 第一章：像写作一样使用 Typora 与 Markdown
+title: "第一章：像写作一样使用 Typora 与 Markdown"
 createTime: 2026/01/11 10:00:00
 description: 深入理解 Markdown 的核心理念：易读易写，内容优先
 tags:

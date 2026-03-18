@@ -1,5 +1,5 @@
 ---
-title: 第三章：真正开始写文档——Markdown 基础语法、LaTeX 公式与 Typora 设置
+title: "第三章：真正开始写文档 - Markdown 基础语法、LaTeX 公式与 Typora 设置"
 createTime: 2026/01/13 10:00:00
 description: 掌握 Markdown 基础语法和 LaTeX 公式，了解 Typora 的关键设置
 tags:

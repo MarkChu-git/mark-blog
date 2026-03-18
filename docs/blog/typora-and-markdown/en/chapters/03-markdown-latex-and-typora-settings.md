@@ -1,13 +1,13 @@
 ---
-title: Chapter 3: Getting Started with Real Writing — Markdown Basics, LaTeX Formulas, and Typora Settings
+title: "Chapter 3: Getting Started with Real Writing - Markdown Basics, LaTeX Formulas, and Typora Settings"
 createTime: 2026/01/13 10:00:00
-description: Master Markdown basic syntax, LaTeX formulas, and key Typora settings
+description: "Master Markdown basic syntax, LaTeX formulas, and key Typora settings"
 tags:
   - markdown
   - latex
   - typora
   - syntax
-excerpt: This chapter's goal is not to train you to memorize symbols, but to bring you into a more practical writing state.
+excerpt: "This chapter's goal is not to train you to memorize symbols, but to bring you into a more practical writing state."
 ---
 
 # Chapter 3: Getting Started with Real Writing — Markdown Basics, LaTeX Formulas, and Typora Settings

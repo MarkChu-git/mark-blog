@@ -1,5 +1,5 @@
 ---
-title: 第零章：新手快学版——先把 Typora、Markdown、LaTeX 真正用起来
+title: "第零章：新手快学版 - 先把 Typora、Markdown、LaTeX 真正用起来"
 createTime: 2026/01/10 10:30:00
 description: 让一个几乎没学过 Markdown 的新手，在最短时间里建立能马上用起来的写作工作流
 tags:

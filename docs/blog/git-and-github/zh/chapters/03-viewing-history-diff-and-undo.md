@@ -1,5 +1,5 @@
 ---
-title: 第三章：回看与回退——如何查看历史、比较差异并安全撤销
+title: "第三章：回看与回退 - 如何查看历史、比较差异并安全撤销"
 createTime: 2026/01/18 10:00:00
 description: 学会用 git log、git diff、git restore、git reset、git revert 查看历史和撤销操作
 tags:

@@ -1,5 +1,5 @@
 ---
-title: Chapter 0: Practical Quick Start — Get Git and GitHub Working Fast
+title: "Chapter 0: Practical Quick Start - Get Git and GitHub Working Fast"
 createTime: 2026/01/15 10:30:00
 description: Help a beginner run through the most useful version-control loop in the shortest realistic time
 tags:
@@ -10,7 +10,7 @@ tags:
 excerpt: This chapter is not a replacement for the full textbook. It is a startup accelerator that helps beginners get Git and GitHub working fast.
 ---
 
-# Chapter 0: Practical Quick Start — Get Git and GitHub Working Fast
+# Chapter 0: Practical Quick Start - Get Git and GitHub Working Fast
 
 > Language / 语言：[中文](../../zh/chapters/00-practical-quickstart.md) | **English**
 

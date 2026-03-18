@@ -1,13 +1,13 @@
 ---
-title: Chapter 4: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features
+title: "Chapter 4: Beyond Basic Syntax - Tables, Task Lists, Diagrams, and Extended Features"
 createTime: 2026/01/14 10:00:00
-description: Learn Markdown advanced features: tables, task lists, Mermaid diagrams, and math formulas
+description: "Learn Markdown advanced features: tables, task lists, Mermaid diagrams, and math formulas"
 tags:
   - markdown
   - tables
   - mermaid
   - advanced
-excerpt: Learn how to create complex tables, use task lists, draw charts with Mermaid, and use math formulas in Markdown.
+excerpt: "Learn how to create complex tables, use task lists, draw charts with Mermaid, and use math formulas in Markdown."
 ---
 
 # Chapter 4: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features
