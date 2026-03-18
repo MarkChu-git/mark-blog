@@ -68,16 +68,19 @@ onUnmounted(() => {
 .typewriter {
   display: inline-block;
   position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 650;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  letter-spacing: 0.002em;
 }
 
 .typewriter::after {
-  content: '';
+  content: '_';
   position: absolute;
-  right: -2px;
+  right: -0.25em;
   top: 0;
   height: 100%;
-  width: 2px;
-  background: currentColor;
+  color: currentColor;
   animation: blink 0.8s infinite;
 }
 
