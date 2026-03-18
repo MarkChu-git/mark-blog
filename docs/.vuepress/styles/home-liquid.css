@@ -687,7 +687,8 @@ a.contact-panel * {
   font-size: calc(var(--card-value-size) + 0.18rem);
   line-height: 1.02;
   letter-spacing: -0.035em;
-  text-wrap: balance;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .contact-panel p {

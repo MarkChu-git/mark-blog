@@ -231,10 +231,10 @@ const socialLinks = computed<SocialItem[]>(() => [
   {
     key: 'linkedin',
     label: 'LinkedIn',
-    title: isZh.value ? '职业轨迹' : 'Professional track',
+    title: isZh.value ? '职业轨迹' : 'Career Track',
     detail: isZh.value
-      ? '适合放职业背景、项目经历和长期方向。'
-      : 'Best for career context, project history, and longer-form professional signal.',
+      ? '工作经历、项目背书和行业人脉。'
+      : 'Work experience, project endorsements, and industry connections.',
     href: socialProfiles.linkedin || undefined,
     iconSrc: withBase('/social-icons/linkedin.png'),
     accent: '#5a84da',
@@ -245,8 +245,8 @@ const socialLinks = computed<SocialItem[]>(() => [
     label: 'GitHub',
     title: '@MarkChu-git',
     detail: isZh.value
-      ? '代码、实验和持续构建的记录。'
-      : 'Code, experiments, and a running log of what gets built.',
+      ? '开源项目、代码实验和技术探索。'
+      : 'Open source projects, code experiments, and technical explorations.',
     href: socialProfiles.github,
     iconSrc: withBase('/social-icons/github.png'),
     accent: '#78829a',
@@ -255,10 +255,10 @@ const socialLinks = computed<SocialItem[]>(() => [
   {
     key: 'instagram',
     label: 'Instagram',
-    title: isZh.value ? '视觉片段' : 'Visual notes',
+    title: isZh.value ? '日常碎片' : 'Daily Fragments',
     detail: isZh.value
-      ? '更轻一点的日常切片、镜头感和生活感。'
-      : 'A lighter stream of daily snapshots, visual fragments, and mood.',
+      ? '生活的片段、灵感和随手拍。'
+      : 'Life fragments, inspiration, and casual shots.',
     href: socialProfiles.instagram || undefined,
     iconSrc: withBase('/social-icons/instagram.png'),
     accent: '#d67ca8',
@@ -269,8 +269,8 @@ const socialLinks = computed<SocialItem[]>(() => [
     label: 'Email',
     title: 'markchu2022@gmail.com',
     detail: isZh.value
-      ? '最快的直接联系渠道。'
-      : 'The fastest direct channel when you want to reach out.',
+      ? '有想法或合作建议？写邮件最快。'
+      : 'Have an idea or proposal? Email is fastest.',
     href: socialProfiles.email,
     iconSrc: withBase('/social-icons/email.png'),
     accent: '#c88b68',
