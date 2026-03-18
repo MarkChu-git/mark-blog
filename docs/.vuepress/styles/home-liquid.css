@@ -478,7 +478,7 @@
 
 .intro-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(184px, 23%, 242px);
+  grid-template-columns: minmax(0, 1fr) clamp(240px, 30%, 320px);
   align-items: center;
   gap: clamp(0.8rem, 1.35vw, 1.12rem);
   margin-top: 0.1rem;
@@ -521,7 +521,7 @@
 }
 
 .intro-person {
-  width: min(100%, 204px);
+  width: min(100%, 280px);
   max-width: none;
   height: auto;
   aspect-ratio: 596 / 919;
@@ -1431,12 +1431,12 @@ a.contact-panel * {
   }
 
   .intro-hero {
-    grid-template-columns: minmax(0, 1fr) clamp(190px, 36%, 260px);
+    grid-template-columns: minmax(0, 1fr) clamp(200px, 42%, 280px);
     gap: 0.85rem;
   }
 
   .intro-person {
-    width: min(100%, 224px);
+    width: min(100%, 300px);
   }
 
   .intro-stats.compact,
@@ -1504,7 +1504,7 @@ a.contact-panel * {
   }
 
   .intro-person {
-    width: min(100%, 178px);
+    width: min(100%, 240px);
   }
 
   .intro-stats.compact,
@@ -1547,8 +1547,12 @@ a.contact-panel * {
   }
 
   .intro-hero {
-    grid-template-columns: minmax(0, 1fr) clamp(150px, 41%, 196px);
+    grid-template-columns: minmax(0, 1fr) clamp(100px, 28%, 140px);
     gap: 0.7rem;
+  }
+
+  .intro-person {
+    width: min(100%, 120px);
   }
 
   .pursuit-title {

@@ -21,7 +21,7 @@ const navbarZH = [
 ]
 
 export default defineThemeConfig({
-  logo: '/site-avatar.png',
+  logo: '/avatar.png',
   social: [
     { icon: 'github', link: githubLink },
   ],

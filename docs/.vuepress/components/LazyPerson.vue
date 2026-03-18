@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { withBase } from 'vuepress/client'
 
-const personImage = withBase('/intro-avatar.png')
+const personImage = withBase('/avatar.png')
 </script>
 
 <template>

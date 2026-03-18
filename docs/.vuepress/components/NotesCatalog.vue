@@ -235,3 +235,10 @@ const copy = computed(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.notes-topic-card__icon :deep(svg) {
+  width: 24px !important;
+  height: 24px !important;
+}
+</style>

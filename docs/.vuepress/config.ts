@@ -104,7 +104,7 @@ export default defineUserConfig({
       {
         rel: 'icon',
         type: 'image/png',
-        href: withBase('/site-avatar.png'),
+        href: withBase('/avatar.png'),
       },
     ],
     [
@@ -136,7 +136,7 @@ export default defineUserConfig({
         url: siteHomeUrl,
       },
       canonical: canonicalBase,
-      fallBackImage: withSiteUrl('/intro-avatar.png'),
+      fallBackImage: withSiteUrl('/avatar.png'),
       isArticle: (page) => isArticlePage(page.filePathRelative),
       customHead: (head, page) => {
         const localeDescription = page.pathLocale === '/zh/' ? siteDescriptionZH : siteDescriptionEN
@@ -147,7 +147,7 @@ export default defineUserConfig({
           return
         }
 
-        const ogImage = getMetaContent(head as HeadEntry[], 'og:image', 'property') || withSiteUrl('/intro-avatar.png')
+        const ogImage = getMetaContent(head as HeadEntry[], 'og:image', 'property') || withSiteUrl('/avatar.png')
 
         upsertMeta(head as HeadEntry[], 'twitter:card', 'summary_large_image')
         upsertMeta(head as HeadEntry[], 'twitter:title', page.title)
