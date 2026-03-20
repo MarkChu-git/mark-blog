@@ -71,15 +71,16 @@ export default defineThemeConfig({
           {
             text: 'Typora and Markdown',
             link: 'README.md',
+            icon: 'fluent:book-24-regular',
           },
           {
             text: 'Chapters',
             items: [
-              { text: 'Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast', link: 'chapters/00-practical-quickstart.md' },
-              { text: 'Chapter 1: Using Typora and Markdown Like Real Writing', link: 'chapters/01-typora-and-markdown.md' },
-              { text: 'Chapter 2: Writing Documents for Long-Term Maintenance — Directory Structure, Images, Relative Paths, and Repository Organization', link: 'chapters/02-structure-images-and-paths.md' },
-              { text: 'Chapter 3: Getting Started with Real Writing — Markdown Basics, LaTeX Formulas, and Typora Settings', link: 'chapters/03-markdown-latex-and-typora-settings.md' },
-              { text: 'Chapter 4: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features', link: 'chapters/04-advanced-markdown-features.md' },
+              { text: 'Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast', link: 'chapters/00-practical-quickstart.md', icon: 'fluent:rocket-24-regular' },
+              { text: 'Chapter 1: Using Typora and Markdown Like Real Writing', link: 'chapters/01-typora-and-markdown.md', icon: 'fluent:pen-24-regular' },
+              { text: 'Chapter 2: Writing Documents for Long-Term Maintenance — Directory Structure, Images, Relative Paths, and Repository Organization', link: 'chapters/02-structure-images-and-paths.md', icon: 'fluent:folder-24-regular' },
+              { text: 'Chapter 3: Getting Started with Real Writing — Markdown Basics, LaTeX Formulas, and Typora Settings', link: 'chapters/03-markdown-latex-and-typora-settings.md', icon: 'fluent:code-24-regular' },
+              { text: 'Chapter 4: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features', link: 'chapters/04-advanced-markdown-features.md', icon: 'fluent:table-24-regular' },
             ],
           },
         ],
@@ -115,15 +116,16 @@ export default defineThemeConfig({
           {
             text: 'Typora 与 Markdown',
             link: '/zh/notes/typora-and-markdown/README.md',
+            icon: 'fluent:book-24-regular',
           },
           {
             text: '目录',
             items: [
-              { text: '第零章：新手快学版——先把 Typora、Markdown、LaTeX 真正用起来', link: '/zh/notes/typora-and-markdown/chapters/00-practical-quickstart.md' },
-              { text: '第一章：像写作一样使用 Typora 与 Markdown', link: '/zh/notes/typora-and-markdown/chapters/01-typora-and-markdown.md' },
-              { text: '第二章：把文档写成可以长期维护的样子——目录、图片、相对路径与仓库组织', link: '/zh/notes/typora-and-markdown/chapters/02-structure-images-and-paths.md' },
-              { text: '第三章：真正开始写文档——Markdown 基础语法、LaTeX 公式与 Typora 设置', link: '/zh/notes/typora-and-markdown/chapters/03-markdown-latex-and-typora-settings.md' },
-              { text: '第四章：不只是基础语法——表格、任务列表、图表与扩展特性', link: '/zh/notes/typora-and-markdown/chapters/04-advanced-markdown-features.md' },
+              { text: '第零章：新手快学版——先把 Typora、Markdown、LaTeX 真正用起来', link: '/zh/notes/typora-and-markdown/chapters/00-practical-quickstart.md', icon: 'fluent:rocket-24-regular' },
+              { text: '第一章：像写作一样使用 Typora 与 Markdown', link: '/zh/notes/typora-and-markdown/chapters/01-typora-and-markdown.md', icon: 'fluent:pen-24-regular' },
+              { text: '第二章：把文档写成可以长期维护的样子——目录、图片、相对路径与仓库组织', link: '/zh/notes/typora-and-markdown/chapters/02-structure-images-and-paths.md', icon: 'fluent:folder-24-regular' },
+              { text: '第三章：真正开始写文档——Markdown 基础语法、LaTeX 公式与 Typora 设置', link: '/zh/notes/typora-and-markdown/chapters/03-markdown-latex-and-typora-settings.md', icon: 'fluent:code-24-regular' },
+              { text: '第四章：不只是基础语法——表格、任务列表、图表与扩展特性', link: '/zh/notes/typora-and-markdown/chapters/04-advanced-markdown-features.md', icon: 'fluent:table-24-regular' },
             ],
           },
         ],
