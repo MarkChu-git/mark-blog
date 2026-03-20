@@ -89,6 +89,9 @@ A next-generation platform for visualizing data structures and algorithms in rea
 - Developed video processing module with two-stage sampling, valid frame calculation, and timestamp annotation
 - Integrated MinIO media storage service for file upload, deduplication, and persistent storage
 - Built LLM orchestration module for unified management of multimodal model calls and context processing
+- Refactored document splitter with optimized chunking algorithm to improve document processing quality
+- Switched length calculation from character-level to token-level for better LLM compatibility
+- Fixed extra space insertion issue in Chinese document cross-page merging, improving text coherence
 - Wrote unit tests and integration tests covering video routing, strategy routing, and other core modules
 
 ---

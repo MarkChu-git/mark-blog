@@ -96,7 +96,7 @@ function isArticlePage(filePathRelative: string | null | undefined): boolean {
 export default defineUserConfig({
   base,
   lang: 'en-US',
-  title: 'Mark Blog',
+  title: "Mark's Blog",
   description: siteDescriptionEN,
   head: [
     [
@@ -118,12 +118,12 @@ export default defineUserConfig({
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'Mark Blog',
+      title: "Mark's Blog",
       description: siteDescriptionEN,
     },
     '/zh/': {
       lang: 'zh-CN',
-      title: 'Mark Blog',
+      title: "Mark's Blog",
       description: siteDescriptionZH,
     },
   },
