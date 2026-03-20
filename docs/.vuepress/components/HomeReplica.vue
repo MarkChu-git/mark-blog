@@ -184,8 +184,8 @@ const t = computed(() => ({
   introLabel: isZh.value ? '你好，很高兴认识你。' : 'Hello, nice to meet you.',
   introTitle: isZh.value ? '你可以叫我 Mark。' : 'You can call me Mark.',
   introDesc: isZh.value
-    ? '我关注营销、金融、计算机与产品，以洞察本质、尊重现实、长期复利三种原则贯穿始终。'
-    : 'I focus on marketing, finance, computer science, and product — guided by three core principles: insight, realism, and compounding.',
+    ? '我关注计算机、金融、产品与营销，以洞察本质、尊重现实、长期复利三种原则贯穿始终。'
+    : 'I focus on computer science, finance, product development, and marketing — guided by three core principles: insight, realism, and compounding.',
   statusLabel: isZh.value ? '状态' : 'Status',
   statusValue: isZh.value ? '持续构建中' : 'Building deliberately',
   timezoneLabel: isZh.value ? '时区' : 'Timezone',
