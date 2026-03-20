@@ -1,0 +1,118 @@
+# 《Git 与 GitHub》
+
+
+
+很多人第一次接触 Git 时，都会觉得它“很重要但很难学”。他们背下了几条命令，却在遇到分支、冲突、回滚时手足无措；他们知道 GitHub 很流行，却分不清它和 Git 到底是什么关系。
+
+这种困境的根源，往往不是 Git 本身太难，而是学习路径出了问题——大多数人一开始学的不是“版本控制在解决什么问题”，而只是“几条命令怎么敲”。
+
+这一册教材的目标，不是把 Git 写成命令速查表，也不是把 GitHub 写成一份“点哪里、按哪里”的网站操作说明，而是把下面这些问题系统讲清楚：
+
+- 版本控制到底在解决什么问题
+- 为什么很多人会背命令，却依然把 Git 用得很痛苦
+- Git 和 GitHub 分别负责什么，不应该混成什么
+- 个人写作、代码协作、发布流程、分支管理、回滚与审阅，为什么都绕不开这一套体系
+
+因此，这一册会同时讲清三条线：
+
+- **概念线**：版本控制、提交、分支、远程仓库、协作关系
+- **操作线**：初始化、提交、查看历史、分支、合并、同步、回滚
+- **工作流线**：个人使用、双机同步、团队协作、发布与审阅
+
+## 适合谁读
+
+这册教材主要面向以下几类读者：
+
+- **完全新手**：知道 Git 很重要，但始终不敢上手。
+- **会用但不懂**：会 `clone`、`add`、`commit`、`push`，但一遇到分支、冲突、回滚、rebase 就开始慌。
+- **用过但混乱**：在 GitHub 上点过不少按钮，但本地仓库、远程仓库、分支、PR、fork、sync 的关系仍然是乱的。
+- **想用得更好**：希望把 Git / GitHub 真正接到教材、知识库、文档和项目协作中。
+
+## 这册现在新增了什么
+
+为了让新手更快建立实用能力，这一册现在增加了一条**快学实战线**：
+
+- 先讲最小可用闭环
+- 强调最常用命令与最常见工作节奏
+- 让文档作者、教材作者、项目维护者先把 Git 真正用起来
+- 然后再回头深入版本控制的完整工作模型
+
+同时，英文内容会逐步从“简略入口页”补成与中文版信息量尽量一致的完整内容。
+
+## 写作范围
+
+本册将逐步覆盖以下内容：
+
+1. 版本控制的基本思想，以及 Git 和传统“文件备份”思路的差异。
+2. Git 的核心对象与工作区模型：工作区、暂存区、提交历史。
+3. 初始化仓库、提交、查看历史、比较差异、撤销与回滚。
+4. 分支、合并、rebase、冲突及其背后的逻辑。
+5. 远程仓库、`fetch`、`pull`、`push` 与同步关系。
+6. GitHub 中的仓库、README、Issues、Pull Requests、Fork、Actions 等平台协作概念。
+7. 从个人工作流走向团队协作与发布流程的实践方法。
+8. 面向新手的快学实战工作流。
+
+## 当前章节
+
+### 快学实战
+
+- [第零章：新手快学版——先把 Git 和 GitHub 用起来](chapters/00-practical-quickstart.md) ([English](chapters/00-practical-quickstart.en.md))
+
+### 第一章
+
+- [第一章：先理解版本控制到底在解决什么问题](chapters/01-why-version-control-matters.md) ([English](chapters/01-why-version-control-matters.en.md))
+
+### 第二章
+
+- [第二章：真正开始用 Git——工作区、暂存区、提交历史与第一次可靠提交](chapters/02-working-tree-staging-and-first-commit.md) ([English](chapters/02-working-tree-staging-and-first-commit.en.md))
+
+### 第三章
+
+- [第三章：回看与回退——如何查看历史、比较差异并安全撤销](chapters/03-viewing-history-diff-and-undo.md) ([English](chapters/03-viewing-history-diff-and-undo.en.md))
+
+### 第四章
+
+- [第四章：分支——同时做多件事](chapters/04-branches-and-merging.md) ([English](chapters/04-branches-and-merging.en.md))
+
+### 第五章
+
+- [第五章：远程仓库——把你的工作连接到世界](chapters/05-remote-repositories.md) ([English](chapters/05-remote-repositories.en.md))
+
+### 第六章
+
+- [第六章：GitHub——协作、Pull Request 与更多](chapters/06-github-collaboration.md) ([English](chapters/06-github-collaboration.en.md))
+
+### 第七章
+
+- [第七章：串联一切——真实世界的工作流](chapters/07-putting-it-all-together.md) ([English](chapters/07-putting-it-all-together.en.md))
+
+## 推荐阅读顺序
+
+### 路线 A：完全新手 / 想马上上手
+
+1. 先读第零章快学版
+2. 再读第一章，建立版本控制心智模型
+3. 再读第二章，把工作区 / 暂存区 / 提交历史三层模型打稳
+4. 再进入后续章节系统学习历史查看、撤销、分支、同步与协作
+
+### 路线 B：会一点命令，但越用越乱
+
+1. 先读第一章，把“Git 在解决什么问题”理顺
+2. 再读第二章，把三层工作模型搞清楚
+3. 再回头读第零章，把最常用命令闭环跑顺
+4. 再进入后续分支、同步、协作章节
+
+## 研究资料
+
+为了避免把这一册写成经验口述，当前已经整理了一份资料地图，用来说明正文背后的主要依据：
+
+- [资料地图](research/source-map.md)
+
+## 当前阶段目标
+
+现阶段最重要的工作重点是：
+
+- 一边扩写概念与工作流正文
+- 一边补强新手实战快学层
+- 持续补齐英文版本
+- 把这册真正写成既适合初学者快速入门、又适合长期回查复习的 Git / GitHub 教材

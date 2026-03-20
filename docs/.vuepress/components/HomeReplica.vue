@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { withBase } from 'vuepress/client'
+import { useRouteLocale, withBase } from 'vuepress/client'
 import LazyPerson from './LazyPerson.vue'
-
-type Lang = 'en' | 'zh'
+import TypewriterText from './TypewriterText.vue'
 
 interface IntroStat {
   label: string
@@ -53,10 +52,15 @@ interface FocusItem {
   href: string
 }
 
-interface QuickAction {
+interface SocialItem {
+  key: string
   label: string
-  href: string
-  icon: string
+  title: string
+  detail: string
+  href?: string
+  iconSrc: string
+  accent: string
+  external?: boolean
 }
 
 type CardKey = 'intro' | 'motto' | 'pursuit' | 'character' | 'skills' | 'routine'
@@ -65,11 +69,8 @@ type CardMotionStyle = {
   '--tilt-y': string
 }
 
-const props = withDefaults(defineProps<{ lang?: Lang }>(), {
-  lang: 'en',
-})
-
-const isZh = computed(() => props.lang === 'zh')
+const routeLocale = useRouteLocale()
+const isZh = computed(() => routeLocale.value === '/zh/')
 
 const links = computed(() => ({
   blog: withBase(isZh.value ? '/zh/blog/' : '/blog/'),
@@ -79,12 +80,21 @@ const links = computed(() => ({
   friends: withBase(isZh.value ? '/zh/more/friends/' : '/more/friends/'),
 }))
 
+// Fill in the missing profile URLs here when you have the final links.
+const socialProfiles = {
+  linkedin: 'https://www.linkedin.com/in/hanyang-chu-8836252a7',
+  github: 'https://github.com/MarkChu-git',
+  instagram: 'https://www.instagram.com/fahreheitmark/',
+  email: 'mailto:markchu2022@gmail.com',
+} as const
+
 const nowText = ref('--:--')
 const timezoneText = ref('--')
+const typewriterWords = ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack.', 'Algorithms.', 'Quant.', 'AI.']
 let clock = 0
 const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')
-const activePursuit = ref('engineering')
+const activePursuit = ref('insight')
 const activeTrait = ref('systems')
 const activeSkill = ref('typescript')
 const activeRoutine = ref('build')
@@ -174,8 +184,8 @@ const t = computed(() => ({
   introLabel: isZh.value ? '你好，很高兴认识你。' : 'Hello, nice to meet you.',
   introTitle: isZh.value ? '你可以叫我 Mark。' : 'You can call me Mark.',
   introDesc: isZh.value
-    ? '我关注工程实践、数学思维与技术写作，也把这个博客当作长期打磨的个人产品。'
-    : 'I care about engineering practice, mathematical thinking, and technical writing, and treat this site as a long-term personal product.',
+    ? '我关注计算机、金融、产品与营销，以洞察本质、尊重现实、长期复利三种原则贯穿始终。'
+    : 'I focus on computer science, finance, product development, and marketing — guided by three core principles: insight, realism, and compounding.',
   statusLabel: isZh.value ? '状态' : 'Status',
   statusValue: isZh.value ? '持续构建中' : 'Building deliberately',
   timezoneLabel: isZh.value ? '时区' : 'Timezone',
@@ -214,21 +224,53 @@ const introStats = computed<IntroStat[]>(() => [
   { label: t.value.localTimeLabel, value: nowText.value },
 ])
 
-const introActions = computed<QuickAction[]>(() => [
+const socialLinks = computed<SocialItem[]>(() => [
   {
-    label: isZh.value ? '博客文章' : 'Open Blog',
-    href: links.value.blog,
-    icon: 'mdi:arrow-top-right',
+    key: 'linkedin',
+    label: 'LinkedIn',
+    title: isZh.value ? '职业轨迹' : 'Career Track',
+    detail: isZh.value
+      ? '工作经历、项目背书和行业人脉。'
+      : 'Work experience, project endorsements, and industry connections.',
+    href: socialProfiles.linkedin || undefined,
+    iconSrc: withBase('/social-icons/linkedin.png'),
+    accent: '#5a84da',
+    external: true,
   },
   {
-    label: isZh.value ? '学习笔记' : 'Read Notes',
-    href: links.value.notes,
-    icon: 'mdi:notebook-outline',
+    key: 'github',
+    label: 'GitHub',
+    title: '@MarkChu-git',
+    detail: isZh.value
+      ? '开源项目、代码实验和技术探索。'
+      : 'Open source projects, code experiments, and technical explorations.',
+    href: socialProfiles.github,
+    iconSrc: withBase('/social-icons/github.png'),
+    accent: '#78829a',
+    external: true,
   },
   {
-    label: isZh.value ? '标签索引' : 'Browse Tags',
-    href: links.value.tags,
-    icon: 'mdi:sitemap-outline',
+    key: 'instagram',
+    label: 'Instagram',
+    title: isZh.value ? '日常碎片' : 'Daily Fragments',
+    detail: isZh.value
+      ? '生活的片段、灵感和随手拍。'
+      : 'Life fragments, inspiration, and casual shots.',
+    href: socialProfiles.instagram || undefined,
+    iconSrc: withBase('/social-icons/instagram.png'),
+    accent: '#d67ca8',
+    external: true,
+  },
+  {
+    key: 'email',
+    label: 'Email',
+    title: 'markchu2022@gmail.com',
+    detail: isZh.value
+      ? '有想法或合作建议？写邮件最快。'
+      : 'Have an idea or proposal? Email is fastest.',
+    href: socialProfiles.email,
+    iconSrc: withBase('/social-icons/email.png'),
+    accent: '#c88b68',
   },
 ])
 
@@ -265,34 +307,34 @@ const activeMottoTab = computed(() => {
 
 const pursuitItems = computed<FocusItem[]>(() => [
   {
-    key: 'engineering',
-    label: isZh.value ? '工程' : 'Engineering',
-    title: isZh.value ? '把系统做稳。' : 'Build robust systems.',
+    key: 'insight',
+    label: isZh.value ? '洞察本质' : 'Insight',
+    title: isZh.value ? '看透问题的底层逻辑。' : 'See through to the underlying logic.',
     desc: isZh.value
-      ? '关注架构、质量、性能和可维护性。'
-      : 'Focus on architecture, quality, performance, and maintainability.',
+      ? '不被表象迷惑，找到真正驱动结果的变量。'
+      : 'Look past the surface to find what truly drives outcomes.',
     ctaLabel: isZh.value ? '查看博客文章' : 'Read related posts',
     href: links.value.blog,
   },
   {
-    key: 'mathematics',
-    label: isZh.value ? '数学' : 'Mathematics',
-    title: isZh.value ? '用模型理解复杂性。' : 'Use models to understand complexity.',
+    key: 'realism',
+    label: isZh.value ? '尊重现实' : 'Realism',
+    title: isZh.value ? '承认约束，接受不确定性。' : 'Acknowledge constraints, accept uncertainty.',
     desc: isZh.value
-      ? '把抽象能力带回工程与表达。'
-      : 'Bring abstraction back into engineering and communication.',
-    ctaLabel: isZh.value ? '查看标签索引' : 'Browse the index',
-    href: links.value.tags,
-  },
-  {
-    key: 'writing',
-    label: isZh.value ? '写作' : 'Writing',
-    title: isZh.value ? '把经验写成可复用知识。' : 'Turn experience into reusable knowledge.',
-    desc: isZh.value
-      ? '让内容不仅可读，也能长期被检索。'
-      : 'Make content not only readable, but worth returning to later.',
+      ? '基于真实条件做决策，而不是理想化的假设。'
+      : 'Make decisions based on real conditions, not idealized assumptions.',
     ctaLabel: isZh.value ? '打开笔记' : 'Open notes',
     href: links.value.notes,
+  },
+  {
+    key: 'compounding',
+    label: isZh.value ? '长期复利' : 'Compounding',
+    title: isZh.value ? '做时间的朋友。' : 'Let time work in your favor.',
+    desc: isZh.value
+      ? '选择可以累积的事情，让今天的努力成为明天的基石。'
+      : 'Choose things that compound — let today\'s effort become tomorrow\'s foundation.',
+    ctaLabel: isZh.value ? '查看标签索引' : 'Browse the index',
+    href: links.value.tags,
   },
 ])
 
@@ -665,20 +707,38 @@ const routineGradient = computed(() => {
           </div>
           <div class="intro-hero">
             <div class="intro-copy">
-              <h1>Mark.</h1>
+              <h1><TypewriterText :words="typewriterWords" /></h1>
               <p class="card-support intro-support">{{ t.introDesc }}</p>
+              <div class="intro-meta-row">
+                <div class="intro-meta-pill">
+                  <span>{{ t.statusLabel }}</span>
+                  <strong>{{ t.statusValue }}</strong>
+                </div>
+                <div class="intro-meta-pill">
+                  <span>{{ t.localTimeLabel }}</span>
+                  <strong>{{ nowText }}</strong>
+                </div>
+              </div>
             </div>
             <LazyPerson class="intro-person" />
           </div>
-          <div class="micro-stats">
-            <div class="micro-stat">
-              <span>{{ t.statusLabel }}</span>
-              <strong>{{ t.statusValue }}</strong>
-            </div>
-            <div class="micro-stat">
-              <span>{{ t.localTimeLabel }}</span>
-              <strong>{{ nowText }}</strong>
-            </div>
+
+          <div class="intro-social-dock" @click.stop>
+            <component
+              :is="item.href ? 'a' : 'div'"
+              v-for="item in socialLinks"
+              :key="item.key"
+              class="social-dock-item"
+              :class="{ 'is-link': !!item.href, 'is-disabled': !item.href }"
+              :href="item.href"
+              :target="item.external ? '_blank' : undefined"
+              :rel="item.external ? 'noreferrer' : undefined"
+              :style="{ '--social-accent': item.accent }"
+              @click.stop
+            >
+              <img class="social-dock-icon" :src="item.iconSrc" :alt="item.label" />
+              <span class="social-dock-label">{{ item.label }}</span>
+            </component>
           </div>
         </div>
 
@@ -688,23 +748,33 @@ const routineGradient = computed(() => {
           </button>
           <p class="card-detail">{{ t.introDesc }}</p>
 
+          <div class="intro-contact-grid" @click.stop>
+            <component
+              :is="item.href ? 'a' : 'div'"
+              v-for="item in socialLinks"
+              :key="item.key"
+              class="contact-panel"
+              :class="{ 'is-link': !!item.href, 'is-disabled': !item.href }"
+              :href="item.href"
+              :target="item.external ? '_blank' : undefined"
+              :rel="item.external ? 'noreferrer' : undefined"
+              :style="{ '--social-accent': item.accent }"
+              @click.stop
+            >
+              <div class="contact-panel-head">
+                <img class="contact-panel-icon" :src="item.iconSrc" :alt="item.label" />
+                <span class="contact-panel-label">{{ item.label }}</span>
+              </div>
+              <strong>{{ item.title }}</strong>
+              <p>{{ item.detail }}</p>
+            </component>
+          </div>
+
           <div class="intro-stats compact">
             <div v-for="item in introStats" :key="item.label" class="stat-pill">
               <span>{{ item.label }}</span>
               <strong>{{ item.value }}</strong>
             </div>
-          </div>
-
-          <div class="action-row">
-            <a
-              v-for="item in introActions"
-              :key="item.label"
-              :href="item.href"
-              class="inline-action"
-            >
-              {{ item.label }}
-              <Icon :icon="item.icon" />
-            </a>
           </div>
         </div>
       </article>
@@ -789,14 +859,14 @@ const routineGradient = computed(() => {
             </span>
           </div>
           <h2 class="pursuit-title" v-if="isZh">
-            <span class="pursuit-token tone-cyan">工程</span>
-            <span class="pursuit-token tone-blue">数学</span>
-            <span class="pursuit-token tone-violet">写作</span>
+            <span class="pursuit-token tone-cyan">洞察本质</span>
+            <span class="pursuit-token tone-blue">尊重现实</span>
+            <span class="pursuit-token tone-violet">长期复利</span>
           </h2>
           <h2 class="pursuit-title" v-else>
-            <span class="pursuit-token tone-cyan">Engineering</span>
-            <span class="pursuit-token tone-blue">Mathematics</span>
-            <span class="pursuit-token tone-violet">Writing</span>
+            <span class="pursuit-token tone-cyan">Insight</span>
+            <span class="pursuit-token tone-blue">Realism</span>
+            <span class="pursuit-token tone-violet">Compounding</span>
           </h2>
           <p class="card-support">{{ activePursuitItem.desc }}</p>
           <div class="card-inline-state">

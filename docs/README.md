@@ -1,7 +1,7 @@
 ---
 home: true
-title: Engineering, Math, and Technical Writing
-description: Personal site of Mark, covering engineering practice, computer science, mathematical thinking, and long-form technical writing.
+title: Insight, Realism, Compounding
+description: Personal site of Mark, covering computer science, finance, product development, and marketing — guided by three core principles.
 config:
   - type: custom
     onlyOnce: true

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-
-type Lang = 'en' | 'zh'
+import { useRouteLocale } from 'vuepress/client'
 
 interface Friend {
   name: string
@@ -9,11 +8,8 @@ interface Friend {
   avatar: string
 }
 
-const props = withDefaults(defineProps<{ lang?: Lang }>(), {
-  lang: 'en',
-})
-
-const isZh = computed(() => props.lang === 'zh')
+const routeLocale = useRouteLocale()
+const isZh = computed(() => routeLocale.value === '/zh/')
 
 const friends: Friend[] = []
 

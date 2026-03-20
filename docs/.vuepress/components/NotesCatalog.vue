@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouteLocale } from '@vuepress/client'
 
-const props = withDefaults(defineProps<{
-  locale?: 'en' | 'zh'
-}>(), {
-  locale: 'en',
-})
+const routeLocale = useRouteLocale()
+const isZh = computed(() => routeLocale.value === '/zh/')
 
 type NoteCard = {
   title: string
   desc: string
-  href: string
+  href?: string
   icon: { svg: string }
   cta: string
 }
@@ -47,6 +45,14 @@ const iconLaptop = {
   svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19h18M5 7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/></svg>',
 }
 
+const iconGit = {
+  svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 92"><path fill="currentColor" d="M90.156 41.965 50.036 1.848a5.918 5.918 0 0 0-8.372 0l-8.328 8.332 10.566 10.566a7.03 7.03 0 0 1 7.23 1.684 7.034 7.034 0 0 1 1.669 7.277l10.187 10.184a7.028 7.028 0 0 1 7.278 1.672 7.04 7.04 0 0 1 0 9.957 7.05 7.05 0 0 1-9.965 0 7.044 7.044 0 0 1-1.528-7.66l-9.5-9.497V59.36a7.04 7.04 0 0 1 1.86 11.29 7.04 7.04 0 0 1-9.957 0 7.04 7.04 0 0 1 0-9.958 7.06 7.06 0 0 1 2.304-1.539V33.926a7.049 7.049 0 0 1-3.82-9.234L29.242 14.272 1.73 41.777a5.925 5.925 0 0 0 0 8.371L41.852 90.27a5.925 5.925 0 0 0 8.37 0l39.934-39.934a5.925 5.925 0 0 0 0-8.371"/></svg>',
+}
+
+const iconMarkdown = {
+  svg: '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m640-360 120-120-42-43-48 48v-125h-60v125l-48-48-42 43 120 120ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Zm60-120h60v-180h40v120h60v-120h40v180h60v-200q0-17-11.5-28.5T440-600H260q-17 0-28.5 11.5T220-560v200Z"/></svg>',
+}
+
 function onCardPointerMove(event: PointerEvent) {
   if (event.pointerType === 'touch')
     return
@@ -75,66 +81,72 @@ function resetCardTilt(event: PointerEvent) {
 }
 
 const copy = computed(() => {
-  if (props.locale === 'zh') {
+  if (isZh.value) {
     return {
       title: '程序员的田野笔记',
       desc: '这里放的是我整理过的计算机科学笔记。它更像一份长期更新的个人知识底稿，记录概念总结、实现经验，以及那些真正把问题想通的瞬间。',
       cards: [
         {
+          title: 'Git 与 GitHub',
+          desc: '系统讲解版本控制的概念、工作线和操作方法，包含新手入门和实战指南。',
+          href: './git-and-github/',
+          icon: iconGit,
+          cta: '现在可读',
+        },
+        {
+          title: 'Typora 与 Markdown',
+          desc: '学习用 Markdown 和 Typora 建立长期可维护的文档写作系统。',
+          href: './typora-and-markdown/',
+          icon: iconMarkdown,
+          cta: '现在可读',
+        },
+        {
           title: '计算理论',
           desc: '整理自动机、形式语言、可计算性与复杂度，让抽象概念落到可理解的结构上。',
-          href: './theory-of-computation.md',
           icon: iconMathFunction,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '并行计算',
           desc: '记录并行架构、同步机制、并发模型与性能分析时常用的理解框架。',
-          href: './parallel-computing.md',
           icon: iconCpu,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '编程范式',
           desc: '把函数式、面向对象、逻辑式与声明式思路放在同一张图里理解取舍。',
-          href: './programming-paradigms.md',
           icon: iconBrackets,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '人工智能',
           desc: '聚焦机器学习直觉、模型评估、神经网络基础，以及智能系统的工程落地。',
-          href: './artificial-intelligence.md',
           icon: iconBrain,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '算法与数据结构',
           desc: '沉淀题型、分析方法、优化套路，以及写出更稳健解法时真正有用的抽象。',
-          href: './algorithms-data-structures.md',
           icon: iconHierarchy,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '前端开发',
           desc: '围绕界面架构、渲染策略、CSS 体系与交互细节，整理更偏工程实感的笔记。',
-          href: './front-end-development.md',
           icon: iconBrowser,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '计算机中的连续数学',
           desc: '把微积分、线性代数、概率与优化放回计算问题中理解，而不是只背公式。',
-          href: './continuous-mathematics-for-cs.md',
           icon: iconIntegral,
-          cta: '现在可读',
+          cta: '即将推出',
         },
         {
           title: '计算机科学导论',
           desc: '给初学者的底层地图：问题拆解、语言、系统、网络与计算思维如何彼此连通。',
-          href: './introduction-to-cs.md',
           icon: iconLaptop,
-          cta: '现在可读',
+          cta: '即将推出',
         },
       ] satisfies NoteCard[],
     }
@@ -145,60 +157,66 @@ const copy = computed(() => {
     desc: 'Welcome to my personal collection of computer science notes. This is where I keep compact summaries, implementation patterns, and the small conceptual links that make hard topics click.',
     cards: [
       {
+        title: 'Git and GitHub',
+        desc: 'A textbook about Git and GitHub, systematically explaining version control concepts and operations.',
+        href: './git-and-github/',
+        icon: iconGit,
+        cta: 'Available Now',
+      },
+      {
+        title: 'Typora and Markdown',
+        desc: 'Learn how to build a long-term maintainable document writing system with Markdown and Typora.',
+        href: './typora-and-markdown/',
+        icon: iconMarkdown,
+        cta: 'Available Now',
+      },
+      {
         title: 'Theory of Computation',
         desc: 'Automata, formal languages, computability, and complexity notes that keep the abstractions readable.',
-        href: './theory-of-computation.md',
         icon: iconMathFunction,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Parallel Computing',
         desc: 'Architectures, concurrency models, synchronization patterns, and performance intuition for parallel systems.',
-        href: './parallel-computing.md',
         icon: iconCpu,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Programming Paradigms',
         desc: 'Functional, object-oriented, logic, and declarative patterns with an emphasis on tradeoffs in real code.',
-        href: './programming-paradigms.md',
         icon: iconBrackets,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Artificial Intelligence',
         desc: 'Machine learning concepts, model intuition, evaluation basics, and practical notes on intelligent systems.',
-        href: './artificial-intelligence.md',
         icon: iconBrain,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Algorithms & Data Structures',
         desc: 'Core techniques for problem solving, analysis, optimization, and building durable computational instincts.',
-        href: './algorithms-data-structures.md',
         icon: iconHierarchy,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Front-end Development',
         desc: 'Interface architecture, rendering patterns, CSS systems, and small implementation details that improve product feel.',
-        href: './front-end-development.md',
         icon: iconBrowser,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Continuous Mathematics for CS',
         desc: 'Calculus, linear algebra, probability, and optimization notes aimed at actual computer science use cases.',
-        href: './continuous-mathematics-for-cs.md',
         icon: iconIntegral,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
       {
         title: 'Introduction to Computer Science',
         desc: 'Beginner-friendly notes on core ideas, problem decomposition, languages, systems, and how everything fits together.',
-        href: './introduction-to-cs.md',
         icon: iconLaptop,
-        cta: 'Available Now',
+        cta: 'Coming Soon',
       },
     ] satisfies NoteCard[],
   }
@@ -215,7 +233,7 @@ const copy = computed(() => {
     <div class="notes-catalog__grid">
       <VPCard
         v-for="card in copy.cards"
-        :key="card.href"
+        :key="card.title"
         class="notes-topic-card"
         @pointermove="onCardPointerMove"
         @pointerleave="resetCardTilt"
@@ -227,11 +245,26 @@ const copy = computed(() => {
         </template>
         <h3>{{ card.title }}</h3>
         <p>{{ card.desc }}</p>
-        <VPLink class="notes-topic-card__cta" :href="card.href" no-icon>
+        <VPLink v-if="card.href" class="notes-topic-card__cta" :href="card.href" no-icon>
           {{ card.cta }}
           <span class="notes-topic-card__cta-arrow" aria-hidden="true">→</span>
         </VPLink>
+        <span v-else class="notes-topic-card__cta notes-topic-card__cta--disabled">
+          {{ card.cta }}
+        </span>
       </VPCard>
     </div>
   </div>
 </template>
+
+<style scoped>
+.notes-topic-card__icon :deep(svg) {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.notes-topic-card__cta--disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+</style>
