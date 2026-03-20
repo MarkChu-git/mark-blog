@@ -2,6 +2,7 @@
 title: 关于我
 description: Mark — 学生开发者，关注工程实践、技术写作与数学思维，致力于构建稳定的系统与可复用的知识。
 aside: false
+pageClass: about-page
 ---
 
 <div class="resume-header">
@@ -99,12 +100,12 @@ Docker / Kubernetes, Linux, Git, Zsh / Bash
 *我关注工程实践、数学思维与技术写作，也把这个博客当作长期打磨的个人产品。*
 
 <style>
-.resume-header {
+.about-page .resume-header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.profile-photo {
+.about-page .profile-photo {
   width: 200px;
   height: auto;
   border-radius: 8px;
@@ -113,16 +114,16 @@ Docker / Kubernetes, Linux, Git, Zsh / Bash
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.resume-header h1 {
+.about-page .resume-header h1 {
   margin-bottom: 0.5rem;
 }
 
-.resume-header p {
+.about-page .resume-header p {
   color: var(--vp-c-text-2);
   margin-bottom: 1rem;
 }
 
-.contact-info {
+.about-page .contact-info {
   margin-top: 1rem;
   display: flex;
   flex-wrap: wrap;
@@ -130,73 +131,73 @@ Docker / Kubernetes, Linux, Git, Zsh / Bash
   gap: 0.25rem 0.5rem;
 }
 
-.contact-info a {
+.about-page .contact-info a {
   white-space: nowrap;
 }
 
-h2 {
+.about-page h2 {
   border-bottom: 2px solid var(--vp-c-divider);
   padding-bottom: 0.5rem;
   margin-top: 2.5rem;
 }
 
-h3 {
+.about-page h3 {
   margin-top: 1.5rem;
   margin-bottom: 0.25rem;
 }
 
-h3 + p strong {
+.about-page h3 + p strong {
   color: var(--vp-c-text-2);
   font-weight: 500;
 }
 
 @media (max-width: 768px) {
-  .profile-photo {
+  .about-page .profile-photo {
     width: 150px;
   }
 
-  .resume-header h1 {
+  .about-page .resume-header h1 {
     font-size: 1.75rem;
   }
 
-  h2 {
+  .about-page h2 {
     font-size: 1.25rem;
     margin-top: 2rem;
   }
 
-  h3 {
+  .about-page h3 {
     font-size: 1.1rem;
   }
 
-  .contact-info {
+  .about-page .contact-info {
     gap: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .profile-photo {
+  .about-page .profile-photo {
     width: 120px;
     margin-bottom: 1rem;
   }
 
-  .resume-header h1 {
+  .about-page .resume-header h1 {
     font-size: 1.5rem;
   }
 
-  .resume-header p {
+  .about-page .resume-header p {
     font-size: 0.9rem;
   }
 
-  h2 {
+  .about-page h2 {
     font-size: 1.1rem;
     margin-top: 1.5rem;
   }
 
-  h3 {
+  .about-page h3 {
     font-size: 1rem;
   }
 
-  .contact-info {
+  .about-page .contact-info {
     flex-direction: column;
     gap: 0.25rem;
   }
