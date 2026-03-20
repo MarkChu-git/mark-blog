@@ -175,13 +175,7 @@
 }
 
 .glass-card::after {
-  content: '';
-  position: absolute;
-  inset: auto 18px 0 18px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  opacity: 0.6;
-  pointer-events: none;
+  display: none;
 }
 
 .card-base,
