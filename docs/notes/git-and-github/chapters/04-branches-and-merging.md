@@ -23,24 +23,27 @@ In Git, a branch is just a movable pointer that points to a commit. That's it. I
 
 When you create a new repository and make your first commit, Git automatically creates a branch called `main` (or `master` in older setups). This pointer moves forward every time you make a new commit.
 
-```
-main: A → B → C → D
-```
-
-When you create a new branch, Git just adds another pointer at the same commit:
-
-```
-main:      A → B → C → D
-                    ↗
-new-feature:       D
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
 ```
 
 Both branches point to the same commit right now. But as you make new commits on `new-feature`, the two pointers diverge:
 
-```
-main:      A → B → C → D
-                    ↗
-new-feature:       D → E → F
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
+    checkout new-feature
+    commit id: "E"
+    commit id: "F"
 ```
 
 `main` still points to D, while `new-feature` has moved on to F. The commits A through D are shared — they exist in both histories. Only E and F are unique to `new-feature`.
@@ -194,14 +197,18 @@ $ git merge new-feature
 
 Git performs a **fast-forward merge** when the branch being merged (here, `new-feature`) is simply ahead of the target branch (`main`). In this case, Git just moves the `main` pointer forward:
 
-```
-Before merge:
-main:      A → B → C → D
-                    ↗
-new-feature:       D → E → F
-
-After fast-forward merge:
-main:      A → B → C → D → E → F
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
+    checkout new-feature
+    commit id: "E"
+    commit id: "F"
+    checkout main
+    merge new-feature id: "fast-forward"
 ```
 
 The history is a straight line. No special commit is created — `main` simply catches up to where `new-feature` was.
@@ -210,18 +217,19 @@ The history is a straight line. No special commit is created — `main` simply c
 
 If `main` has received new commits since you branched off, a fast-forward is no longer possible. Git must create a **merge commit** to combine the two lines of history:
 
-```
-Before merge:
-main:      A → B → C → D → G
-                    ↗
-new-feature:       D → E → F
-
-After merge commit:
-main:      A → B → C → D → G
-                    ↗     ↖
-new-feature:       D → E → F
-                         ↓
-                   merge commit H
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
+    checkout new-feature
+    commit id: "E"
+    commit id: "F"
+    checkout main
+    commit id: "G"
+    merge new-feature id: "H"
 ```
 
 Git will open your editor and ask you to write a merge commit message. The default message is usually fine:

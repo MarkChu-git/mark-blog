@@ -74,6 +74,18 @@ This volume will gradually cover:
 
 - [Chapter 4: Branches — Working on Multiple Things at Once](chapters/04-branches-and-merging.en.md) ([中文](chapters/04-branches-and-merging.md))
 
+### Chapter 5
+
+- [Chapter 5: Remote Repositories — Connecting Your Work to the World](chapters/05-remote-repositories.en.md) ([中文](chapters/05-remote-repositories.md))
+
+### Chapter 6
+
+- [Chapter 6: GitHub — Collaboration, Pull Requests, and Beyond](chapters/06-github-collaboration.en.md) ([中文](chapters/06-github-collaboration.md))
+
+### Chapter 7
+
+- [Chapter 7: Putting It All Together — Real-World Workflows](chapters/07-putting-it-all-together.en.md) ([中文](chapters/07-putting-it-all-together.md))
+
 ## Recommended reading order
 
 ### Track A: complete beginner / wants traction quickly

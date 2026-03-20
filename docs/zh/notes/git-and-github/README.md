@@ -74,6 +74,18 @@
 
 - [第四章：分支——同时做多件事](chapters/04-branches-and-merging.md) ([English](chapters/04-branches-and-merging.en.md))
 
+### 第五章
+
+- [第五章：远程仓库——把你的工作连接到世界](chapters/05-remote-repositories.md) ([English](chapters/05-remote-repositories.en.md))
+
+### 第六章
+
+- [第六章：GitHub——协作、Pull Request 与更多](chapters/06-github-collaboration.md) ([English](chapters/06-github-collaboration.en.md))
+
+### 第七章
+
+- [第七章：串联一切——真实世界的工作流](chapters/07-putting-it-all-together.md) ([English](chapters/07-putting-it-all-together.en.md))
+
 ## 推荐阅读顺序
 
 ### 路线 A：完全新手 / 想马上上手

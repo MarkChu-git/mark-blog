@@ -23,24 +23,27 @@
 
 当你创建新仓库并做出第一次提交时，Git 会自动创建一个叫 `main` 的分支（旧版本叫 `master`）。这个指针每次你做出新提交时就往前移一步。
 
-```
-main: A → B → C → D
-```
-
-当你创建一个新分支时，Git 只是添加了另一个指向同一个提交的指针：
-
-```
-main:      A → B → C → D
-                    ↗
-new-feature:       D
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
 ```
 
 两个分支指向同一个提交。但当你开始在 `new-feature` 上做出新提交后，两个指针就分叉了：
 
-```
-main:      A → B → C → D
-                    ↗
-new-feature:       D → E → F
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
+    checkout new-feature
+    commit id: "E"
+    commit id: "F"
 ```
 
 `main` 仍然指向 D，而 `new-feature` 已经移到了 F。从 A 到 D 的提交是共享的——它们存在于两条分支的历史中。只有 E 和 F 是 `new-feature` 独有的。
@@ -194,14 +197,18 @@ $ git merge new-feature
 
 Git 执行**快进合并（fast-forward merge）**——当被合并的分支（这里是 `new-feature`）只是领先于目标分支（`main`）时，Git 只需把 `main` 指针往前移：
 
-```
-合并前：
-main:      A → B → C → D
-                    ↗
-new-feature:       D → E → F
-
-快进合并后：
-main:      A → B → C → D → E → F
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
+    checkout new-feature
+    commit id: "E"
+    commit id: "F"
+    checkout main
+    merge new-feature id: "fast-forward"
 ```
 
 历史是一条直线。没有创建任何特殊提交——`main` 只是追上了 `new-feature` 的位置。
@@ -210,18 +217,19 @@ main:      A → B → C → D → E → F
 
 如果在你创建分支之后 `main` 又有了新的提交，快进就不再可能。Git 必须创建一个**合并提交（merge commit）**来把两条历史线合在一起：
 
-```
-合并前：
-main:      A → B → C → D → G
-                    ↗
-new-feature:       D → E → F
-
-合并提交后：
-main:      A → B → C → D → G
-                    ↗     ↖
-new-feature:       D → E → F
-                         ↓
-                   合并提交 H
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "C"
+    commit id: "D"
+    branch new-feature
+    checkout new-feature
+    commit id: "E"
+    commit id: "F"
+    checkout main
+    commit id: "G"
+    merge new-feature id: "H"
 ```
 
 Git 会打开编辑器让你写合并提交信息。默认信息通常就够了：
