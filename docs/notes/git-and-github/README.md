@@ -66,6 +66,14 @@ This volume will gradually cover:
 
 - [Chapter 2: Start Using Git for Real — Working Tree, Staging Area, and Your First Reliable Commit](chapters/02-working-tree-staging-and-first-commit.en.md) ([中文](chapters/02-working-tree-staging-and-first-commit.md))
 
+### Chapter 3
+
+- [Chapter 3: Looking Back and Undoing — How to View History, Compare Differences, and Safely Undo](chapters/03-viewing-history-diff-and-undo.en.md) ([中文](chapters/03-viewing-history-diff-and-undo.md))
+
+### Chapter 4
+
+- [Chapter 4: Branches — Working on Multiple Things at Once](chapters/04-branches-and-merging.en.md) ([中文](chapters/04-branches-and-merging.md))
+
 ## Recommended reading order
 
 ### Track A: complete beginner / wants traction quickly

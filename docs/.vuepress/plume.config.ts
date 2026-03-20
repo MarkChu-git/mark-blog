@@ -109,6 +109,7 @@ export default defineThemeConfig({
               { text: '第一章：先理解版本控制到底在解决什么问题', link: '/zh/notes/git-and-github/chapters/01-why-version-control-matters.md' },
               { text: '第二章：真正开始用 Git——工作区、暂存区、提交历史与第一次可靠提交', link: '/zh/notes/git-and-github/chapters/02-working-tree-staging-and-first-commit.md' },
               { text: '第三章：回看与回退——如何查看历史、比较差异并安全撤销', link: '/zh/notes/git-and-github/chapters/03-viewing-history-diff-and-undo.md' },
+              { text: '第四章：分支——同时做多件事', link: '/zh/notes/git-and-github/chapters/04-branches-and-merging.md' },
             ],
           },
         ],

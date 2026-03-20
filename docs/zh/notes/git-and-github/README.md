@@ -66,6 +66,14 @@
 
 - [第二章：真正开始用 Git——工作区、暂存区、提交历史与第一次可靠提交](chapters/02-working-tree-staging-and-first-commit.md) ([English](chapters/02-working-tree-staging-and-first-commit.en.md))
 
+### 第三章
+
+- [第三章：回看与回退——如何查看历史、比较差异并安全撤销](chapters/03-viewing-history-diff-and-undo.md) ([English](chapters/03-viewing-history-diff-and-undo.en.md))
+
+### 第四章
+
+- [第四章：分支——同时做多件事](chapters/04-branches-and-merging.md) ([English](chapters/04-branches-and-merging.en.md))
+
 ## 推荐阅读顺序
 
 ### 路线 A：完全新手 / 想马上上手
