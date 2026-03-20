@@ -29,6 +29,10 @@ export default defineThemeConfig({
     provider: 'local',
   },
   autoFrontmatter: false,
+  codeHighlighter: {
+    langs: ['ts', 'js', 'vue', 'json', 'bash', 'sh', 'css', 'html', 'python', 'markdown'],
+    defaultLang: 'plaintext',
+  },
   blog: {
     include: ['blog/**/*.md', 'zh/blog/**/*.md'],
     pagination: 10,

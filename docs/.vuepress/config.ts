@@ -164,5 +164,9 @@ export default defineUserConfig({
       excludePaths: ['/404.html'],
     }),
   ],
-  theme: plumeTheme(),
+  theme: plumeTheme({
+    markdown: {
+      mermaid: true,
+    },
+  }),
 })
