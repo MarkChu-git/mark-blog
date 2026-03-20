@@ -106,11 +106,13 @@ The importance of this approach is that it can clearly separate "body text expla
 
 In Typora, after you type three backticks and press Enter, a code block is automatically generated; if you write a language name directly after the backticks, such as `python`, `bash`, `json`, Typora will try to provide syntax highlighting.
 
-![Code Block with Syntax Highlighting - Python](images/Figure%203-3-1.png)
+![Code Block with Syntax Highlighting](images/Figure%203-3-1.png)
 
-![Code Block with Syntax Highlighting - Bash](images/Figure%203-3-2.png)
+> **Figure 3-3**: Python and Bash code blocks with syntax highlighting
 
-> **Figure 3-3**: Code blocks with language identifiers (Python and Bash) showing syntax highlighting
+![JSON Code Block](images/Figure%203-3-2.png)
+
+> **Figure 3-4**: JSON code block with syntax highlighting
 
 ### 6. Links and images: they are resource connections, not just format features
 
@@ -168,9 +170,9 @@ This is suitable for scenarios where "the formula is just part of a sentence." F
 
 But note that Typora's inline formula feature usually needs to be explicitly enabled in settings. That is, just because you see others can type `$...$` doesn't mean you currently have this feature enabled by default. So when writing formulas, if you find the output isn't as expected, don't immediately suspect you wrote it wrong — also check whether the setting is enabled.
 
-![Inline Math Setting](images/Figure%203-4.png)
+![Inline Math Settings and Examples](images/Figure%203-4.png)
 
-> **Figure 3-4**: Inline formulas displayed within body text
+> **Figure 3-5**: Typora Markdown settings showing Inline Math option (top) and inline formulas rendered in body text (bottom)
 
 ### 2. Display formulas: let formulas stand out on their own
 
@@ -237,7 +239,7 @@ The value of multi-line formulas is that they can make derivation steps truly re
 
 ![Display Math and Multi-line Alignment](images/Figure%203-5.png)
 
-> **Figure 3-5**: Display formulas and multi-line aligned formulas
+> **Figure 3-6**: Display formulas (with auto-numbering) and multi-line aligned formulas
 
 ### 6. Auto-numbering, cross-references, physics package, chemical expressions: belong to second-tier capabilities
 
@@ -268,13 +270,9 @@ Beginners are most easily attracted first by themes, colors, and fonts, which is
 
 These toggles don't look as prominent as theme switching, but they actually determine whether your document is stable, smooth, and suitable for long-term maintenance.
 
-![Markdown Settings - Page 1](images/settings1.png)
+![Markdown Syntax Support Settings](images/settings4.png)
 
-![Markdown Settings - Page 2](images/settings2.png)
-
-![Markdown Settings - Page 3](images/settings3.png)
-
-> **Figure 3-6**: Typora Markdown settings overview, including Inline Math, Footnote, Highlight, Subscript/Superscript, and other key options
+> **Figure 3-7**: Typora Markdown syntax support settings, including Inline Math, Subscript, Superscript, Highlight, and Diagrams options
 
 ### 2. Settings directly related to formulas should be unified in advance
 
@@ -287,6 +285,14 @@ If you're certain you'll be writing math, algorithms, statistics, physics, engin
 
 The benefit of unifying these settings isn't just "looking more professional," but avoiding inconsistent behavior across your documents later. Especially when making teaching materials, having numbering in one chapter but not another, inline formulas rendering in one place but not another, will tire both readers and authors.
 
+![Code Fences and Math Settings](images/settings5.png)
+
+> **Figure 3-8**: Typora Markdown settings for Code Fences and Math options
+
+![Math Detailed Settings](images/settings6.png)
+
+> **Figure 3-9**: Typora Math detailed settings, including Inline Math, LaTeX Math Delimiter, and Auto Numbering options
+
 ### 3. Image-related settings are key settings for teaching material workflow
 
 If you only write short notes, maybe image strategy isn't that prominent. But as long as you want to write tutorials, teaching materials, or documentation with screenshots, image settings are a category of options that must be handled in advance. Most worth prioritizing are:
@@ -298,11 +304,9 @@ If you only write short notes, maybe image strategy isn't that prominent. But as
 
 Once you handle these items in advance, you won't easily fall into the disaster of "images displayed at the time, but all broke later" when inserting images.
 
-![Image Settings - Page 1](images/settings4.png)
+![Image Settings](images/settings3.png)
 
-![Image Settings - Page 2](images/settings5.png)
-
-> **Figure 3-7**: Typora image settings showing image insertion paths and relative path options
+> **Figure 3-10**: Typora image settings showing image insertion paths, relative path options, and Image Uploader settings
 
 ### 4. Outline, file tree, word count — these views aren't icing on the cake, but your workbench when writing long documents
 
@@ -313,6 +317,14 @@ So you should at least develop a habit:
 - When writing long documents, keep outline visible or readily accessible.
 - When writing multi-file materials, keep file tree clear.
 - When writing chapters, regularly use outline to check whether heading hierarchy is unbalanced.
+
+![General Settings](images/settings1.png)
+
+> **Figure 3-11**: Typora General settings, including launch options and outline settings (Collapsible Outline on Left Panel)
+
+![Editor Settings](images/settings2.png)
+
+> **Figure 3-12**: Typora Editor settings, including Auto Pair, Auto Complete, and Live Rendering options
 
 ### 5. Don't memorize all shortcuts at once, but first grab high-frequency actions
 
@@ -328,10 +340,6 @@ Typora officially provides many shortcuts, but you don't need to memorize them a
 - Formula input toggle
 
 The best learning method isn't copying a shortcut list and posting it on the wall, but first understanding actions through menus, then gradually replacing the highest-frequency groups with shortcuts. This way they'll slowly embed into your writing process, rather than staying in a "I think I've seen this" half-memory state.
-
-![Shortcuts and Menu Entry](images/settings6.png)
-
-> **Figure 3-8**: Typora shortcuts and menu entry
 
 ## 6. A practice task suitable for beginners to start immediately
 
