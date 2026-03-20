@@ -40,10 +40,9 @@ The most common and most reliable approach is to use ATX-style headings starting
 
 In Typora, after you type the hash symbol and heading text and press Enter, Typora automatically converts it to a heading. This process is very smooth, so many people easily overlook the structural significance behind it. You must remember: headings are not decorative enlarged text, but outline nodes of the article. The clearer your headings, the easier outline view, table of contents generation, section navigation, and long-term maintenance will be later.
 
-> **[Figure Position 3-1]** Heading hierarchy and outline linkage diagram
-> **Suggested content**: A screenshot of Typora's editing area + outline sidebar, showing at least level 1, 2, and 3 headings, with the right sidebar displaying the hierarchy synchronously.
-> **Key point this figure illustrates**: Headings not only affect main text display, but also determine outline structure.
-> **Suggested filename**: `chapter-03-figure-01-heading-outline-overview.png`
+![Heading Hierarchy and Outline](images/Figure%203-1.heic)
+
+> **Figure 3-1**: Typora editing area with outline sidebar showing heading hierarchy (levels 1, 2, and 3)
 
 ### 2. Paragraphs and line breaks: first distinguish "new paragraph" from "inline line break"
 
@@ -79,10 +78,9 @@ Ordered list:
 
 The real difficulty with lists isn't single-level lists, but nested lists. When you continue listing sub-items under a list item, indentation becomes important. You need to gradually develop a concept: **indentation in Markdown isn't a spacing game, but expresses hierarchy.**
 
-> **[Figure Position 3-2]** Unordered list / ordered list / nested list diagram
-> **Suggested content**: Show both editing state and rendered state in the same image, including at least first-level unordered list, first-level ordered list, and second-level nested list.
-> **Key point this figure illustrates**: Lists aren't just "adding bullets," but structural hierarchy tools.
-> **Suggested filename**: `chapter-03-figure-02-list-and-nesting.png`
+![Lists and Nesting](images/Figure%203-2.heic)
+
+> **Figure 3-2**: Unordered lists, ordered lists, and nested lists
 
 ### 4. Blockquotes: not gray box decoration, but "another layer of voice"
 
@@ -108,10 +106,11 @@ The importance of this approach is that it can clearly separate "body text expla
 
 In Typora, after you type three backticks and press Enter, a code block is automatically generated; if you write a language name directly after the backticks, such as `python`, `bash`, `json`, Typora will try to provide syntax highlighting.
 
-> **[Figure Position 3-3]** Code block and language highlighting diagram
-> **Suggested content**: A screenshot of a code block with language identifier in Typora, such as `python` or `bash`.
-> **Key point this figure illustrates**: Code blocks should be distinguished from body text, language identifiers can improve readability.
-> **Suggested filename**: `chapter-03-figure-03-code-block-highlight.png`
+![Code Block with Syntax Highlighting - Python](images/Figure%203-3-1.heic)
+
+![Code Block with Syntax Highlighting - Bash](images/Figure%203-3-2.heic)
+
+> **Figure 3-3**: Code blocks with language identifiers (Python and Bash) showing syntax highlighting
 
 ### 6. Links and images: they are resource connections, not just format features
 
@@ -169,10 +168,9 @@ This is suitable for scenarios where "the formula is just part of a sentence." F
 
 But note that Typora's inline formula feature usually needs to be explicitly enabled in settings. That is, just because you see others can type `$...$` doesn't mean you currently have this feature enabled by default. So when writing formulas, if you find the output isn't as expected, don't immediately suspect you wrote it wrong — also check whether the setting is enabled.
 
-> **[Figure Position 3-4]** Inline formula before and after enabling diagram
-> **Suggested content**: A screenshot showing the Inline Math toggle location in Typora's Markdown settings, or showing the display effect of inline formulas in body text after enabling.
-> **Key point this figure illustrates**: Inline formulas aren't automatically available unconditionally, usually need to be enabled in Markdown settings.
-> **Suggested filename**: `chapter-03-figure-04-inline-math-setting.png`
+![Inline Math Setting](images/Figure%203-4.heic)
+
+> **Figure 3-4**: Inline formulas displayed within body text
 
 ### 2. Display formulas: let formulas stand out on their own
 
@@ -237,10 +235,9 @@ $$
 
 The value of multi-line formulas is that they can make derivation steps truly readable, rather than cramming all equations into one line. For teaching material writing, this point is especially critical. Because truly "knowing how to explain" isn't just presenting the final answer, but letting readers see the transformation process clearly.
 
-> **[Figure Position 3-5]** Display formula and multi-line aligned formula diagram
-> **Suggested content**: A screenshot including both standalone display formulas and `align` multi-line formulas rendered in Typora.
-> **Key point this figure illustrates**: Display formulas are suitable for showing objects, multi-line alignment is suitable for showing processes.
-> **Suggested filename**: `chapter-03-figure-05-display-math-and-align.png`
+![Display Math and Multi-line Alignment](images/Figure%203-5.heic)
+
+> **Figure 3-5**: Display formulas and multi-line aligned formulas
 
 ### 6. Auto-numbering, cross-references, physics package, chemical expressions: belong to second-tier capabilities
 
@@ -271,10 +268,13 @@ Beginners are most easily attracted first by themes, colors, and fonts, which is
 
 These toggles don't look as prominent as theme switching, but they actually determine whether your document is stable, smooth, and suitable for long-term maintenance.
 
-> **[Figure Position 3-6]** Typora's Markdown settings overview
-> **Suggested content**: A complete screenshot of the Markdown section in Typora preferences, ideally showing Inline Math, Math, Footnote, Highlight, Subscript/Superscript and other related items.
-> **Key point this figure illustrates**: Settings that truly affect tutorial/teaching material writing experience are mainly concentrated in the Markdown section.
-> **Suggested filename**: `chapter-03-figure-06-markdown-preferences-overview.png`
+![Markdown Settings - Page 1](images/settings1.heic)
+
+![Markdown Settings - Page 2](images/settings2.heic)
+
+![Markdown Settings - Page 3](images/settings3.heic)
+
+> **Figure 3-6**: Typora Markdown settings overview, including Inline Math, Footnote, Highlight, Subscript/Superscript, and other key options
 
 ### 2. Settings directly related to formulas should be unified in advance
 
@@ -298,10 +298,11 @@ If you only write short notes, maybe image strategy isn't that prominent. But as
 
 Once you handle these items in advance, you won't easily fall into the disaster of "images displayed at the time, but all broke later" when inserting images.
 
-> **[Figure Position 3-7]** Typora image settings and target directory diagram
-> **Suggested content**: Screenshot of image processing related options in preferences; if possible, add a file tree screenshot of `images/` directory with chapter files.
-> **Key point this figure illustrates**: Images aren't temporary attachments, but part of body text resources.
-> **Suggested filename**: `chapter-03-figure-07-image-preferences-and-folder-structure.png`
+![Image Settings - Page 1](images/settings4.heic)
+
+![Image Settings - Page 2](images/settings5.heic)
+
+> **Figure 3-7**: Typora image settings showing image insertion paths and relative path options
 
 ### 4. Outline, file tree, word count — these views aren't icing on the cake, but your workbench when writing long documents
 
@@ -328,10 +329,9 @@ Typora officially provides many shortcuts, but you don't need to memorize them a
 
 The best learning method isn't copying a shortcut list and posting it on the wall, but first understanding actions through menus, then gradually replacing the highest-frequency groups with shortcuts. This way they'll slowly embed into your writing process, rather than staying in a "I think I've seen this" half-memory state.
 
-> **[Figure Position 3-8]** Typora shortcuts / menu entry diagram
-> **Suggested content**: A screenshot showing common insert items in the menu bar, or the shortcut help page.
-> **Key point this figure illustrates**: Shortcut learning should revolve around high-frequency actions, not memorizing everything at once.
-> **Suggested filename**: `chapter-03-figure-08-shortcuts-and-menu-entry.png`
+![Shortcuts and Menu Entry](images/settings6.heic)
+
+> **Figure 3-8**: Typora shortcuts and menu entry
 
 ## 6. A practice task suitable for beginners to start immediately
 
