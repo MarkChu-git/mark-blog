@@ -90,10 +90,7 @@ const socialProfiles = {
 
 const nowText = ref('--:--')
 const timezoneText = ref('--')
-const typewriterWords = computed(() => isZh.value
-  ? ['Mark.', '学生开发者。', '设计师。', '全栈。', '算法。', '量化。', 'AI。']
-  : ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack.', 'Algorithms.', 'Quant.', 'AI.'],
-)
+const typewriterWords = ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack.', 'Algorithms.', 'Quant.', 'AI.']
 let clock = 0
 const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')
