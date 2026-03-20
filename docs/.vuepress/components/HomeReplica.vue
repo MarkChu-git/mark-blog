@@ -184,8 +184,8 @@ const t = computed(() => ({
   introLabel: isZh.value ? '你好，很高兴认识你。' : 'Hello, nice to meet you.',
   introTitle: isZh.value ? '你可以叫我 Mark。' : 'You can call me Mark.',
   introDesc: isZh.value
-    ? '我关注营销、金融、计算机与产品，以洞察、构建、增长三种能力贯穿始终。'
-    : 'I focus on marketing, finance, computer science, and product — unified by three core capabilities: insight, build, and grow.',
+    ? '我关注营销、金融、计算机与产品，以洞察本质、尊重现实、长期复利三种原则贯穿始终。'
+    : 'I focus on marketing, finance, computer science, and product — guided by three core principles: insight, realism, and compounding.',
   statusLabel: isZh.value ? '状态' : 'Status',
   statusValue: isZh.value ? '持续构建中' : 'Building deliberately',
   timezoneLabel: isZh.value ? '时区' : 'Timezone',
@@ -308,31 +308,31 @@ const activeMottoTab = computed(() => {
 const pursuitItems = computed<FocusItem[]>(() => [
   {
     key: 'insight',
-    label: isZh.value ? '洞察' : 'Insight',
-    title: isZh.value ? '理解市场、用户与数据。' : 'Understand markets, users, and data.',
+    label: isZh.value ? '洞察本质' : 'Insight',
+    title: isZh.value ? '看透问题的底层逻辑。' : 'See through to the underlying logic.',
     desc: isZh.value
-      ? '从营销和金融中提炼洞察力，发现机会，验证假设。'
-      : 'Extract insight from marketing and finance — find opportunities, validate assumptions.',
+      ? '不被表象迷惑，找到真正驱动结果的变量。'
+      : 'Look past the surface to find what truly drives outcomes.',
     ctaLabel: isZh.value ? '查看博客文章' : 'Read related posts',
     href: links.value.blog,
   },
   {
-    key: 'build',
-    label: isZh.value ? '构建' : 'Build',
-    title: isZh.value ? '把想法变成现实。' : 'Turn ideas into reality.',
+    key: 'realism',
+    label: isZh.value ? '尊重现实' : 'Realism',
+    title: isZh.value ? '承认约束，接受不确定性。' : 'Acknowledge constraints, accept uncertainty.',
     desc: isZh.value
-      ? '用技术和产品能力，构建可用的系统与体验。'
-      : 'Use tech and product skills to build usable systems and experiences.',
+      ? '基于真实条件做决策，而不是理想化的假设。'
+      : 'Make decisions based on real conditions, not idealized assumptions.',
     ctaLabel: isZh.value ? '打开笔记' : 'Open notes',
     href: links.value.notes,
   },
   {
-    key: 'grow',
-    label: isZh.value ? '增长' : 'Grow',
-    title: isZh.value ? '持续优化与扩大影响。' : 'Optimize and scale impact.',
+    key: 'compounding',
+    label: isZh.value ? '长期复利' : 'Compounding',
+    title: isZh.value ? '做时间的朋友。' : 'Let time work in your favor.',
     desc: isZh.value
-      ? '用营销和产品思维驱动增长，持续迭代。'
-      : 'Drive growth with marketing and product thinking, keep iterating.',
+      ? '选择可以累积的事情，让今天的努力成为明天的基石。'
+      : 'Choose things that compound — let today\'s effort become tomorrow\'s foundation.',
     ctaLabel: isZh.value ? '查看标签索引' : 'Browse the index',
     href: links.value.tags,
   },
@@ -859,14 +859,14 @@ const routineGradient = computed(() => {
             </span>
           </div>
           <h2 class="pursuit-title" v-if="isZh">
-            <span class="pursuit-token tone-cyan">洞察</span>
-            <span class="pursuit-token tone-blue">构建</span>
-            <span class="pursuit-token tone-violet">增长</span>
+            <span class="pursuit-token tone-cyan">洞察本质</span>
+            <span class="pursuit-token tone-blue">尊重现实</span>
+            <span class="pursuit-token tone-violet">长期复利</span>
           </h2>
           <h2 class="pursuit-title" v-else>
             <span class="pursuit-token tone-cyan">Insight</span>
-            <span class="pursuit-token tone-blue">Build</span>
-            <span class="pursuit-token tone-violet">Grow</span>
+            <span class="pursuit-token tone-blue">Realism</span>
+            <span class="pursuit-token tone-violet">Compounding</span>
           </h2>
           <p class="card-support">{{ activePursuitItem.desc }}</p>
           <div class="card-inline-state">
