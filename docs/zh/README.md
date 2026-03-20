@@ -7,4 +7,4 @@ config:
     onlyOnce: true
 ---
 
-<HomeReplica lang="zh" />
+<HomeReplica />

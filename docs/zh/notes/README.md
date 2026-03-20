@@ -5,4 +5,4 @@ config:
     onlyOnce: true
 ---
 
-<NotesCatalog locale="zh" />
+<NotesCatalog />

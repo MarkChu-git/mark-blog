@@ -1,6 +1,6 @@
 # Chapter 1: First Understand What Problem Version Control Is Actually Solving
 
-> Language / 语言：[中文](../../zh/chapters/01-why-version-control-matters.md) | **English**
+
 
 ## 1. Many people don't fail to use Git — they never truly understood why it exists
 

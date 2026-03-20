@@ -1,6 +1,6 @@
 # Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast
 
-> Language / 语言：[中文](../../zh/chapters/00-practical-quickstart.md) | **English**
+
 
 This is not a lazy “compressed version” of the whole volume, and it is not a syntax-only cheat sheet.
 

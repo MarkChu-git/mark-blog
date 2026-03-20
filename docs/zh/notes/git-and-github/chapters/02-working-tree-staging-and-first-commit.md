@@ -1,6 +1,6 @@
 # 第二章：真正开始用 Git——工作区、暂存区、提交历史与第一次可靠提交
 
-> Language / 语言：**中文** | [English](../../en/chapters/02-working-tree-staging-and-first-commit.md)
+
 
 上一章解决的是“Git 为什么存在”。
 

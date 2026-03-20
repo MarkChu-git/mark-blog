@@ -1,6 +1,6 @@
 # 第四章：不只是基础语法——表格、任务列表、图表与扩展特性
 
-> 语言 / Language：**中文** | [English](../../en/chapters/04-advanced-markdown-features.md)
+
 
 ## 本章你会学到什么
 

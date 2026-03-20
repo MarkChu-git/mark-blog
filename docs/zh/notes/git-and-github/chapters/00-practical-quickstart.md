@@ -1,6 +1,6 @@
 # 第零章：新手快学版——先把 Git 和 GitHub 用起来
 
-> Language / 语言：**中文** | [English](../../en/chapters/00-practical-quickstart.md)
+
 
 这一章不是完整教材的替代品，而是一个**上手加速器**。
 

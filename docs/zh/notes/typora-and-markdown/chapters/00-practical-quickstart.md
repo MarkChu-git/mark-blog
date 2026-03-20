@@ -1,6 +1,6 @@
 # 第零章：新手快学版——先把 Typora、Markdown、LaTeX 真正用起来
 
-> Language / 语言：**中文** | [English](../../en/chapters/00-practical-quickstart.md)
+
 
 这不是“把整本教材压缩成一页”的偷懒版，也不是一张只有符号的速查表。
 

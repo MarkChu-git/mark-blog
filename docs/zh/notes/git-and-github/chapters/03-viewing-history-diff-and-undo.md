@@ -1,6 +1,6 @@
 # 第三章：回看与回退——如何查看历史、比较差异并安全撤销
 
-> 语言 / Language：**中文** | [English](../../en/chapters/03-viewing-history-diff-and-undo.md)
+
 
 ## 本章你会学到什么
 

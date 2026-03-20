@@ -1,6 +1,6 @@
 # Chapter 4: Beyond Basic Syntax — Tables, Task Lists, Diagrams, and Extended Features
 
-> Language / 语言：**English** | [中文](../../zh/chapters/04-advanced-markdown-features.md)
+
 
 ## What You'll Learn in This Chapter
 

@@ -1,6 +1,6 @@
 # Typora and Markdown
 
-> Language / 语言：[中文](../zh/README.md) | **English**
+
 
 This is the first volume in the textbook collection.
 

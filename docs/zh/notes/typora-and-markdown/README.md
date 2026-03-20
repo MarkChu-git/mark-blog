@@ -1,6 +1,6 @@
 # 《Typora 与 Markdown》
 
-> 语言 / Language：**中文** | [English](../en/README.md)
+
 
 这是教材合集中的第一册。
 

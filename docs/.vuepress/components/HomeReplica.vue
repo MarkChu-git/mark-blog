@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { withBase } from 'vuepress/client'
+import { useRouteLocale, withBase } from 'vuepress/client'
 import LazyPerson from './LazyPerson.vue'
 import TypewriterText from './TypewriterText.vue'
-
-type Lang = 'en' | 'zh'
 
 interface IntroStat {
   label: string
@@ -71,11 +69,8 @@ type CardMotionStyle = {
   '--tilt-y': string
 }
 
-const props = withDefaults(defineProps<{ lang?: Lang }>(), {
-  lang: 'en',
-})
-
-const isZh = computed(() => props.lang === 'zh')
+const routeLocale = useRouteLocale()
+const isZh = computed(() => routeLocale.value === '/zh/')
 
 const links = computed(() => ({
   blog: withBase(isZh.value ? '/zh/blog/' : '/blog/'),
@@ -95,7 +90,10 @@ const socialProfiles = {
 
 const nowText = ref('--:--')
 const timezoneText = ref('--')
-const typewriterWords = ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack.', 'Algorithms.', 'Quant.', 'AI.']
+const typewriterWords = computed(() => isZh.value
+  ? ['Mark.', '学生开发者。', '设计师。', '全栈。', '算法。', '量化。', 'AI。']
+  : ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack.', 'Algorithms.', 'Quant.', 'AI.'],
+)
 let clock = 0
 const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')

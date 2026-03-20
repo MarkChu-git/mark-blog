@@ -1,6 +1,6 @@
 # Chapter 2: Start Using Git for Real — Working Tree, Staging Area, and Your First Reliable Commit
 
-> Language / 语言：[中文](../../zh/chapters/02-working-tree-staging-and-first-commit.md) | **English**
+
 
 Chapter 1 answered the conceptual question:
 

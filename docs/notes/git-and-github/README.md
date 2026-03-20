@@ -1,6 +1,6 @@
 # Git and GitHub
 
-> Language / 语言：[中文](../zh/README.md) | **English**
+
 
 Many people meet Git for the first time and immediately feel that it is “important but hard.” They memorize a few commands, then freeze when branches, conflicts, rollback, or remotes appear. They know GitHub is popular, but still do not know how Git and GitHub relate to each other.
 

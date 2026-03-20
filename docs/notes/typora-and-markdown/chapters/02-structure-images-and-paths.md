@@ -1,6 +1,6 @@
 # Chapter 2: Writing Documents for Long-Term Maintenance — Directory Structure, Images, Relative Paths, and Repository Organization
 
-> Language / 语言：[中文](../../zh/chapters/02-structure-images-and-paths.md) | **English**
+
 
 ## 1. What truly determines whether a set of Markdown materials can survive long-term is often not syntax, but structure
 

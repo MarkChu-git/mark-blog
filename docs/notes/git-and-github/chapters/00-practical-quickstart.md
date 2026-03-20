@@ -1,6 +1,6 @@
 # Chapter 0: Practical Quick Start — Get Git and GitHub Working Fast
 
-> Language / 语言：[中文](../../zh/chapters/00-practical-quickstart.md) | **English**
+
 
 This chapter is not a replacement for the full textbook. It is a **startup accelerator**.
 

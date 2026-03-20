@@ -1,6 +1,6 @@
 # Chapter 1: Using Typora and Markdown Like Real Writing
 
-> Language / 语言：[中文](../../zh/chapters/01-typora-and-markdown.md) | **English**
+
 
 ## 1. First, Understand This: Markdown Is Not a "Fancy Syntax," It's a Writing Tool
 
