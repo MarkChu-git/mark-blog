@@ -94,7 +94,7 @@ const typewriterWords = ['Mark.', 'Student Developer.', 'Designer.', 'Full Stack
 let clock = 0
 const activeCard = ref<CardKey | null>(null)
 const activeMotto = ref('clarity')
-const activePursuit = ref('engineering')
+const activePursuit = ref('insight')
 const activeTrait = ref('systems')
 const activeSkill = ref('typescript')
 const activeRoutine = ref('build')
@@ -184,8 +184,8 @@ const t = computed(() => ({
   introLabel: isZh.value ? '你好，很高兴认识你。' : 'Hello, nice to meet you.',
   introTitle: isZh.value ? '你可以叫我 Mark。' : 'You can call me Mark.',
   introDesc: isZh.value
-    ? '我关注工程实践、数学思维与技术写作，也把这个博客当作长期打磨的个人产品。'
-    : 'I care about engineering practice, mathematical thinking, and technical writing, and treat this site as a long-term personal product.',
+    ? '我关注营销、金融、计算机与产品，以洞察、构建、增长三种能力贯穿始终。'
+    : 'I focus on marketing, finance, computer science, and product — unified by three core capabilities: insight, build, and grow.',
   statusLabel: isZh.value ? '状态' : 'Status',
   statusValue: isZh.value ? '持续构建中' : 'Building deliberately',
   timezoneLabel: isZh.value ? '时区' : 'Timezone',
@@ -307,34 +307,34 @@ const activeMottoTab = computed(() => {
 
 const pursuitItems = computed<FocusItem[]>(() => [
   {
-    key: 'engineering',
-    label: isZh.value ? '工程' : 'Engineering',
-    title: isZh.value ? '把系统做稳。' : 'Build robust systems.',
+    key: 'insight',
+    label: isZh.value ? '洞察' : 'Insight',
+    title: isZh.value ? '理解市场、用户与数据。' : 'Understand markets, users, and data.',
     desc: isZh.value
-      ? '关注架构、质量、性能和可维护性。'
-      : 'Focus on architecture, quality, performance, and maintainability.',
+      ? '从营销和金融中提炼洞察力，发现机会，验证假设。'
+      : 'Extract insight from marketing and finance — find opportunities, validate assumptions.',
     ctaLabel: isZh.value ? '查看博客文章' : 'Read related posts',
     href: links.value.blog,
   },
   {
-    key: 'mathematics',
-    label: isZh.value ? '数学' : 'Mathematics',
-    title: isZh.value ? '用模型理解复杂性。' : 'Use models to understand complexity.',
+    key: 'build',
+    label: isZh.value ? '构建' : 'Build',
+    title: isZh.value ? '把想法变成现实。' : 'Turn ideas into reality.',
     desc: isZh.value
-      ? '把抽象能力带回工程与表达。'
-      : 'Bring abstraction back into engineering and communication.',
-    ctaLabel: isZh.value ? '查看标签索引' : 'Browse the index',
-    href: links.value.tags,
-  },
-  {
-    key: 'writing',
-    label: isZh.value ? '写作' : 'Writing',
-    title: isZh.value ? '把经验写成可复用知识。' : 'Turn experience into reusable knowledge.',
-    desc: isZh.value
-      ? '让内容不仅可读，也能长期被检索。'
-      : 'Make content not only readable, but worth returning to later.',
+      ? '用技术和产品能力，构建可用的系统与体验。'
+      : 'Use tech and product skills to build usable systems and experiences.',
     ctaLabel: isZh.value ? '打开笔记' : 'Open notes',
     href: links.value.notes,
+  },
+  {
+    key: 'grow',
+    label: isZh.value ? '增长' : 'Grow',
+    title: isZh.value ? '持续优化与扩大影响。' : 'Optimize and scale impact.',
+    desc: isZh.value
+      ? '用营销和产品思维驱动增长，持续迭代。'
+      : 'Drive growth with marketing and product thinking, keep iterating.',
+    ctaLabel: isZh.value ? '查看标签索引' : 'Browse the index',
+    href: links.value.tags,
   },
 ])
 
@@ -859,14 +859,14 @@ const routineGradient = computed(() => {
             </span>
           </div>
           <h2 class="pursuit-title" v-if="isZh">
-            <span class="pursuit-token tone-cyan">工程</span>
-            <span class="pursuit-token tone-blue">数学</span>
-            <span class="pursuit-token tone-violet">写作</span>
+            <span class="pursuit-token tone-cyan">洞察</span>
+            <span class="pursuit-token tone-blue">构建</span>
+            <span class="pursuit-token tone-violet">增长</span>
           </h2>
           <h2 class="pursuit-title" v-else>
-            <span class="pursuit-token tone-cyan">Engineering</span>
-            <span class="pursuit-token tone-blue">Mathematics</span>
-            <span class="pursuit-token tone-violet">Writing</span>
+            <span class="pursuit-token tone-cyan">Insight</span>
+            <span class="pursuit-token tone-blue">Build</span>
+            <span class="pursuit-token tone-violet">Grow</span>
           </h2>
           <p class="card-support">{{ activePursuitItem.desc }}</p>
           <div class="card-inline-state">

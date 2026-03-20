@@ -1,7 +1,7 @@
 ---
 home: true
-title: Engineering, Math, and Technical Writing
-description: Personal site of Mark, covering engineering practice, computer science, mathematical thinking, and long-form technical writing.
+title: Insight, Build, Grow
+description: Personal site of Mark, covering marketing, finance, computer science, and product development — unified by three core capabilities.
 config:
   - type: custom
     onlyOnce: true
