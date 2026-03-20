@@ -21,17 +21,9 @@ This book is mainly written for:
 - **Group 2**: people who know some Markdown syntax, but still run into trouble with formatting, paths, export behavior, and cross-platform compatibility.
 - **Group 3**: people who want to use Typora as a long-term knowledge and writing tool, not just as “an editor that can type Markdown.”
 
-## What has been added in this pass
+## Practical fast track
 
-To make the material more useful for beginners, this volume now adds a dedicated **practical fast-track layer**:
-
-- a beginner-facing quick-start chapter,
-- stronger emphasis on high-frequency syntax, LaTeX basics, image paths, Typora settings, and Git-backed document workflow,
-- a learning path that lets readers **use the tools first** and then return to the deeper textbook chapters.
-
-The English content is also no longer treated as a thin entry layer. The direction going forward is:
-
-> **Chinese and English should carry the same substantive information, differing only by language whenever possible.**
+To make the material more useful for beginners, this volume provides a dedicated **practical fast-track layer**: a beginner-facing quick-start chapter with stronger emphasis on high-frequency syntax, LaTeX basics, image paths, Typora settings, and Git-backed document workflow — a learning path that lets readers **use the tools first** and then return to the deeper textbook chapters.
 
 ## Scope
 
@@ -50,19 +42,19 @@ This volume will gradually cover:
 
 ### Practical fast track
 
-- [Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast](chapters/00-practical-quickstart.en.md) ([中文](chapters/00-practical-quickstart.md))
+- [Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast](chapters/00-practical-quickstart.md)
 
 ### Chapter 1
 
-- [Chapter 1: Using Typora and Markdown as a Writing Method](chapters/01-typora-and-markdown.en.md) ([中文](chapters/01-typora-and-markdown.md))
+- [Chapter 1: Using Typora and Markdown as a Writing Method](chapters/01-typora-and-markdown.md)
 
 ### Chapter 2
 
-- [Chapter 2: Writing Documents That Can Survive Long-Term Maintenance](chapters/02-structure-images-and-paths.en.md) ([中文](chapters/02-structure-images-and-paths.md))
+- [Chapter 2: Writing Documents That Can Survive Long-Term Maintenance](chapters/02-structure-images-and-paths.md)
 
 ### Chapter 3
 
-- [Chapter 3: Markdown Basics, LaTeX Formula Syntax, and Typora Settings](chapters/03-markdown-latex-and-typora-settings.en.md) ([中文](chapters/03-markdown-latex-and-typora-settings.md))
+- [Chapter 3: Markdown Basics, LaTeX Formula Syntax, and Typora Settings](chapters/03-markdown-latex-and-typora-settings.md)
 
 ## Recommended reading order
 
@@ -78,20 +70,3 @@ This volume will gradually cover:
 1. Start with Chapter 2.
 2. Return to Chapter 0 and Chapter 3.
 3. Then pair this volume with **Git and GitHub** to build version-control habits.
-
-## Research materials
-
-To avoid turning this volume into undocumented personal experience, a source map has already been prepared:
-
-- [Source map](research/source-map.md)
-
-As more chapters are added, this section will also expand into more detailed chapter-level source notes and topic-specific references.
-
-## Current stage goal
-
-The current priorities are:
-
-- continue expanding the full textbook body,
-- maintain a real beginner fast track,
-- keep filling the English material until it matches the Chinese material in substance,
-- and turn this volume into something that works both as an entry point and as long-term reference material.

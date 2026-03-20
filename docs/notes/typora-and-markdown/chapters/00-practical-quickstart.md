@@ -1,154 +1,47 @@
 # Chapter 0: Practical Quick Start — Get Typora, Markdown, and LaTeX Working Fast
 
+## What You'll Learn in This Chapter
 
+- Understand the core value of Markdown: writing structured documents in plain text
+- Master the most commonly used Markdown syntax: headings, paragraphs, lists, blockquotes, code blocks, links, images, and tables
+- Write basic LaTeX formulas
+- Set up a stable document directory structure
+- Manage document history with Git
+- Configure the Typora settings that matter most for writing
 
-This is not a lazy “compressed version” of the whole volume, and it is not a syntax-only cheat sheet.
+## Where This Chapter Fits
 
-Its goal is more direct:
+From Chapter 1 onward, this book systematically covers Markdown's design philosophy, how Typora works under the hood, specification differences, image path management, and long-term document maintenance. But before that, this chapter helps you build hands-on familiarity — letting you run through the most common writing operations without needing to understand every underlying detail first.
 
-> **help a complete beginner build a usable writing workflow with Typora, Markdown, LaTeX basics, and Git in the shortest realistic time.**
+## What Markdown Is
 
-If what you want right now is:
+Markdown is a way to write structured documents in plain text. You use simple symbols (`#` for headings, `-` for lists, `>` for blockquotes) to mark up document structure, then hand the file to a rendering tool (Typora, GitHub, a blog system, etc.) to produce a formatted page.
 
-- to start writing in Markdown quickly,
-- to learn the most useful syntax first,
-- to make Typora comfortable enough for daily work,
-- to understand how Git fits into document writing,
-- and to write basic formulas without fear,
+Markdown is not a WYSIWYG editor. What you write is source code; what you see is the rendered result. This "write source code" approach has a key advantage: you can open, edit, compare, and track these files with any text editor. For this reason, Markdown files are naturally suited for version control with Git.
 
-then this is the right place to start.
+## What Typora Is
 
-After this chapter, you can return to the full textbook with much better momentum.
+Typora is a Markdown editor with a distinguishing feature: it renders as you type. When you enter Markdown syntax, Typora immediately displays the formatted result instead of leaving you staring at raw markup.
 
----
+This doesn't mean Typora hides Markdown from you. On the contrary, the content you write in Typora is standard Markdown source code underneath. Typora simply makes the writing process smoother — you don't need to toggle between "edit source" and "preview result" modes.
 
-## 1. Who this chapter is for
+## The Most Commonly Used Markdown Syntax
 
-This chapter is especially useful for:
+The skeleton of everyday document writing comes down to eight types: headings, paragraphs, lists, blockquotes, code blocks, links, images, and tables. Once you're comfortable with these eight, you can already produce well-structured documents.
 
-- **complete beginners** who are touching Markdown or Typora seriously for the first time,
-- **people who want immediate traction** instead of a long conceptual detour,
-- **document-heavy learners** writing notes, tutorials, textbooks, lab reports, assignments, or blog posts,
-- **practical readers** who want to get useful work done first and study theory second.
-
-If you have tried to learn Markdown before but never truly adopted it, the problem is often not lack of intelligence. The problem is usually the learning sequence:
-
-- too abstract,
-- too fragmented,
-- too syntax-centered,
-- and not enough like a real writing workflow.
-
-This chapter is meant to fix that.
-
----
-
-## 2. The five most important takeaways
-
-If you only remember five things from today, remember these:
-
-1. **Markdown matters because of structure, not decoration.**
-2. **Typora matters because it lets you stay close to the source text without making writing feel unpleasant.**
-3. **The core document skeleton is small:** headings, paragraphs, lists, blockquotes, code blocks, links, images, and tables.
-4. **For LaTeX, beginners only need a small useful subset at first:** inline math, display math, fractions, superscripts, subscripts, and square roots.
-5. **For Git, you do not need advanced branching on day one.** If you can use `status`, `add`, `commit`, `pull`, and `push`, you already cover a large amount of real document work.
-
-Once these basic moves become natural, you are already ahead of many people who have “watched tutorials” but never built a durable habit.
-
----
-
-## 3. A 30-minute onboarding route
-
-The fastest stable route looks like this:
-
-### Step 1: Install Typora and start writing before customizing
-
-Install Typora, open a file, and begin writing.
-
-Do **not** start with:
-
-- themes,
-- fonts,
-- export cosmetics,
-- fancy templates,
-- endless menu exploration.
-
-What decides whether you keep using the tool is not visual polish. It is whether you can open it and write immediately.
-
-### Step 2: Learn the eight most useful Markdown building blocks
-
-The first set you should master is:
-
-- headings,
-- paragraphs,
-- lists,
-- blockquotes,
-- code blocks,
-- links,
-- images,
-- tables.
-
-### Step 3: Learn only enough LaTeX to be useful
-
-Start with:
-
-- inline math `$...$`
-- display math `$$...$$`
-- fractions `\frac{a}{b}`
-- superscripts `x^2`
-- subscripts `a_1`
-- square roots `\sqrt{x}`
-- sums `\sum_{i=1}^{n}`
-
-### Step 4: Create a stable document folder structure
-
-At minimum, use something like this:
-
-```text
-my-notes/
-├── README.md
-├── chapters/
-│   └── 01-my-first-note.md
-└── images/
-    └── 01-example.png
-```
-
-### Step 5: Use Git to manage change
-
-Even if you are writing alone, use Git from the start. Documents also grow, get revised, get reordered, and sometimes need rollback.
-
----
-
-## 4. Markdown essentials: the first syntax you actually need
-
-These are not “all Markdown features.” They are the features you need first and use constantly.
-
-### 4.1 Headings
+### Headings
 
 ```markdown
-# Level 1 heading
-## Level 2 heading
-### Level 3 heading
+# Heading 1
+## Heading 2
+### Heading 3
 ```
 
-Use them like this:
+`#` is the document's main title, `##` marks major sections, and `###` marks subsections within a section. Headings are structural backbone nodes, not font-size controls. In Typora's Outline panel, heading levels automatically generate a document navigation tree — the clearer your heading hierarchy, the more useful the outline becomes.
 
-- `#` for the document title,
-- `##` for major sections,
-- `###` for subsections.
+### Paragraphs
 
-Common beginner mistakes:
-
-- using only one heading level everywhere,
-- using larger headings just to make text “look important,”
-- treating headings like bold text.
-
-The right mental model is simple:
-
-> **headings are structure, not font size.**
-
-### 4.2 Paragraphs
-
-Normal writing is just normal text.
+Separate paragraphs with a blank line:
 
 ```markdown
 This is the first paragraph.
@@ -156,76 +49,57 @@ This is the first paragraph.
 This is the second paragraph.
 ```
 
-If you only want a forced line break inside the same idea, use:
+To force a line break within the same paragraph (without starting a new one), use `Shift + Enter`.
 
-- `Shift + Enter`,
-- or sometimes `<br>`.
+### Lists
 
-### 4.3 Unordered lists
+Unordered lists use `-`:
 
 ```markdown
-- Apple
-- Banana
-- Orange
+- Apples
+- Bananas
+- Oranges
 ```
 
-Use unordered lists for parallel items.
-
-### 4.4 Ordered lists
+Ordered lists use numbers followed by periods:
 
 ```markdown
 1. Open Typora
 2. Create a new document
-3. Add the title
-4. Write the body
+3. Type a heading
+4. Start writing
 ```
 
-Use ordered lists for steps and sequences.
-
-### 4.5 Nested lists
+Lists can be nested. Indentation expresses hierarchy — it's not about visual formatting, but about showing which items belong to which parent.
 
 ```markdown
-1. Prepare the environment
+1. Set up your environment
    - Install Typora
    - Install Git
-2. Create the repository
-   - Make a chapters folder
-   - Make an images folder
+2. Create a repository
+   - Create a chapters directory
+   - Create an images directory
 ```
 
-The key idea here is indentation.
+### Blockquotes
 
-> **Indentation expresses hierarchy, not visual decoration.**
-
-### 4.6 Blockquotes
+Blockquotes start with `>`:
 
 ```markdown
 > This is a blockquote.
 ```
 
-Use blockquotes for:
+A blockquote is essentially a shift in voice — you can use it for tips, definitions, warnings, source excerpts, or supplementary notes, keeping them visually distinct from the main narrative.
 
-- reminders,
-- definitions,
-- warnings,
-- extracts,
-- side comments.
+### Code
 
-Example:
+Inline code is wrapped in backticks:
 
 ```markdown
-> Note: use relative image paths whenever possible.
+Use `git status` to check the current state.
 ```
 
-### 4.7 Inline code
-
-```markdown
-Use `git status` to inspect the current state.
-```
-
-Inline code is ideal for commands, filenames, flags, and parameter names inside normal prose.
-
-### 4.8 Code blocks
+Code blocks use triple backticks with a language annotation:
 
 ````markdown
 ```bash
@@ -235,116 +109,54 @@ git commit -m "docs: update chapter"
 ```
 ````
 
-Common language labels include:
+The language annotation is optional, but it enables syntax highlighting. Common language tags include `bash`, `python`, `json`, `yaml`, and `text`.
 
-- `bash`
-- `python`
-- `json`
-- `yaml`
-- `text`
+### Links and Images
 
-### 4.9 Links
+Link syntax is `[display text](URL)`:
 
 ```markdown
-[Typora official site](https://typora.io)
+[Typora website](https://typora.io)
 ```
 
-### 4.10 Images
+Image syntax is `![alt text](path)`:
 
 ```markdown
-![Example image](../images/example.png)
+![Diagram](../images/example.png)
 ```
 
-What matters most is not just “can you insert an image?” It is whether:
+Use relative paths for images. Keep image files in a dedicated `images/` directory, and establish a naming convention tied to chapters (e.g., `chapter-01-figure-01.png`). This saves a lot of trouble during long-term maintenance.
 
-- images live in a consistent `images/` folder,
-- the path is relative,
-- filenames follow a clear rule.
-
-### 4.11 Tables
+### Tables
 
 ```markdown
 | Syntax | Purpose |
 | --- | --- |
-| # Heading | Defines heading hierarchy |
-| - List | Creates unordered items |
+| # Heading | Define heading levels |
+| - List | Indicate parallel items |
 ```
 
-Tables are good for:
+Tables work well for comparisons and summaries. They're not suitable for long-form text.
 
-- comparisons,
-- summaries,
-- quick reference.
-
-They are not good containers for long explanatory paragraphs.
-
-### 4.12 Emphasis
+### Emphasis
 
 ```markdown
-**bold**
-*italic*
-~~strikethrough~~
+**bold**, *italic*, ~~strikethrough~~
 ```
 
-Emphasis is useful, but it is not the structural backbone of the document.
+Emphasis is supplementary — it's not the structural backbone of a document.
 
----
+## LaTeX Formulas: Start with the Essentials
 
-## 5. A copy-ready Markdown writing template
+Typora natively supports LaTeX math formulas. For beginners, the following types cover most practical needs.
 
-If you need to write a tutorial today, start with this:
+Inline formulas are wrapped in single `$` and embedded within a sentence:
 
 ```markdown
-# My First Markdown Document
-
-## 1. What problem this document solves
-
-Use one or two paragraphs to explain the goal.
-
-## 2. What you need
-
-- Tool A
-- Tool B
-- One example file
-
-## 3. Steps
-
-### 3.1 Step one
-
-Explain the action clearly.
-
-### 3.2 Step two
-
-Continue.
-
-## 4. Common problems
-
-> Note: put the most frequent pitfalls here.
-
-## 5. Summary
-
-End with the key lesson the reader should remember.
+Frequency can be written as $f = \frac{1}{T}$.
 ```
 
-This template is not fancy, but it is stable and effective.
-
----
-
-## 6. LaTeX formulas: only the useful beginner layer
-
-Many beginners panic when they see formulas. In practice, most document writers use a small set of patterns again and again.
-
-### 6.1 Inline math
-
-```markdown
-$f = \frac{1}{T}$
-```
-
-Use inline math when the formula belongs inside a sentence.
-
-Example: frequency can be written as $f = \frac{1}{T}$.
-
-### 6.2 Display math
+Block-level formulas are wrapped in double `$$` and occupy their own line:
 
 ```markdown
 $$
@@ -352,40 +164,18 @@ E = mc^2
 $$
 ```
 
-Use display math when the formula deserves its own line.
+Commonly used formula syntax:
 
-### 6.3 Fractions
+| Syntax | Result |
+| --- | --- |
+| `\frac{a}{b}` | Fraction a/b |
+| `x^2` | Superscript (square) |
+| `a_1` | Subscript |
+| `\sqrt{x}` | Square root |
+| `\sum_{i=1}^{n}` | Summation |
+| `\int_a^b f(x)\,dx` | Integral |
 
-```markdown
-$\frac{a+b}{c}$
-```
-
-### 6.4 Superscripts and subscripts
-
-```markdown
-$x^2$
-$a_1$
-```
-
-### 6.5 Square roots
-
-```markdown
-$\sqrt{x^2+y^2}$
-```
-
-### 6.6 Summation
-
-```markdown
-$\sum_{i=1}^{n} i$
-```
-
-### 6.7 Integrals
-
-```markdown
-$\int_a^b f(x)\,dx$
-```
-
-### 6.8 Multi-line alignment
+Multi-line aligned formulas use the `align` environment:
 
 ```markdown
 $$
@@ -396,234 +186,138 @@ d &= e+f
 $$
 ```
 
-At the beginner stage, this subset is already enough for a large amount of practical work.
+## Document Directory Structure
 
----
+Before you start writing, set up your directory structure. A good starting structure:
 
-## 7. The Typora settings worth checking first
+```text
+my-notes/
+├── README.md
+├── chapters/
+│   └── 01-my-first-note.md
+└── images/
+    └── 01-example.png
+```
 
-You do not need to learn every setting. But some settings have an immediate effect on writing comfort.
+The core idea: keep content files and image files in separate directories, and use numbered filenames for easy sorting and maintenance.
 
-### 7.1 Markdown-related preferences
+## Typora Settings
 
-Pay special attention to whether Typora:
+You don't need to study every setting, but a few directly affect the writing experience. Confirm these early on.
 
-- enables inline math,
-- shows the outline panel,
-- shows the file tree,
-- handles image insertion in a stable way.
+**Markdown-related**: Make sure inline math is enabled, the Outline panel is visible, and the file tree is active.
 
-### 7.2 Image handling preferences
+**Image-related**: Set Typora to "automatically copy images to a specified directory on insert," and consistently use relative paths. Adopt a `chapter-XX-figure-XX.png` naming convention for image files.
 
-If you plan to maintain documents over time, build this habit early:
+**Keyboard shortcuts**: Prioritize mastering: create heading, insert list, insert code block, insert table, search, and open outline. You don't need to memorize them all at once — they become natural with use.
 
-- copy images into a fixed folder,
-- use relative paths,
-- use predictable filenames.
+## Managing Documents with Git
 
-Examples:
+Even if you're writing documents alone, Git is worth using. Documents undergo constant revision, deletion, rollback, and expansion — Git records every change and gives you a basis for every revert.
 
-- `chapter-01-figure-01.png`
-- `chapter-01-figure-02.png`
-
-### 7.3 Learn a few high-frequency shortcuts
-
-Do not try to memorize everything at once. Learn the most useful actions first:
-
-- create headings,
-- create lists,
-- insert code blocks,
-- insert tables,
-- search,
-- open the outline.
-
----
-
-## 8. A writing workflow is not just “finish once”
-
-Real document work is usually not:
-
-- write once,
-- export once,
-- forget forever.
-
-It is more like:
-
-- draft,
-- improve structure,
-- add screenshots,
-- refine language,
-- adjust folders,
-- revise later.
-
-That is exactly why Markdown plus Typora is so useful for long-term writing.
-
-You are working with plain text, stable structure, clean version history, and a format that can later be reorganized, exported, or synchronized.
-
----
-
-## 9. The smallest useful Git workflow for document writing
-
-If this is your first serious contact with Git, do not begin with advanced branch models.
-
-Start with this minimum loop:
-
-### 9.1 Initialize a repository
+Minimum workflow:
 
 ```bash
 git init
-```
-
-### 9.2 Check the current state
-
-```bash
-git status
-```
-
-### 9.3 Stage your changes
-
-```bash
 git add .
+git commit -m "docs: add initial draft"
 ```
 
-### 9.4 Commit them
-
-```bash
-git commit -m "docs: add first markdown draft"
-```
-
-### 9.5 Connect a remote repository if needed
+If you want remote backup (e.g., via GitHub):
 
 ```bash
 git remote add origin <your-repo-url>
-```
-
-### 9.6 Push
-
-```bash
 git push -u origin main
 ```
 
-### 9.7 Pull
+The daily cycle: `git pull` (sync before starting) → write → `git add` + `git commit` (commit after completing a unit of work) → `git push` (push before finishing).
 
-```bash
-git pull
-```
+Most frequently used commands:
 
-These actions already cover a huge amount of solo document maintenance.
-
----
-
-## 10. The Git commands document writers use constantly
-
-The following table is worth revisiting until it becomes natural.
-
-| Command | Purpose | Typical use |
+| Command | Purpose | When to use it |
 | --- | --- | --- |
-| `git status` | Check current state | Before every commit |
-| `git add .` | Stage changes | When preparing a commit |
-| `git commit -m "..."` | Record a change set | After each small milestone |
-| `git pull` | Get latest remote changes | Before starting work |
-| `git push` | Send local commits to remote | After finishing a session |
-| `git log --oneline` | Review commit history | To see recent work quickly |
-| `git diff` | Inspect exact changes | Before committing |
+| `git status` | Check current change state | Anytime — make it a habit |
+| `git add .` | Stage all changes | Before committing |
+| `git commit -m "..."` | Record a change | After completing a unit of work |
+| `git pull` | Pull latest from remote | Before starting work |
+| `git push` | Push local commits to remote | Before finishing work |
+| `git log --oneline` | View short commit history | When reviewing recent changes |
+| `git diff` | View specific changes | Before committing, to double-check |
 
----
+For a complete Git tutorial, see the **Git and GitHub** volume.
 
-## 11. A practical daily rhythm for writing
+## Writing Template
 
-If your work is document-heavy, this routine is excellent:
+If you're ready to start writing a tutorial or note right now, you can use this structure directly:
 
-### Before working
+```markdown
+# Document Title
 
-```bash
-git pull
+## 1. What problem does this document solve?
+
+A paragraph or two explaining the goal.
+
+## 2. What you need
+
+- Tool A
+- Tool B
+- A sample file
+
+## 3. Step-by-step
+
+### 3.1 First step
+
+Describe the action clearly.
+
+### 3.2 Second step
+
+Continue.
+
+## 4. Common issues
+
+> Note: place the most common pitfalls here.
+
+## 5. Summary
+
+Summarize what the reader should remember most.
 ```
 
-### While writing
+This template's value isn't that it "looks good" — it's that it's inherently a well-structured document, with clear heading hierarchy, goal explanation, step-by-step guidance, issue warnings, and a clean wrap-up.
 
-Commit after meaningful small units such as:
+## Hands-On Exercises
 
-- one section structure,
-- one subsection finished,
-- one set of screenshots added,
-- one round of language cleanup.
+Before moving on, try completing these exercises yourself.
 
-### When committing
+### Exercise 1: Write a Markdown Document
 
-```bash
-git add .
-git commit -m "docs: refine chapter 1 structure"
-```
+Requirements: 1 heading level 1, 2 heading level 2, 1 unordered list, 1 ordered list, 1 blockquote, 1 code block, 1 link.
 
-### Before stopping
+### Exercise 2: Write 3 Formulas
+
+One inline formula, one block-level formula, one formula with a fraction.
+
+### Exercise 3: Manage with Git
 
 ```bash
-git push
-```
-
-This creates a powerful feeling very quickly:
-
-> every change is recorded, and every rollback has a handle.
-
----
-
-## 12. Exercises you can do right now
-
-Do not postpone this. Start with a small practical set.
-
-### Exercise 1: Write a 300-word Markdown document
-
-Requirements:
-
-- 1 level-1 heading,
-- 2 level-2 headings,
-- 1 unordered list,
-- 1 ordered list,
-- 1 blockquote,
-- 1 code block,
-- 1 link.
-
-### Exercise 2: Write three formulas
-
-- one inline formula,
-- one display formula,
-- one formula with a fraction.
-
-### Exercise 3: Put the file under Git
-
-```bash
+mkdir typora-practice
+cd typora-practice
 git init
+
+# After writing your document
 git add .
 git commit -m "docs: add first practice note"
 ```
 
-If you finish these three exercises, you are no longer just “someone who watched a tutorial.”
+If you've completed these three steps, Markdown, LaTeX, and Git are no longer just concepts to you.
 
----
+## Chapter Summary
 
-## 13. Chapter summary
+Markdown is a way to write structured documents in plain text; Typora is an editor that makes the process smoother. Together, they let you produce documents that are well-structured, easy to maintain, and naturally suited for version control.
 
-The key lessons from this quick-start chapter are:
+The most commonly used syntax skeleton consists of eight types: headings, paragraphs, lists, blockquotes, code blocks, links, images, and tables. For LaTeX formulas, inline formulas, block-level formulas, fractions, superscripts/subscripts, and square roots cover most practical needs.
 
-- learn the most frequently used moves first,
-- treat structure as more important than visual tricks,
-- learn only the most useful LaTeX subset first,
-- configure the Typora settings that directly affect writing comfort,
-- and build the minimum Git loop:
-  `status` → `add` → `commit` → `pull` / `push`.
+Before you start writing, set up a directory structure with images in a dedicated `images/` directory using relative paths. Use Git to track modification history and build the `status` → `add` → `commit` → `pull` / `push` daily cycle.
 
-Once this minimum workflow feels natural, the full textbook becomes much easier to absorb — and much more interesting — because you are no longer reading in the abstract. You are already using the system.
+## Next Steps
 
----
-
-## 14. Suggested next steps
-
-After this chapter, continue like this:
-
-1. Read Chapter 1 for the long-term writing mindset behind Typora and Markdown.
-2. Read Chapter 2 to stabilize folders, images, and relative paths.
-3. Read Chapter 3 for a fuller treatment of Markdown, LaTeX, and Typora settings.
-4. Read Chapter 4 to learn advanced features like table alignment, task lists, and Mermaid diagrams.
-5. Then move to the quick-start chapter in **Git and GitHub** so that your writing workflow and version control start working together.
-4. Then move to the quick-start chapter in **Git and GitHub** so that your writing workflow and version control start working together.
+The next chapter goes back to fundamentals and discusses a foundational question: why are Typora and Markdown not just a set of syntax tools, but a writing method? Once you understand that, everything that follows will feel more natural.
