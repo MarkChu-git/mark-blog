@@ -87,6 +87,20 @@ const copy = computed(() => {
       desc: '这里放的是我整理过的计算机科学笔记。它更像一份长期更新的个人知识底稿，记录概念总结、实现经验，以及那些真正把问题想通的瞬间。',
       cards: [
         {
+          title: 'Git 与 GitHub',
+          desc: '系统讲解版本控制的概念、工作线和操作方法，包含新手入门和实战指南。',
+          href: './git-and-github/',
+          icon: iconGit,
+          cta: '现在可读',
+        },
+        {
+          title: 'Typora 与 Markdown',
+          desc: '学习用 Markdown 和 Typora 建立长期可维护的文档写作系统。',
+          href: './typora-and-markdown/',
+          icon: iconMarkdown,
+          cta: '现在可读',
+        },
+        {
           title: '计算理论',
           desc: '整理自动机、形式语言、可计算性与复杂度，让抽象概念落到可理解的结构上。',
           icon: iconMathFunction,
@@ -134,20 +148,6 @@ const copy = computed(() => {
           icon: iconLaptop,
           cta: '即将推出',
         },
-        {
-          title: 'Git 与 GitHub',
-          desc: '系统讲解版本控制的概念、工作线和操作方法，包含新手入门和实战指南。',
-          href: './git-and-github/',
-          icon: iconGit,
-          cta: '现在可读',
-        },
-        {
-          title: 'Typora 与 Markdown',
-          desc: '学习用 Markdown 和 Typora 建立长期可维护的文档写作系统。',
-          href: './typora-and-markdown/',
-          icon: iconMarkdown,
-          cta: '现在可读',
-        },
       ] satisfies NoteCard[],
     }
   }
@@ -156,6 +156,20 @@ const copy = computed(() => {
     title: 'A Coder\'s Field Notes',
     desc: 'Welcome to my personal collection of computer science notes. This is where I keep compact summaries, implementation patterns, and the small conceptual links that make hard topics click.',
     cards: [
+      {
+        title: 'Git and GitHub',
+        desc: 'A textbook about Git and GitHub, systematically explaining version control concepts and operations.',
+        href: './git-and-github/',
+        icon: iconGit,
+        cta: 'Available Now',
+      },
+      {
+        title: 'Typora and Markdown',
+        desc: 'Learn how to build a long-term maintainable document writing system with Markdown and Typora.',
+        href: './typora-and-markdown/',
+        icon: iconMarkdown,
+        cta: 'Available Now',
+      },
       {
         title: 'Theory of Computation',
         desc: 'Automata, formal languages, computability, and complexity notes that keep the abstractions readable.',
@@ -203,20 +217,6 @@ const copy = computed(() => {
         desc: 'Beginner-friendly notes on core ideas, problem decomposition, languages, systems, and how everything fits together.',
         icon: iconLaptop,
         cta: 'Coming Soon',
-      },
-      {
-        title: 'Git and GitHub',
-        desc: 'A textbook about Git and GitHub, systematically explaining version control concepts and operations.',
-        href: './git-and-github/',
-        icon: iconGit,
-        cta: 'Available Now',
-      },
-      {
-        title: 'Typora and Markdown',
-        desc: 'Learn how to build a long-term maintainable document writing system with Markdown and Typora.',
-        href: './typora-and-markdown/',
-        icon: iconMarkdown,
-        cta: 'Available Now',
       },
     ] satisfies NoteCard[],
   }
