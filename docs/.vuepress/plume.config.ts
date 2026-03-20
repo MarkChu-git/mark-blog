@@ -8,6 +8,7 @@ const navbarEN = [
   { text: 'Notes', link: '/notes/' },
   { text: 'Tags', link: '/blog/tags/' },
   { text: 'Archives', link: '/blog/archives/' },
+  { text: 'About Me', link: '/more/about/' },
   { text: 'Friends', link: '/more/friends/' },
 ]
 
@@ -17,6 +18,7 @@ const navbarZH = [
   { text: '笔记', link: '/zh/notes/' },
   { text: '标签', link: '/zh/blog/tags/' },
   { text: '归档', link: '/zh/blog/archives/' },
+  { text: '关于我', link: '/zh/more/about/' },
   { text: '友链', link: '/zh/more/friends/' },
 ]
 
