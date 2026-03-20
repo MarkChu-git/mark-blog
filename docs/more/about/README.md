@@ -124,10 +124,14 @@ A next-generation platform for visualizing data structures and algorithms in rea
 
 .contact-info {
   margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 0.5rem;
 }
 
 .contact-info a {
-  margin: 0 0.5rem;
+  white-space: nowrap;
 }
 
 h2 {
@@ -144,5 +148,57 @@ h3 {
 h3 + p strong {
   color: var(--vp-c-text-2);
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .profile-photo {
+    width: 150px;
+  }
+
+  .resume-header h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .contact-info {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-photo {
+    width: 120px;
+    margin-bottom: 1rem;
+  }
+
+  .resume-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .resume-header p {
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 }
 </style>
