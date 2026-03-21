@@ -456,7 +456,7 @@
   font-size: var(--card-title-size);
   line-height: 1.2;
   letter-spacing: var(--card-title-track);
-  font-weight: 520;
+  font-weight: 600;
   text-wrap: balance;
 }
 
@@ -500,7 +500,7 @@
   font-size: clamp(3.9rem, 6vw, 5.2rem);
   line-height: 0.92;
   letter-spacing: -0.075em;
-  font-weight: 540;
+  font-weight: 600;
 }
 
 .intro-support {
@@ -808,13 +808,13 @@ a.contact-panel * {
   line-height: 1.2;
   letter-spacing: var(--card-title-track);
   font-size: var(--pursuit-title-size) !important;
-  font-weight: 520;
+  font-weight: 600;
 }
 
 .pursuit-token {
   display: block;
   font-size: inherit !important;
-  font-weight: 520;
+  font-weight: 600;
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), filter 0.28s ease;
 }
 
@@ -1215,7 +1215,7 @@ a.contact-panel * {
   background: rgba(255, 255, 255, 0.18);
   text-decoration: none;
   font-size: var(--text-link-size);
-  font-weight: 640;
+  font-weight: 600;
 }
 
 .inline-action .iconify,
@@ -1242,7 +1242,7 @@ a.contact-panel * {
   border: 1px solid var(--tahoe-border);
   background: rgba(255, 255, 255, 0.16);
   font-size: var(--card-chip-size);
-  font-weight: 650;
+  font-weight: 600;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
@@ -1322,7 +1322,7 @@ a.contact-panel * {
   color: var(--tahoe-accent);
   text-decoration: none;
   font-size: var(--text-link-size);
-  font-weight: 640;
+  font-weight: 600;
 }
 
 .micro-stat,
