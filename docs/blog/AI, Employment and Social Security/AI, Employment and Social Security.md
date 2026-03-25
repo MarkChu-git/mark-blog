@@ -14,21 +14,9 @@ excerpt: China's "AI+" action plan emphasizes large-scale application of technol
 > 
 > This article is reprinted from *Caijing Magazine*, original author: Zhuo Xian, editor: Su Qi. Copyright belongs to the original author and publisher. Reprinted for educational and exchange purposes only.
 
----
-
-**Source** | Caijing Magazine  **Author** | Zhuo Xian  **Editor** | Su Qi  
-Issue 1, 2026, Published January 5  
-8,794 words, approximately 13 minutes
-
----
 
 China's "AI+" action plan emphasizes large-scale application of technology, which not only shortens the return on investment cycle for technological innovation but also helps increase employment by creating AI application scenarios in production, consumption, and distribution.
 
----
-
-*July 29, 2025, during the 2025 World Artificial Intelligence Conference, Zhiyuan Robot performs a "talent show," attracting visitors. Photo/Xinhua*
-
----
 
 ## The Relationship Between Economic Growth and Employment is Changing
 
