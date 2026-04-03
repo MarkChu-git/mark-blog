@@ -11,6 +11,7 @@ type NoteCard = {
   href?: string
   icon: { svg: string }
   cta: string
+  visible?: boolean
 }
 
 const iconMathFunction = {
@@ -92,6 +93,7 @@ const copy = computed(() => {
           href: './git-and-github/',
           icon: iconGit,
           cta: '现在可读',
+          visible: true,
         },
         {
           title: 'Typora 与 Markdown',
@@ -99,54 +101,63 @@ const copy = computed(() => {
           href: './typora-and-markdown/',
           icon: iconMarkdown,
           cta: '现在可读',
+          visible: true,
         },
         {
           title: '计算理论',
           desc: '整理自动机、形式语言、可计算性与复杂度，让抽象概念落到可理解的结构上。',
           icon: iconMathFunction,
           cta: '即将推出',
+          visible: false,
         },
         {
           title: '并行计算',
           desc: '记录并行架构、同步机制、并发模型与性能分析时常用的理解框架。',
           icon: iconCpu,
           cta: '即将推出',
+          visible: false,
         },
         {
           title: '编程范式',
           desc: '把函数式、面向对象、逻辑式与声明式思路放在同一张图里理解取舍。',
           icon: iconBrackets,
           cta: '即将推出',
+          visible: false,
         },
         {
           title: '人工智能',
           desc: '聚焦机器学习直觉、模型评估、神经网络基础，以及智能系统的工程落地。',
           icon: iconBrain,
           cta: '即将推出',
+          visible: true,
         },
         {
           title: '算法与数据结构',
           desc: '沉淀题型、分析方法、优化套路，以及写出更稳健解法时真正有用的抽象。',
           icon: iconHierarchy,
           cta: '即将推出',
+          visible: false,
         },
         {
           title: '前端开发',
           desc: '围绕界面架构、渲染策略、CSS 体系与交互细节，整理更偏工程实感的笔记。',
           icon: iconBrowser,
           cta: '即将推出',
+          visible: true,
         },
         {
           title: '计算机中的连续数学',
           desc: '把微积分、线性代数、概率与优化放回计算问题中理解，而不是只背公式。',
           icon: iconIntegral,
           cta: '即将推出',
+          visible: false,
         },
         {
           title: '计算机科学导论',
           desc: '给初学者的底层地图：问题拆解、语言、系统、网络与计算思维如何彼此连通。',
           icon: iconLaptop,
           cta: '即将推出',
+          visible: true,
         },
       ] satisfies NoteCard[],
     }
@@ -162,6 +173,7 @@ const copy = computed(() => {
         href: './git-and-github/',
         icon: iconGit,
         cta: 'Available Now',
+        visible: true,
       },
       {
         title: 'Typora and Markdown',
@@ -169,57 +181,70 @@ const copy = computed(() => {
         href: './typora-and-markdown/',
         icon: iconMarkdown,
         cta: 'Available Now',
+        visible: true,
       },
       {
         title: 'Theory of Computation',
         desc: 'Automata, formal languages, computability, and complexity notes that keep the abstractions readable.',
         icon: iconMathFunction,
         cta: 'Coming Soon',
+        visible: false,
       },
       {
         title: 'Parallel Computing',
         desc: 'Architectures, concurrency models, synchronization patterns, and performance intuition for parallel systems.',
         icon: iconCpu,
         cta: 'Coming Soon',
+        visible: false,
       },
       {
         title: 'Programming Paradigms',
         desc: 'Functional, object-oriented, logic, and declarative patterns with an emphasis on tradeoffs in real code.',
         icon: iconBrackets,
         cta: 'Coming Soon',
+        visible: false,
       },
       {
         title: 'Artificial Intelligence',
         desc: 'Machine learning concepts, model intuition, evaluation basics, and practical notes on intelligent systems.',
         icon: iconBrain,
         cta: 'Coming Soon',
+        visible: true,
       },
       {
         title: 'Algorithms & Data Structures',
         desc: 'Core techniques for problem solving, analysis, optimization, and building durable computational instincts.',
         icon: iconHierarchy,
         cta: 'Coming Soon',
+        visible: false,
       },
       {
         title: 'Front-end Development',
         desc: 'Interface architecture, rendering patterns, CSS systems, and small implementation details that improve product feel.',
         icon: iconBrowser,
         cta: 'Coming Soon',
+        visible: true,
       },
       {
         title: 'Continuous Mathematics for CS',
         desc: 'Calculus, linear algebra, probability, and optimization notes aimed at actual computer science use cases.',
         icon: iconIntegral,
         cta: 'Coming Soon',
+        visible: false,
       },
       {
         title: 'Introduction to Computer Science',
         desc: 'Beginner-friendly notes on core ideas, problem decomposition, languages, systems, and how everything fits together.',
         icon: iconLaptop,
         cta: 'Coming Soon',
+        visible: true,
       },
     ] satisfies NoteCard[],
   }
+})
+
+const visibleCards = computed(() => {
+  return copy.value.cards.filter(card => card.visible !== false)
 })
 </script>
 
@@ -232,7 +257,7 @@ const copy = computed(() => {
 
     <div class="notes-catalog__grid">
       <VPCard
-        v-for="card in copy.cards"
+        v-for="card in visibleCards"
         :key="card.title"
         class="notes-topic-card"
         @pointermove="onCardPointerMove"
