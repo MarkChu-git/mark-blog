@@ -244,7 +244,7 @@ const copy = computed(() => {
 })
 
 const visibleCards = computed(() => {
-  return copy.value.cards.filter(card => card.visible === true)
+  return copy.value.cards.filter(card => card.visible !== false)
 })
 </script>
 
