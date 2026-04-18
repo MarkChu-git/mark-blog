@@ -14,7 +14,7 @@ export default defineClientConfig({
     app.component('HomeReplica', HomeReplica)
     app.component('FriendsReplica', FriendsReplica)
     app.component('NotesCatalog', NotesCatalog)
-    app.component('SpeedInsights', SpeedInsights)
-    app.component('Analytics', Analytics)
   },
+  // Add Analytics and SpeedInsights as root components so they're present on all pages
+  rootComponents: [Analytics, SpeedInsights],
 })
