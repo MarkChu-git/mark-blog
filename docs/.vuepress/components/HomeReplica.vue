@@ -679,8 +679,6 @@ const routineGradient = computed(() => {
 </script>
 
 <template>
-  <Analytics />
-  <SpeedInsights />
   <div class="tahoe-home">
     <div class="tahoe-atmosphere" aria-hidden="true">
       <span class="mist mist-a"></span>
