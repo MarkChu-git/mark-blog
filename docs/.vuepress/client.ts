@@ -1,4 +1,6 @@
 import { defineClientConfig } from 'vuepress/client'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
+import { Analytics } from '@vercel/analytics/vue'
 import FriendsReplica from './components/FriendsReplica.vue'
 import HomeReplica from './components/HomeReplica.vue'
 import './styles/article-float.css'
@@ -12,5 +14,7 @@ export default defineClientConfig({
     app.component('HomeReplica', HomeReplica)
     app.component('FriendsReplica', FriendsReplica)
     app.component('NotesCatalog', NotesCatalog)
+    app.component('SpeedInsights', SpeedInsights)
+    app.component('Analytics', Analytics)
   },
 })
