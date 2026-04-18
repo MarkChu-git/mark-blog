@@ -40,7 +40,7 @@ The most common and most reliable approach is to use ATX-style headings starting
 
 In Typora, after you type the hash symbol and heading text and press Enter, Typora automatically converts it to a heading. This process is very smooth, so many people easily overlook the structural significance behind it. You must remember: headings are not decorative enlarged text, but outline nodes of the article. The clearer your headings, the easier outline view, table of contents generation, section navigation, and long-term maintenance will be later.
 
-![Heading Hierarchy and Outline](images/Figure%203-1.png)
+![Heading Hierarchy and Outline](./images/Figure%203-1.png)
 
 > **Figure 3-1**: Typora editing area with outline sidebar showing heading hierarchy (levels 1, 2, and 3)
 
@@ -78,7 +78,7 @@ Ordered list:
 
 The real difficulty with lists isn't single-level lists, but nested lists. When you continue listing sub-items under a list item, indentation becomes important. You need to gradually develop a concept: **indentation in Markdown isn't a spacing game, but expresses hierarchy.**
 
-![Lists and Nesting](images/Figure%203-2.png)
+![Lists and Nesting](./images/Figure%203-2.png)
 
 > **Figure 3-2**: Unordered lists, ordered lists, and nested lists
 
@@ -106,11 +106,11 @@ The importance of this approach is that it can clearly separate "body text expla
 
 In Typora, after you type three backticks and press Enter, a code block is automatically generated; if you write a language name directly after the backticks, such as `python`, `bash`, `json`, Typora will try to provide syntax highlighting.
 
-![Code Block with Syntax Highlighting](images/Figure%203-3-1.png)
+![Code Block with Syntax Highlighting](./images/Figure%203-3-1.png)
 
 > **Figure 3-3**: Python and Bash code blocks with syntax highlighting
 
-![JSON Code Block](images/Figure%203-3-2.png)
+![JSON Code Block](./images/Figure%203-3-2.png)
 
 > **Figure 3-4**: JSON code block with syntax highlighting
 
@@ -170,7 +170,7 @@ This is suitable for scenarios where "the formula is just part of a sentence." F
 
 But note that Typora's inline formula feature usually needs to be explicitly enabled in settings. That is, just because you see others can type `$...$` doesn't mean you currently have this feature enabled by default. So when writing formulas, if you find the output isn't as expected, don't immediately suspect you wrote it wrong — also check whether the setting is enabled.
 
-![Inline Math Settings and Examples](images/Figure%203-4.png)
+![Inline Math Settings and Examples](./images/Figure%203-4.png)
 
 > **Figure 3-5**: Typora Markdown settings showing Inline Math option (top) and inline formulas rendered in body text (bottom)
 
@@ -237,7 +237,7 @@ $$
 
 The value of multi-line formulas is that they can make derivation steps truly readable, rather than cramming all equations into one line. For teaching material writing, this point is especially critical. Because truly "knowing how to explain" isn't just presenting the final answer, but letting readers see the transformation process clearly.
 
-![Display Math and Multi-line Alignment](images/Figure%203-5.png)
+![Display Math and Multi-line Alignment](./images/Figure%203-5.png)
 
 > **Figure 3-6**: Display formulas (with auto-numbering) and multi-line aligned formulas
 
@@ -270,7 +270,7 @@ Beginners are most easily attracted first by themes, colors, and fonts, which is
 
 These toggles don't look as prominent as theme switching, but they actually determine whether your document is stable, smooth, and suitable for long-term maintenance.
 
-![Markdown Syntax Support Settings](images/settings4.png)
+![Markdown Syntax Support Settings](./images/settings4.png)
 
 > **Figure 3-7**: Typora Markdown syntax support settings, including Inline Math, Subscript, Superscript, Highlight, and Diagrams options
 
@@ -285,11 +285,11 @@ If you're certain you'll be writing math, algorithms, statistics, physics, engin
 
 The benefit of unifying these settings isn't just "looking more professional," but avoiding inconsistent behavior across your documents later. Especially when making teaching materials, having numbering in one chapter but not another, inline formulas rendering in one place but not another, will tire both readers and authors.
 
-![Code Fences and Math Settings](images/settings5.png)
+![Code Fences and Math Settings](./images/settings5.png)
 
 > **Figure 3-8**: Typora Markdown settings for Code Fences and Math options
 
-![Math Detailed Settings](images/settings6.png)
+![Math Detailed Settings](./images/settings6.png)
 
 > **Figure 3-9**: Typora Math detailed settings, including Inline Math, LaTeX Math Delimiter, and Auto Numbering options
 
@@ -304,7 +304,7 @@ If you only write short notes, maybe image strategy isn't that prominent. But as
 
 Once you handle these items in advance, you won't easily fall into the disaster of "images displayed at the time, but all broke later" when inserting images.
 
-![Image Settings](images/settings3.png)
+![Image Settings](./images/settings3.png)
 
 > **Figure 3-10**: Typora image settings showing image insertion paths, relative path options, and Image Uploader settings
 
@@ -318,11 +318,11 @@ So you should at least develop a habit:
 - When writing multi-file materials, keep file tree clear.
 - When writing chapters, regularly use outline to check whether heading hierarchy is unbalanced.
 
-![General Settings](images/settings1.png)
+![General Settings](./images/settings1.png)
 
 > **Figure 3-11**: Typora General settings, including launch options and outline settings (Collapsible Outline on Left Panel)
 
-![Editor Settings](images/settings2.png)
+![Editor Settings](./images/settings2.png)
 
 > **Figure 3-12**: Typora Editor settings, including Auto Pair, Auto Complete, and Live Rendering options
 
