@@ -160,6 +160,20 @@ function onCardTouchEnd(event: TouchEvent) {
   touchState.value.isScrolling = false
 }
 
+function onCardTouchCancel(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card)
+    return
+
+  // 触摸被取消（如来电、弹窗等），强制回正
+  resetCardTiltWithBounce(card)
+  card.classList.remove('is-pressed')
+
+  // 重置状态
+  touchState.value.activeCard = null
+  touchState.value.isScrolling = false
+}
+
 function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
   const rect = card.getBoundingClientRect()
   const px = (touch.clientX - rect.left) / rect.width
@@ -359,9 +373,10 @@ const visibleCards = computed(() => {
         class="notes-topic-card"
         @pointermove="onCardPointerMove"
         @pointerleave="resetCardTilt"
-        @touchstart="onCardTouchStart"
-        @touchmove="onCardTouchMove"
+        @touchstart.passive="onCardTouchStart"
+        @touchmove.passive="onCardTouchMove"
         @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <template #title>
           <span class="notes-topic-card__icon">
@@ -393,21 +408,25 @@ const visibleCards = computed(() => {
   cursor: default;
 }
 
-/* 移动端触摸交互样式 */
-.notes-topic-card {
+/* 移动端触摸交互样式 - 使用 :deep 穿透到子组件 */
+:deep(.notes-topic-card.vp-card-wrapper) {
   transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
     background-color var(--vp-t-color),
     border-color var(--vp-t-color),
-    box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 
-.notes-topic-card.is-pressed {
-  transform: scale(0.98);
+:deep(.notes-topic-card.vp-card-wrapper.is-pressed) {
+  transform:
+    perspective(1400px)
+    rotateX(var(--note-tilt-x, 0deg))
+    rotateY(var(--note-tilt-y, 0deg))
+    scale(0.98) !important;
 }
 
 /* 触摸设备优化 */
 @media (hover: none) and (pointer: coarse) {
-  .notes-topic-card {
+  :deep(.notes-topic-card.vp-card-wrapper) {
     touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;

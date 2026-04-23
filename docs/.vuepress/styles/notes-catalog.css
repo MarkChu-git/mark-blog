@@ -279,9 +279,9 @@ html[data-theme='dark'] .notes-topic-card__icon {
   .notes-topic-card.vp-card-wrapper.is-pressed {
     transform:
       perspective(1400px)
-      rotateX(var(--note-tilt-x))
-      rotateY(var(--note-tilt-y))
-      scale(0.98);
+      rotateX(var(--note-tilt-x, 0deg))
+      rotateY(var(--note-tilt-y, 0deg))
+      scale(0.98) !important;
   }
 
   .notes-topic-card__icon {
@@ -397,9 +397,9 @@ html[data-theme='dark'] .notes-topic-card__icon {
   .notes-topic-card.vp-card-wrapper.is-pressed {
     transform:
       perspective(1400px)
-      rotateX(var(--note-tilt-x))
-      rotateY(var(--note-tilt-y))
-      scale(0.98);
+      rotateX(var(--note-tilt-x, 0deg))
+      rotateY(var(--note-tilt-y, 0deg))
+      scale(0.98) !important;
   }
 
   .notes-topic-card .title {
