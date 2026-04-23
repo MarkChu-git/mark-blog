@@ -208,6 +208,15 @@ html[data-theme='dark'] .notes-topic-card__icon {
   background: color-mix(in srgb, var(--vp-c-default-soft) 90%, transparent);
 }
 
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .notes-topic-card.vp-card-wrapper {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
 @media (max-width: 959px) {
   .notes-catalog {
     width: min(100%, 720px);
@@ -276,12 +285,18 @@ html[data-theme='dark'] .notes-topic-card__icon {
     box-shadow: 0 12px 28px rgb(15 23 42 / 0.08);
   }
 
-  .notes-topic-card.vp-card-wrapper.is-pressed {
+  /* 移动端按压效果 - 使用更高优先级选择器 */
+  .notes-catalog__grid .notes-topic-card.vp-card-wrapper.is-pressed {
     transform:
       perspective(1400px)
       rotateX(var(--note-tilt-x, 0deg))
       rotateY(var(--note-tilt-y, 0deg))
       scale(0.98) !important;
+    transition:
+      transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color var(--vp-t-color),
+      border-color var(--vp-t-color),
+      box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   }
 
   .notes-topic-card__icon {
@@ -394,12 +409,18 @@ html[data-theme='dark'] .notes-topic-card__icon {
     transform: none;
   }
 
-  .notes-topic-card.vp-card-wrapper.is-pressed {
+  /* 移动端按压效果 - 使用更高优先级选择器 */
+  .notes-catalog__grid .notes-topic-card.vp-card-wrapper.is-pressed {
     transform:
       perspective(1400px)
       rotateX(var(--note-tilt-x, 0deg))
       rotateY(var(--note-tilt-y, 0deg))
       scale(0.98) !important;
+    transition:
+      transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color var(--vp-t-color),
+      border-color var(--vp-t-color),
+      box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   }
 
   .notes-topic-card .title {

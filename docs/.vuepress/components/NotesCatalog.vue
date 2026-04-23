@@ -407,29 +407,4 @@ const visibleCards = computed(() => {
   opacity: 0.5;
   cursor: default;
 }
-
-/* 移动端触摸交互样式 - 使用 :deep 穿透到子组件 */
-:deep(.notes-topic-card.vp-card-wrapper) {
-  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color var(--vp-t-color),
-    border-color var(--vp-t-color),
-    box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-}
-
-:deep(.notes-topic-card.vp-card-wrapper.is-pressed) {
-  transform:
-    perspective(1400px)
-    rotateX(var(--note-tilt-x, 0deg))
-    rotateY(var(--note-tilt-y, 0deg))
-    scale(0.98) !important;
-}
-
-/* 触摸设备优化 */
-@media (hover: none) and (pointer: coarse) {
-  :deep(.notes-topic-card.vp-card-wrapper) {
-    touch-action: pan-y;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-}
 </style>
