@@ -1,9 +1,25 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouteLocale } from '@vuepress/client'
 
 const routeLocale = useRouteLocale()
 const isZh = computed(() => routeLocale.value === '/zh/')
+
+// 触摸交互状态
+const touchState = ref<{
+  startX: number
+  startY: number
+  isScrolling: boolean
+  activeCard: HTMLElement | null
+}>({
+  startX: 0,
+  startY: 0,
+  isScrolling: false,
+  activeCard: null,
+})
+
+const TOUCH_THRESHOLD = 10 // 防误触阈值（像素）
+const MOBILE_TILT_ANGLE = 8 // 移动端倾斜角度（度）
 
 type NoteCard = {
   title: string
@@ -77,6 +93,87 @@ function resetCardTilt(event: PointerEvent) {
   if (!card)
     return
 
+  card.style.setProperty('--note-tilt-x', '0deg')
+  card.style.setProperty('--note-tilt-y', '0deg')
+}
+
+// 移动端触摸事件处理
+function onCardTouchStart(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card || event.touches.length === 0)
+    return
+
+  const touch = event.touches[0]
+
+  // 记录起始位置
+  touchState.value.startX = touch.clientX
+  touchState.value.startY = touch.clientY
+  touchState.value.isScrolling = false
+  touchState.value.activeCard = card
+
+  // 计算倾斜角度
+  applyTiltFromTouch(card, touch)
+
+  // 添加按压效果
+  card.classList.add('is-pressed')
+}
+
+function onCardTouchMove(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card || event.touches.length === 0 || !touchState.value.activeCard)
+    return
+
+  const touch = event.touches[0]
+
+  // 计算移动距离
+  const deltaX = Math.abs(touch.clientX - touchState.value.startX)
+  const deltaY = Math.abs(touch.clientY - touchState.value.startY)
+  const moveDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+
+  // 如果移动超过阈值，认为是滑动/滚动，取消倾斜效果
+  if (moveDistance > TOUCH_THRESHOLD) {
+    touchState.value.isScrolling = true
+    resetCardTiltWithBounce(card)
+    card.classList.remove('is-pressed')
+    return
+  }
+
+  // 更新倾斜角度
+  applyTiltFromTouch(card, touch)
+}
+
+function onCardTouchEnd(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card)
+    return
+
+  // 如果不是在滚动状态，执行回弹动画
+  if (!touchState.value.isScrolling) {
+    resetCardTiltWithBounce(card)
+  }
+
+  // 移除按压效果
+  card.classList.remove('is-pressed')
+
+  // 重置状态
+  touchState.value.activeCard = null
+  touchState.value.isScrolling = false
+}
+
+function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
+  const rect = card.getBoundingClientRect()
+  const px = (touch.clientX - rect.left) / rect.width
+  const py = (touch.clientY - rect.top) / rect.height
+
+  // 移动端使用更小的倾斜角度
+  const tiltY = ((px - 0.5) * MOBILE_TILT_ANGLE * 2).toFixed(2)
+  const tiltX = ((0.5 - py) * MOBILE_TILT_ANGLE * 2).toFixed(2)
+
+  card.style.setProperty('--note-tilt-x', `${tiltX}deg`)
+  card.style.setProperty('--note-tilt-y', `${tiltY}deg`)
+}
+
+function resetCardTiltWithBounce(card: HTMLElement) {
   card.style.setProperty('--note-tilt-x', '0deg')
   card.style.setProperty('--note-tilt-y', '0deg')
 }
@@ -262,6 +359,9 @@ const visibleCards = computed(() => {
         class="notes-topic-card"
         @pointermove="onCardPointerMove"
         @pointerleave="resetCardTilt"
+        @touchstart="onCardTouchStart"
+        @touchmove="onCardTouchMove"
+        @touchend="onCardTouchEnd"
       >
         <template #title>
           <span class="notes-topic-card__icon">
@@ -291,5 +391,26 @@ const visibleCards = computed(() => {
 .notes-topic-card__cta--disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+/* 移动端触摸交互样式 */
+.notes-topic-card {
+  transition: transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color var(--vp-t-color),
+    border-color var(--vp-t-color),
+    box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.notes-topic-card.is-pressed {
+  transform: scale(0.98);
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .notes-topic-card {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 }
 </style>
