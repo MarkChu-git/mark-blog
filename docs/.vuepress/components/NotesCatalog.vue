@@ -375,8 +375,8 @@ const visibleCards = computed(() => {
         @pointerleave="resetCardTilt"
         @touchstart.passive="onCardTouchStart"
         @touchmove.passive="onCardTouchMove"
-        @touchend="onCardTouchEnd"
-        @touchcancel="onCardTouchCancel"
+        @touchend.passive="onCardTouchEnd"
+        @touchcancel.passive="onCardTouchCancel"
       >
         <template #title>
           <span class="notes-topic-card__icon">
