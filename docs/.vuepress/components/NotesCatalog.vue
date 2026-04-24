@@ -20,6 +20,10 @@ const touchState = ref<{
 
 const TOUCH_THRESHOLD = 10 // 防误触阈值（像素）
 const MOBILE_TILT_ANGLE = 8 // 移动端倾斜角度（度）
+const LONG_PRESS_DELAY = 200 // 长按触发倾斜的延迟（毫秒）
+
+let longPressTimer: ReturnType<typeof setTimeout> | null = null
+let isTiltMode = false
 
 type NoteCard = {
   title: string
@@ -105,17 +109,26 @@ function onCardTouchStart(event: TouchEvent) {
 
   const touch = event.touches[0]
 
-  // 记录起始位置
+  // 记录起始位置，重置状态
   touchState.value.startX = touch.clientX
   touchState.value.startY = touch.clientY
   touchState.value.isScrolling = false
   touchState.value.activeCard = card
+  isTiltMode = false
 
-  // 计算倾斜角度
-  applyTiltFromTouch(card, touch)
+  // 清除上一个定时器
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
 
-  // 添加按压效果
-  card.classList.add('is-pressed')
+  // 启动长按定时器：200ms 后触发倾斜模式
+  longPressTimer = setTimeout(() => {
+    if (!touchState.value.isScrolling && touchState.value.activeCard) {
+      isTiltMode = true
+      touchState.value.activeCard.classList.add('is-pressed')
+    }
+  }, LONG_PRESS_DELAY)
 }
 
 function onCardTouchMove(event: TouchEvent) {
@@ -125,21 +138,25 @@ function onCardTouchMove(event: TouchEvent) {
 
   const touch = event.touches[0]
 
-  // 计算移动距离
+  // 倾斜模式下：跟随手指位置更新倾斜角度
+  if (isTiltMode) {
+    applyTiltFromTouch(card, touch)
+    return
+  }
+
+  // 非倾斜模式：检测是否为滚动操作
   const deltaX = Math.abs(touch.clientX - touchState.value.startX)
   const deltaY = Math.abs(touch.clientY - touchState.value.startY)
   const moveDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
 
-  // 如果移动超过阈值，认为是滑动/滚动，取消倾斜效果
   if (moveDistance > TOUCH_THRESHOLD) {
+    // 手指滑动超过阈值 → 判定为滚动，取消长按
     touchState.value.isScrolling = true
-    resetCardTiltWithBounce(card)
-    card.classList.remove('is-pressed')
-    return
+    if (longPressTimer !== null) {
+      clearTimeout(longPressTimer)
+      longPressTimer = null
+    }
   }
-
-  // 更新倾斜角度
-  applyTiltFromTouch(card, touch)
 }
 
 function onCardTouchEnd(event: TouchEvent) {
@@ -147,17 +164,23 @@ function onCardTouchEnd(event: TouchEvent) {
   if (!card)
     return
 
-  // 如果不是在滚动状态，执行回弹动画
-  if (!touchState.value.isScrolling) {
-    resetCardTiltWithBounce(card)
+  // 清除定时器
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
   }
 
-  // 移除按压效果
-  card.classList.remove('is-pressed')
+  if (isTiltMode) {
+    // 倾斜模式结束 → 弹簧回弹 + 移除按压效果
+    card.style.setProperty('--note-tilt-x', '0deg')
+    card.style.setProperty('--note-tilt-y', '0deg')
+    card.classList.remove('is-pressed')
+  }
 
   // 重置状态
   touchState.value.activeCard = null
   touchState.value.isScrolling = false
+  isTiltMode = false
 }
 
 function onCardTouchCancel(event: TouchEvent) {
@@ -165,13 +188,21 @@ function onCardTouchCancel(event: TouchEvent) {
   if (!card)
     return
 
-  // 触摸被取消（如来电、弹窗等），强制回正
-  resetCardTiltWithBounce(card)
+  // 清除定时器
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+
+  // 回正 + 清理
+  card.style.setProperty('--note-tilt-x', '0deg')
+  card.style.setProperty('--note-tilt-y', '0deg')
   card.classList.remove('is-pressed')
 
   // 重置状态
   touchState.value.activeCard = null
   touchState.value.isScrolling = false
+  isTiltMode = false
 }
 
 function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
@@ -185,11 +216,6 @@ function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
 
   card.style.setProperty('--note-tilt-x', `${tiltX}deg`)
   card.style.setProperty('--note-tilt-y', `${tiltY}deg`)
-}
-
-function resetCardTiltWithBounce(card: HTMLElement) {
-  card.style.setProperty('--note-tilt-x', '0deg')
-  card.style.setProperty('--note-tilt-y', '0deg')
 }
 
 const copy = computed(() => {

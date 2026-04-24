@@ -217,6 +217,18 @@ html[data-theme='dark'] .notes-topic-card__icon {
   }
 }
 
+/* 移动端长按倾斜状态 */
+.notes-topic-card.vp-card-wrapper.is-tilted {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, white 28%);
+  border-color: color-mix(in srgb, var(--vp-c-brand-2) 26%, var(--vp-c-divider));
+  box-shadow: 0 12px 28px rgb(15 23 42 / 0.08);
+}
+
+html[data-theme='dark'] .notes-topic-card.vp-card-wrapper.is-tilted {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 94%, transparent);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 0.18);
+}
+
 @media (max-width: 959px) {
   .notes-catalog {
     width: min(100%, 720px);
@@ -276,13 +288,6 @@ html[data-theme='dark'] .notes-topic-card__icon {
       rotateX(var(--note-tilt-x))
       rotateY(var(--note-tilt-y))
       translateY(-4px);
-  }
-
-  /* 移动端触摸倾斜状态 */
-  .notes-topic-card.vp-card-wrapper.is-tilted {
-    background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, white 28%);
-    border-color: color-mix(in srgb, var(--vp-c-brand-2) 26%, var(--vp-c-divider));
-    box-shadow: 0 12px 28px rgb(15 23 42 / 0.08);
   }
 
   /* 移动端按压效果 - 使用更高优先级选择器 */
