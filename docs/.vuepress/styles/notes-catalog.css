@@ -208,7 +208,7 @@ html[data-theme='dark'] .notes-topic-card__icon {
   background: color-mix(in srgb, var(--vp-c-default-soft) 90%, transparent);
 }
 
-/* 触摸设备优化 */
+/* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .notes-topic-card.vp-card-wrapper {
     touch-action: pan-y;
@@ -217,7 +217,7 @@ html[data-theme='dark'] .notes-topic-card__icon {
   }
 }
 
-/* 移动端长按倾斜状态 */
+/* Mobile long-press tilt state */
 .notes-topic-card.vp-card-wrapper.is-tilted {
   background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, white 28%);
   border-color: color-mix(in srgb, var(--vp-c-brand-2) 26%, var(--vp-c-divider));
@@ -290,7 +290,7 @@ html[data-theme='dark'] .notes-topic-card.vp-card-wrapper.is-tilted {
       translateY(-4px);
   }
 
-  /* 移动端按压效果 - 使用更高优先级选择器 */
+  /* Mobile press effect - higher specificity selector */
   .notes-catalog__grid .notes-topic-card.vp-card-wrapper.is-pressed {
     transform:
       perspective(1400px)
@@ -414,7 +414,7 @@ html[data-theme='dark'] .notes-topic-card.vp-card-wrapper.is-tilted {
     transform: none;
   }
 
-  /* 移动端按压效果 - 使用更高优先级选择器 */
+  /* Mobile press effect - higher specificity selector */
   .notes-catalog__grid .notes-topic-card.vp-card-wrapper.is-pressed {
     transform:
       perspective(1400px)

@@ -5,7 +5,7 @@ import { useRouteLocale } from '@vuepress/client'
 const routeLocale = useRouteLocale()
 const isZh = computed(() => routeLocale.value === '/zh/')
 
-// 触摸交互状态
+// Touch interaction state
 const touchState = ref<{
   startX: number
   startY: number
@@ -18,9 +18,9 @@ const touchState = ref<{
   activeCard: null,
 })
 
-const TOUCH_THRESHOLD = 10 // 防误触阈值（像素）
-const MOBILE_TILT_ANGLE = 8 // 移动端倾斜角度（度）
-const LONG_PRESS_DELAY = 200 // 长按触发倾斜的延迟（毫秒）
+const TOUCH_THRESHOLD = 10 // Anti-accidental-touch threshold (px)
+const MOBILE_TILT_ANGLE = 8 // Mobile tilt angle in degrees
+const LONG_PRESS_DELAY = 200 // Long-press activation delay (ms)
 
 let longPressTimer: ReturnType<typeof setTimeout> | null = null
 let isTiltMode = false
@@ -101,7 +101,7 @@ function resetCardTilt(event: PointerEvent) {
   card.style.setProperty('--note-tilt-y', '0deg')
 }
 
-// 移动端触摸事件处理
+// Mobile touch event handlers
 function onCardTouchStart(event: TouchEvent) {
   const card = event.currentTarget as HTMLElement | null
   if (!card || event.touches.length === 0)
@@ -109,20 +109,20 @@ function onCardTouchStart(event: TouchEvent) {
 
   const touch = event.touches[0]
 
-  // 记录起始位置，重置状态
+  // Record start position, reset state
   touchState.value.startX = touch.clientX
   touchState.value.startY = touch.clientY
   touchState.value.isScrolling = false
   touchState.value.activeCard = card
   isTiltMode = false
 
-  // 清除上一个定时器
+  // Clear any existing long-press timer
   if (longPressTimer !== null) {
     clearTimeout(longPressTimer)
     longPressTimer = null
   }
 
-  // 启动长按定时器：200ms 后触发倾斜模式
+  // Start long-press timer: activate tilt after 200ms
   longPressTimer = setTimeout(() => {
     if (!touchState.value.isScrolling && touchState.value.activeCard) {
       isTiltMode = true
@@ -138,19 +138,19 @@ function onCardTouchMove(event: TouchEvent) {
 
   const touch = event.touches[0]
 
-  // 倾斜模式下：跟随手指位置更新倾斜角度
+  // Tilt mode: track finger position to update tilt angles
   if (isTiltMode) {
     applyTiltFromTouch(card, touch)
     return
   }
 
-  // 非倾斜模式：检测是否为滚动操作
+  // Not in tilt mode: detect scroll vs tilt intent
   const deltaX = Math.abs(touch.clientX - touchState.value.startX)
   const deltaY = Math.abs(touch.clientY - touchState.value.startY)
   const moveDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
 
   if (moveDistance > TOUCH_THRESHOLD) {
-    // 手指滑动超过阈值 → 判定为滚动，取消长按
+    // Finger moved beyond threshold -> treat as scroll, cancel long-press
     touchState.value.isScrolling = true
     if (longPressTimer !== null) {
       clearTimeout(longPressTimer)
@@ -164,20 +164,20 @@ function onCardTouchEnd(event: TouchEvent) {
   if (!card)
     return
 
-  // 清除定时器
+  // Clear timer
   if (longPressTimer !== null) {
     clearTimeout(longPressTimer)
     longPressTimer = null
   }
 
   if (isTiltMode) {
-    // 倾斜模式结束 → 弹簧回弹 + 移除按压效果
+    // Tilt mode ended: spring-back + remove press effect
     card.style.setProperty('--note-tilt-x', '0deg')
     card.style.setProperty('--note-tilt-y', '0deg')
     card.classList.remove('is-pressed')
   }
 
-  // 重置状态
+  // Reset state
   touchState.value.activeCard = null
   touchState.value.isScrolling = false
   isTiltMode = false
@@ -188,18 +188,18 @@ function onCardTouchCancel(event: TouchEvent) {
   if (!card)
     return
 
-  // 清除定时器
+  // Clear timer
   if (longPressTimer !== null) {
     clearTimeout(longPressTimer)
     longPressTimer = null
   }
 
-  // 回正 + 清理
+  // Reset tilt + clean up
   card.style.setProperty('--note-tilt-x', '0deg')
   card.style.setProperty('--note-tilt-y', '0deg')
   card.classList.remove('is-pressed')
 
-  // 重置状态
+  // Reset state
   touchState.value.activeCard = null
   touchState.value.isScrolling = false
   isTiltMode = false
@@ -210,7 +210,7 @@ function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
   const px = (touch.clientX - rect.left) / rect.width
   const py = (touch.clientY - rect.top) / rect.height
 
-  // 移动端使用更小的倾斜角度
+  // Smaller tilt angle on mobile
   const tiltY = ((px - 0.5) * MOBILE_TILT_ANGLE * 2).toFixed(2)
   const tiltX = ((0.5 - py) * MOBILE_TILT_ANGLE * 2).toFixed(2)
 

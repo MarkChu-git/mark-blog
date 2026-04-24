@@ -99,7 +99,7 @@ const activeTrait = ref('systems')
 const activeSkill = ref('typescript')
 const activeRoutine = ref('build')
 
-// 移动端长按倾斜
+// Mobile long-press tilt
 const LONG_PRESS_DELAY = 200
 let longPressTimer: ReturnType<typeof setTimeout> | null = null
 let touchTiltCard: CardKey | null = null
@@ -187,7 +187,7 @@ const resetCardMotion = (card: CardKey) => {
   cardMotion.value[card] = createCardMotion()
 }
 
-// 移动端触摸倾斜
+// Mobile touch tilt
 const TOUCH_THRESHOLD = 10
 
 function onCardTouchStart(event: TouchEvent, card: CardKey) {
@@ -217,7 +217,7 @@ function onCardTouchMove(event: TouchEvent) {
   const touch = event.touches[0]
 
   if (touchIsTilting) {
-    // 倾斜模式：根据手指位置更新卡片倾斜
+    // Tilt mode: track finger position to rotate card
     const el = event.currentTarget
     if (!(el instanceof HTMLElement)) return
 
@@ -232,7 +232,7 @@ function onCardTouchMove(event: TouchEvent) {
     return
   }
 
-  // 检测滚动
+  // Detect scroll vs tilt intent
   const deltaX = Math.abs(touch.clientX - touchStartX)
   const deltaY = Math.abs(touch.clientY - touchStartY)
   if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) > TOUCH_THRESHOLD) {
