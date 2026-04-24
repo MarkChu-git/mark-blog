@@ -99,6 +99,15 @@ const activeTrait = ref('systems')
 const activeSkill = ref('typescript')
 const activeRoutine = ref('build')
 
+// 移动端长按倾斜
+const LONG_PRESS_DELAY = 200
+let longPressTimer: ReturnType<typeof setTimeout> | null = null
+let touchTiltCard: CardKey | null = null
+let touchStartX = 0
+let touchStartY = 0
+let touchIsScrolling = false
+let touchIsTilting = false
+
 const createCardMotion = (): CardMotionStyle => ({
   '--tilt-x': '0deg',
   '--tilt-y': '0deg',
@@ -177,6 +186,83 @@ const updateCardMotion = (event: MouseEvent, card: CardKey) => {
 const resetCardMotion = (card: CardKey) => {
   cardMotion.value[card] = createCardMotion()
 }
+
+// 移动端触摸倾斜
+const TOUCH_THRESHOLD = 10
+
+function onCardTouchStart(event: TouchEvent, card: CardKey) {
+  if (event.touches.length === 0) return
+
+  const touch = event.touches[0]
+  touchTiltCard = card
+  touchStartX = touch.clientX
+  touchStartY = touch.clientY
+  touchIsScrolling = false
+  touchIsTilting = false
+
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+  }
+
+  longPressTimer = setTimeout(() => {
+    if (!touchIsScrolling && touchTiltCard === card) {
+      touchIsTilting = true
+    }
+  }, LONG_PRESS_DELAY)
+}
+
+function onCardTouchMove(event: TouchEvent) {
+  if (!touchTiltCard || event.touches.length === 0) return
+
+  const touch = event.touches[0]
+
+  if (touchIsTilting) {
+    // 倾斜模式：根据手指位置更新卡片倾斜
+    const el = event.currentTarget
+    if (!(el instanceof HTMLElement)) return
+
+    const rect = el.getBoundingClientRect()
+    const x = (touch.clientX - rect.left) / rect.width
+    const y = (touch.clientY - rect.top) / rect.height
+    const tiltKey = touchTiltCard
+    if (!tiltKey) return
+    const cardMotionState = cardMotion.value[tiltKey]
+    cardMotionState['--tilt-x'] = `${((0.5 - y) * 5.8).toFixed(2)}deg`
+    cardMotionState['--tilt-y'] = `${((x - 0.5) * 6.8).toFixed(2)}deg`
+    return
+  }
+
+  // 检测滚动
+  const deltaX = Math.abs(touch.clientX - touchStartX)
+  const deltaY = Math.abs(touch.clientY - touchStartY)
+  if (Math.sqrt(deltaX * deltaX + deltaY * deltaY) > TOUCH_THRESHOLD) {
+    touchIsScrolling = true
+    if (longPressTimer !== null) {
+      clearTimeout(longPressTimer)
+      longPressTimer = null
+    }
+  }
+}
+
+function onCardTouchEnd() {
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+
+  if (touchTiltCard) {
+    resetCardMotion(touchTiltCard)
+  }
+
+  touchTiltCard = null
+  touchIsTilting = false
+  touchIsScrolling = false
+}
+
+function onCardTouchCancel() {
+  onCardTouchEnd()
+}
+
 
 const cardStyle = (card: CardKey) => cardMotion.value[card]
 
@@ -698,6 +784,10 @@ const routineGradient = computed(() => {
         @keydown="onCardKeydown($event, 'intro')"
         @mousemove="updateCardMotion($event, 'intro')"
         @mouseleave="resetCardMotion('intro')"
+        @touchstart.passive="onCardTouchStart($event, 'intro')"
+        @touchmove.passive="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <div class="card-base intro-base">
           <div class="card-topline">
@@ -790,6 +880,10 @@ const routineGradient = computed(() => {
         @keydown="onCardKeydown($event, 'motto')"
         @mousemove="updateCardMotion($event, 'motto')"
         @mouseleave="resetCardMotion('motto')"
+        @touchstart.passive="onCardTouchStart($event, 'motto')"
+        @touchmove.passive="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <div class="card-base">
           <div class="card-topline">
@@ -851,6 +945,10 @@ const routineGradient = computed(() => {
         @keydown="onCardKeydown($event, 'pursuit')"
         @mousemove="updateCardMotion($event, 'pursuit')"
         @mouseleave="resetCardMotion('pursuit')"
+        @touchstart.passive="onCardTouchStart($event, 'pursuit')"
+        @touchmove.passive="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <div class="card-base">
           <div class="card-topline">
@@ -915,6 +1013,10 @@ const routineGradient = computed(() => {
         @keydown="onCardKeydown($event, 'character')"
         @mousemove="updateCardMotion($event, 'character')"
         @mouseleave="resetCardMotion('character')"
+        @touchstart.passive="onCardTouchStart($event, 'character')"
+        @touchmove.passive="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <div class="card-base character-base">
           <div class="card-topline character-topline">
@@ -983,6 +1085,10 @@ const routineGradient = computed(() => {
         @keydown="onCardKeydown($event, 'skills')"
         @mousemove="updateCardMotion($event, 'skills')"
         @mouseleave="resetCardMotion('skills')"
+        @touchstart.passive="onCardTouchStart($event, 'skills')"
+        @touchmove.passive="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <div class="card-base">
           <div class="card-topline">
@@ -1048,6 +1154,10 @@ const routineGradient = computed(() => {
         @keydown="onCardKeydown($event, 'routine')"
         @mousemove="updateCardMotion($event, 'routine')"
         @mouseleave="resetCardMotion('routine')"
+        @touchstart.passive="onCardTouchStart($event, 'routine')"
+        @touchmove.passive="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <div class="card-base">
           <div class="card-topline">
