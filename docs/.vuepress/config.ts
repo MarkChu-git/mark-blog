@@ -198,7 +198,7 @@ export default defineUserConfig({
       categoryId: 'DIC_kwDORfVEE84C8DeW',
       mapping: 'pathname',
       strict: false,
-      lazyLoading: true,
+      lazyLoading: false,
       reactionsEnabled: true,
       inputPosition: 'top',
       lightTheme: 'light',
