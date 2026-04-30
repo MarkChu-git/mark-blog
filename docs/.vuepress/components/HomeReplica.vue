@@ -103,6 +103,7 @@ const activeRoutine = ref('build')
 const LONG_PRESS_DELAY = 200
 let longPressTimer: ReturnType<typeof setTimeout> | null = null
 let touchTiltCard: CardKey | null = null
+let activeTouchId: number | null = null
 let touchStartX = 0
 let touchStartY = 0
 let touchIsScrolling = false
@@ -157,6 +158,21 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (clock)
     window.clearInterval(clock)
+
+  // Clean up any pending long-press timer and touch state
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+  if (touchEl) {
+    touchEl.classList.remove('is-tilting')
+  }
+  touchTiltCard = null
+  activeTouchId = null
+  touchEl = null
+  cachedRect = null
+  touchIsScrolling = false
+  touchIsTilting = false
 })
 
 const activateCard = (card: CardKey) => {
@@ -199,7 +215,11 @@ const TOUCH_THRESHOLD = 10
 function onCardTouchStart(event: TouchEvent, card: CardKey) {
   if (event.touches.length === 0) return
 
+  // Ignore additional touches while one is already active
+  if (activeTouchId !== null) return
+
   const touch = event.touches[0]
+  activeTouchId = touch.identifier
   touchTiltCard = card
   touchStartX = touch.clientX
   touchStartY = touch.clientY
@@ -226,10 +246,15 @@ function onCardTouchStart(event: TouchEvent, card: CardKey) {
 function onCardTouchMove(event: TouchEvent) {
   if (!touchTiltCard || event.touches.length === 0) return
 
-  const touch = event.touches[0]
+  // Only track the touch that started the gesture
+  const touch = activeTouchId !== null
+    ? Array.from(event.touches).find(t => t.identifier === activeTouchId)
+    : event.touches[0]
+  if (!touch) return
 
   if (touchIsTilting) {
-    event.preventDefault()
+    if (event.cancelable)
+      event.preventDefault()
     if (!cachedRect) return
     const x = (touch.clientX - cachedRect.left) / cachedRect.width
     const y = (touch.clientY - cachedRect.top) / cachedRect.height
@@ -253,7 +278,13 @@ function onCardTouchMove(event: TouchEvent) {
   }
 }
 
-function onCardTouchEnd() {
+function onCardTouchEnd(event: TouchEvent) {
+  // Only handle the touch that started the gesture
+  if (activeTouchId !== null) {
+    const stillActive = Array.from(event.touches).some(t => t.identifier === activeTouchId)
+    if (stillActive) return
+  }
+
   if (longPressTimer !== null) {
     clearTimeout(longPressTimer)
     longPressTimer = null
@@ -263,19 +294,21 @@ function onCardTouchEnd() {
     resetCardMotion(touchTiltCard)
   }
 
-  if (touchEl) {
-    touchEl.classList.remove('is-tilting')
+  const el = (event.currentTarget as HTMLElement | null) ?? touchEl
+  if (el) {
+    el.classList.remove('is-tilting')
   }
 
   touchTiltCard = null
+  activeTouchId = null
   touchIsTilting = false
   touchIsScrolling = false
   cachedRect = null
   touchEl = null
 }
 
-function onCardTouchCancel() {
-  onCardTouchEnd()
+function onCardTouchCancel(event: TouchEvent) {
+  onCardTouchEnd(event)
 }
 
 

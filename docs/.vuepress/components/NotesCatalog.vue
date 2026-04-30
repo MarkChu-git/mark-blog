@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount } from 'vue'
 import { useRouteLocale } from '@vuepress/client'
 
 const routeLocale = useRouteLocale()
@@ -11,6 +11,7 @@ let touchStartY = 0
 let touchIsScrolling = false
 let touchActiveCard: HTMLElement | null = null
 let cachedCardRect: DOMRect | null = null
+let activeTouchId: number | null = null
 
 const TOUCH_THRESHOLD = 10 // Anti-accidental-touch threshold (px)
 const MOBILE_TILT_ANGLE = 8 // Mobile tilt angle in degrees
@@ -101,7 +102,12 @@ function onCardTouchStart(event: TouchEvent) {
   if (!card || event.touches.length === 0)
     return
 
+  // Ignore additional touches while one is already active
+  if (activeTouchId !== null)
+    return
+
   const touch = event.touches[0]
+  activeTouchId = touch.identifier
 
   // Record start position, reset state
   touchStartX = touch.clientX
@@ -118,7 +124,7 @@ function onCardTouchStart(event: TouchEvent) {
 
   // Start long-press timer: activate tilt after 200ms
   longPressTimer = setTimeout(() => {
-    if (!touchIsScrolling && touchActiveCard) {
+    if (!touchIsScrolling && touchActiveCard === card) {
       isTiltMode = true
       touchActiveCard.classList.add('is-pressed')
       cachedCardRect = card.getBoundingClientRect()
@@ -131,10 +137,16 @@ function onCardTouchMove(event: TouchEvent) {
   if (!card || event.touches.length === 0 || !touchActiveCard)
     return
 
-  const touch = event.touches[0]
+  // Only track the touch that started the gesture
+  const touch = activeTouchId !== null
+    ? Array.from(event.touches).find(t => t.identifier === activeTouchId)
+    : event.touches[0]
+  if (!touch) return
 
-  // Tilt mode: track finger position to update tilt angles
+  // Tilt mode: suppress scroll and track finger position to update tilt angles
   if (isTiltMode) {
+    if (event.cancelable)
+      event.preventDefault()
     applyTiltFromTouch(card, touch)
     return
   }
@@ -159,6 +171,12 @@ function onCardTouchEnd(event: TouchEvent) {
   if (!card)
     return
 
+  // Only handle the touch that started the gesture
+  if (activeTouchId !== null) {
+    const stillActive = Array.from(event.touches).some(t => t.identifier === activeTouchId)
+    if (stillActive) return
+  }
+
   // Clear timer
   if (longPressTimer !== null) {
     clearTimeout(longPressTimer)
@@ -174,6 +192,7 @@ function onCardTouchEnd(event: TouchEvent) {
 
   // Reset state
   touchActiveCard = null
+  activeTouchId = null
   touchIsScrolling = false
   isTiltMode = false
   cachedCardRect = null
@@ -197,6 +216,7 @@ function onCardTouchCancel(event: TouchEvent) {
 
   // Reset state
   touchActiveCard = null
+  activeTouchId = null
   touchIsScrolling = false
   isTiltMode = false
   cachedCardRect = null
@@ -207,13 +227,31 @@ function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
   const px = (touch.clientX - cachedCardRect.left) / cachedCardRect.width
   const py = (touch.clientY - cachedCardRect.top) / cachedCardRect.height
 
-  // Smaller tilt angle on mobile
+  // Larger tilt angle on mobile (MOBILE_TILT_ANGLE × 3)
   const tiltY = ((px - 0.5) * MOBILE_TILT_ANGLE * 3).toFixed(2)
   const tiltX = ((0.5 - py) * MOBILE_TILT_ANGLE * 3).toFixed(2)
 
   card.style.setProperty('--note-tilt-x', `${tiltX}deg`)
   card.style.setProperty('--note-tilt-y', `${tiltY}deg`)
 }
+
+onBeforeUnmount(() => {
+  // Clean up any pending long-press timer and touch state
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+  if (touchActiveCard) {
+    touchActiveCard.classList.remove('is-pressed')
+    touchActiveCard.style.setProperty('--note-tilt-x', '0deg')
+    touchActiveCard.style.setProperty('--note-tilt-y', '0deg')
+  }
+  touchActiveCard = null
+  activeTouchId = null
+  cachedCardRect = null
+  touchIsScrolling = false
+  isTiltMode = false
+})
 
 const copy = computed(() => {
   if (isZh.value) {
@@ -397,7 +435,7 @@ const visibleCards = computed(() => {
         @pointermove="onCardPointerMove"
         @pointerleave="resetCardTilt"
         @touchstart.passive="onCardTouchStart"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >
