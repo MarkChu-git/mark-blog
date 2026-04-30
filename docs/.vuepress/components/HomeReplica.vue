@@ -160,6 +160,8 @@ onBeforeUnmount(() => {
 })
 
 const activateCard = (card: CardKey) => {
+  // Clear tilt before toggling so the active state renders flat
+  resetCardMotion(card)
   activeCard.value = activeCard.value === card ? null : card
 }
 
@@ -186,7 +188,9 @@ const updateCardMotion = (event: MouseEvent, card: CardKey) => {
 }
 
 const resetCardMotion = (card: CardKey) => {
-  cardMotion.value[card] = createCardMotion()
+  const state = cardMotion.value[card]
+  state['--tilt-x'] = '0deg'
+  state['--tilt-y'] = '0deg'
 }
 
 // Mobile touch tilt
