@@ -190,5 +190,19 @@ export default defineUserConfig({
     markdown: {
       mermaid: true,
     },
+    comment: {
+      provider: 'Giscus',
+      repo: 'MarkChu-git/mark-blog',
+      repoId: 'R_kgDORfVEEw',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDORfVEE84C8DeW',
+      mapping: 'pathname',
+      strict: false,
+      lazyLoading: false,
+      reactionsEnabled: true,
+      inputPosition: 'top',
+      lightTheme: 'light',
+      darkTheme: 'dark',
+    },
   }),
 })
