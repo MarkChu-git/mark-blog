@@ -107,6 +107,8 @@ let touchStartX = 0
 let touchStartY = 0
 let touchIsScrolling = false
 let touchIsTilting = false
+let touchEl: HTMLElement | null = null
+let cachedRect: DOMRect | null = null
 
 const createCardMotion = (): CardMotionStyle => ({
   '--tilt-x': '0deg',
@@ -179,8 +181,8 @@ const updateCardMotion = (event: MouseEvent, card: CardKey) => {
   const y = (event.clientY - rect.top) / rect.height
   const state = cardMotion.value[card]
 
-  state['--tilt-x'] = `${((0.5 - y) * 5.8).toFixed(2)}deg`
-  state['--tilt-y'] = `${((x - 0.5) * 6.8).toFixed(2)}deg`
+  state['--tilt-x'] = `${((0.5 - y) * 12).toFixed(2)}deg`
+  state['--tilt-y'] = `${((x - 0.5) * 14).toFixed(2)}deg`
 }
 
 const resetCardMotion = (card: CardKey) => {
@@ -204,9 +206,15 @@ function onCardTouchStart(event: TouchEvent, card: CardKey) {
     clearTimeout(longPressTimer)
   }
 
+  touchEl = event.currentTarget as HTMLElement
+
   longPressTimer = setTimeout(() => {
     if (!touchIsScrolling && touchTiltCard === card) {
       touchIsTilting = true
+      if (touchEl) {
+        cachedRect = touchEl.getBoundingClientRect()
+        touchEl.classList.add('is-tilting')
+      }
     }
   }, LONG_PRESS_DELAY)
 }
@@ -217,18 +225,15 @@ function onCardTouchMove(event: TouchEvent) {
   const touch = event.touches[0]
 
   if (touchIsTilting) {
-    // Tilt mode: track finger position to rotate card
-    const el = event.currentTarget
-    if (!(el instanceof HTMLElement)) return
-
-    const rect = el.getBoundingClientRect()
-    const x = (touch.clientX - rect.left) / rect.width
-    const y = (touch.clientY - rect.top) / rect.height
+    event.preventDefault()
+    if (!cachedRect) return
+    const x = (touch.clientX - cachedRect.left) / cachedRect.width
+    const y = (touch.clientY - cachedRect.top) / cachedRect.height
     const tiltKey = touchTiltCard
     if (!tiltKey) return
     const cardMotionState = cardMotion.value[tiltKey]
-    cardMotionState['--tilt-x'] = `${((0.5 - y) * 5.8).toFixed(2)}deg`
-    cardMotionState['--tilt-y'] = `${((x - 0.5) * 6.8).toFixed(2)}deg`
+    cardMotionState['--tilt-x'] = `${((0.5 - y) * 14).toFixed(2)}deg`
+    cardMotionState['--tilt-y'] = `${((x - 0.5) * 16).toFixed(2)}deg`
     return
   }
 
@@ -254,9 +259,15 @@ function onCardTouchEnd() {
     resetCardMotion(touchTiltCard)
   }
 
+  if (touchEl) {
+    touchEl.classList.remove('is-tilting')
+  }
+
   touchTiltCard = null
   touchIsTilting = false
   touchIsScrolling = false
+  cachedRect = null
+  touchEl = null
 }
 
 function onCardTouchCancel() {
@@ -785,7 +796,7 @@ const routineGradient = computed(() => {
         @mousemove="updateCardMotion($event, 'intro')"
         @mouseleave="resetCardMotion('intro')"
         @touchstart.passive="onCardTouchStart($event, 'intro')"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >
@@ -881,7 +892,7 @@ const routineGradient = computed(() => {
         @mousemove="updateCardMotion($event, 'motto')"
         @mouseleave="resetCardMotion('motto')"
         @touchstart.passive="onCardTouchStart($event, 'motto')"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >
@@ -946,7 +957,7 @@ const routineGradient = computed(() => {
         @mousemove="updateCardMotion($event, 'pursuit')"
         @mouseleave="resetCardMotion('pursuit')"
         @touchstart.passive="onCardTouchStart($event, 'pursuit')"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >
@@ -1014,7 +1025,7 @@ const routineGradient = computed(() => {
         @mousemove="updateCardMotion($event, 'character')"
         @mouseleave="resetCardMotion('character')"
         @touchstart.passive="onCardTouchStart($event, 'character')"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >
@@ -1086,7 +1097,7 @@ const routineGradient = computed(() => {
         @mousemove="updateCardMotion($event, 'skills')"
         @mouseleave="resetCardMotion('skills')"
         @touchstart.passive="onCardTouchStart($event, 'skills')"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >
@@ -1155,7 +1166,7 @@ const routineGradient = computed(() => {
         @mousemove="updateCardMotion($event, 'routine')"
         @mouseleave="resetCardMotion('routine')"
         @touchstart.passive="onCardTouchStart($event, 'routine')"
-        @touchmove.passive="onCardTouchMove"
+        @touchmove="onCardTouchMove"
         @touchend="onCardTouchEnd"
         @touchcancel="onCardTouchCancel"
       >

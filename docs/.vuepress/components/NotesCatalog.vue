@@ -1,22 +1,16 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useRouteLocale } from '@vuepress/client'
 
 const routeLocale = useRouteLocale()
 const isZh = computed(() => routeLocale.value === '/zh/')
 
-// Touch interaction state
-const touchState = ref<{
-  startX: number
-  startY: number
-  isScrolling: boolean
-  activeCard: HTMLElement | null
-}>({
-  startX: 0,
-  startY: 0,
-  isScrolling: false,
-  activeCard: null,
-})
+// Touch interaction state (plain vars — not reactive, never read in template)
+let touchStartX = 0
+let touchStartY = 0
+let touchIsScrolling = false
+let touchActiveCard: HTMLElement | null = null
+let cachedCardRect: DOMRect | null = null
 
 const TOUCH_THRESHOLD = 10 // Anti-accidental-touch threshold (px)
 const MOBILE_TILT_ANGLE = 8 // Mobile tilt angle in degrees
@@ -110,10 +104,10 @@ function onCardTouchStart(event: TouchEvent) {
   const touch = event.touches[0]
 
   // Record start position, reset state
-  touchState.value.startX = touch.clientX
-  touchState.value.startY = touch.clientY
-  touchState.value.isScrolling = false
-  touchState.value.activeCard = card
+  touchStartX = touch.clientX
+  touchStartY = touch.clientY
+  touchIsScrolling = false
+  touchActiveCard = card
   isTiltMode = false
 
   // Clear any existing long-press timer
@@ -124,16 +118,17 @@ function onCardTouchStart(event: TouchEvent) {
 
   // Start long-press timer: activate tilt after 200ms
   longPressTimer = setTimeout(() => {
-    if (!touchState.value.isScrolling && touchState.value.activeCard) {
+    if (!touchIsScrolling && touchActiveCard) {
       isTiltMode = true
-      touchState.value.activeCard.classList.add('is-pressed')
+      touchActiveCard.classList.add('is-pressed')
+      cachedCardRect = card.getBoundingClientRect()
     }
   }, LONG_PRESS_DELAY)
 }
 
 function onCardTouchMove(event: TouchEvent) {
   const card = event.currentTarget as HTMLElement | null
-  if (!card || event.touches.length === 0 || !touchState.value.activeCard)
+  if (!card || event.touches.length === 0 || !touchActiveCard)
     return
 
   const touch = event.touches[0]
@@ -145,13 +140,13 @@ function onCardTouchMove(event: TouchEvent) {
   }
 
   // Not in tilt mode: detect scroll vs tilt intent
-  const deltaX = Math.abs(touch.clientX - touchState.value.startX)
-  const deltaY = Math.abs(touch.clientY - touchState.value.startY)
+  const deltaX = Math.abs(touch.clientX - touchStartX)
+  const deltaY = Math.abs(touch.clientY - touchStartY)
   const moveDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
 
   if (moveDistance > TOUCH_THRESHOLD) {
     // Finger moved beyond threshold -> treat as scroll, cancel long-press
-    touchState.value.isScrolling = true
+    touchIsScrolling = true
     if (longPressTimer !== null) {
       clearTimeout(longPressTimer)
       longPressTimer = null
@@ -178,9 +173,10 @@ function onCardTouchEnd(event: TouchEvent) {
   }
 
   // Reset state
-  touchState.value.activeCard = null
-  touchState.value.isScrolling = false
+  touchActiveCard = null
+  touchIsScrolling = false
   isTiltMode = false
+  cachedCardRect = null
 }
 
 function onCardTouchCancel(event: TouchEvent) {
@@ -200,19 +196,20 @@ function onCardTouchCancel(event: TouchEvent) {
   card.classList.remove('is-pressed')
 
   // Reset state
-  touchState.value.activeCard = null
-  touchState.value.isScrolling = false
+  touchActiveCard = null
+  touchIsScrolling = false
   isTiltMode = false
+  cachedCardRect = null
 }
 
 function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
-  const rect = card.getBoundingClientRect()
-  const px = (touch.clientX - rect.left) / rect.width
-  const py = (touch.clientY - rect.top) / rect.height
+  if (!cachedCardRect) return
+  const px = (touch.clientX - cachedCardRect.left) / cachedCardRect.width
+  const py = (touch.clientY - cachedCardRect.top) / cachedCardRect.height
 
   // Smaller tilt angle on mobile
-  const tiltY = ((px - 0.5) * MOBILE_TILT_ANGLE * 2).toFixed(2)
-  const tiltX = ((0.5 - py) * MOBILE_TILT_ANGLE * 2).toFixed(2)
+  const tiltY = ((px - 0.5) * MOBILE_TILT_ANGLE * 3).toFixed(2)
+  const tiltX = ((0.5 - py) * MOBILE_TILT_ANGLE * 3).toFixed(2)
 
   card.style.setProperty('--note-tilt-x', `${tiltX}deg`)
   card.style.setProperty('--note-tilt-y', `${tiltY}deg`)

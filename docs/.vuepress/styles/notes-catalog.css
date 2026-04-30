@@ -211,20 +211,21 @@ html[data-theme='dark'] .notes-topic-card__icon {
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
   .notes-topic-card.vp-card-wrapper {
-    touch-action: pan-y;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
     user-select: none;
     -webkit-user-select: none;
   }
 }
 
 /* Mobile long-press tilt state */
-.notes-topic-card.vp-card-wrapper.is-tilted {
+.notes-topic-card.vp-card-wrapper.is-pressed {
   background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, white 28%);
   border-color: color-mix(in srgb, var(--vp-c-brand-2) 26%, var(--vp-c-divider));
   box-shadow: 0 12px 28px rgb(15 23 42 / 0.08);
 }
 
-html[data-theme='dark'] .notes-topic-card.vp-card-wrapper.is-tilted {
+html[data-theme='dark'] .notes-topic-card.vp-card-wrapper.is-pressed {
   background: color-mix(in srgb, var(--vp-c-bg-soft) 94%, transparent);
   box-shadow: 0 12px 24px rgb(0 0 0 / 0.18);
 }
