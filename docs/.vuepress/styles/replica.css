@@ -58,6 +58,10 @@
   transform: translateY(-2px);
 }
 
+.friends-replica .friend-item:active {
+  transform: translateY(-1px);
+}
+
 .friends-replica .friend-item > img {
   width: 66px;
   height: 66px;

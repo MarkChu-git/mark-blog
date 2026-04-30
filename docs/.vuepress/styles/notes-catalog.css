@@ -208,6 +208,28 @@ html[data-theme='dark'] .notes-topic-card__icon {
   background: color-mix(in srgb, var(--vp-c-default-soft) 90%, transparent);
 }
 
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .notes-topic-card.vp-card-wrapper {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* Mobile long-press tilt state */
+.notes-topic-card.vp-card-wrapper.is-pressed {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 72%, white 28%);
+  border-color: color-mix(in srgb, var(--vp-c-brand-2) 26%, var(--vp-c-divider));
+  box-shadow: 0 12px 28px rgb(15 23 42 / 0.08);
+}
+
+html[data-theme='dark'] .notes-topic-card.vp-card-wrapper.is-pressed {
+  background: color-mix(in srgb, var(--vp-c-bg-soft) 94%, transparent);
+  box-shadow: 0 12px 24px rgb(0 0 0 / 0.18);
+}
+
 @media (max-width: 959px) {
   .notes-catalog {
     width: min(100%, 720px);
@@ -239,12 +261,22 @@ html[data-theme='dark'] .notes-topic-card__icon {
   }
 
   .notes-topic-card.vp-card-wrapper {
+    --note-tilt-x: 0deg;
+    --note-tilt-y: 0deg;
     gap: 14px;
     min-height: 0;
     padding: 18px;
     border-radius: 18px;
-    transform: none;
-    will-change: auto;
+    transform:
+      perspective(1400px)
+      rotateX(var(--note-tilt-x))
+      rotateY(var(--note-tilt-y));
+    will-change: transform;
+    transition:
+      transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color var(--vp-t-color),
+      border-color var(--vp-t-color),
+      box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .notes-topic-card.vp-card-wrapper::after {
@@ -252,7 +284,25 @@ html[data-theme='dark'] .notes-topic-card__icon {
   }
 
   .notes-topic-card.vp-card-wrapper:hover {
-    transform: none;
+    transform:
+      perspective(1400px)
+      rotateX(var(--note-tilt-x))
+      rotateY(var(--note-tilt-y))
+      translateY(-4px);
+  }
+
+  /* Mobile press effect - higher specificity selector */
+  .notes-catalog__grid .notes-topic-card.vp-card-wrapper.is-pressed {
+    transform:
+      perspective(1400px)
+      rotateX(var(--note-tilt-x, 0deg))
+      rotateY(var(--note-tilt-y, 0deg))
+      scale(0.98) !important;
+    transition:
+      transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color var(--vp-t-color),
+      border-color var(--vp-t-color),
+      box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   }
 
   .notes-topic-card__icon {
@@ -329,6 +379,8 @@ html[data-theme='dark'] .notes-topic-card__icon {
   }
 
   .notes-topic-card.vp-card-wrapper {
+    --note-tilt-x: 0deg;
+    --note-tilt-y: 0deg;
     display: grid;
     grid-template-columns: 68px minmax(0, 1fr);
     align-items: start;
@@ -338,6 +390,16 @@ html[data-theme='dark'] .notes-topic-card__icon {
     background: color-mix(in srgb, var(--vp-c-bg-soft) 92%, white 8%);
     border-color: color-mix(in srgb, var(--vp-c-divider) 52%, transparent);
     box-shadow: none;
+    transform:
+      perspective(1400px)
+      rotateX(var(--note-tilt-x))
+      rotateY(var(--note-tilt-y));
+    will-change: transform;
+    transition:
+      transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color var(--vp-t-color),
+      border-color var(--vp-t-color),
+      box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .notes-topic-card.vp-card-wrapper::before,
@@ -351,6 +413,20 @@ html[data-theme='dark'] .notes-topic-card__icon {
   .notes-topic-card .body p,
   .notes-topic-card__cta.vp-link {
     transform: none;
+  }
+
+  /* Mobile press effect - higher specificity selector */
+  .notes-catalog__grid .notes-topic-card.vp-card-wrapper.is-pressed {
+    transform:
+      perspective(1400px)
+      rotateX(var(--note-tilt-x, 0deg))
+      rotateY(var(--note-tilt-y, 0deg))
+      scale(0.98) !important;
+    transition:
+      transform 260ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color var(--vp-t-color),
+      border-color var(--vp-t-color),
+      box-shadow 260ms cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   }
 
   .notes-topic-card .title {

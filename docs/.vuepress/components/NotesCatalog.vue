@@ -1,9 +1,24 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onBeforeUnmount } from 'vue'
 import { useRouteLocale } from '@vuepress/client'
 
 const routeLocale = useRouteLocale()
 const isZh = computed(() => routeLocale.value === '/zh/')
+
+// Touch interaction state (plain vars — not reactive, never read in template)
+let touchStartX = 0
+let touchStartY = 0
+let touchIsScrolling = false
+let touchActiveCard: HTMLElement | null = null
+let cachedCardRect: DOMRect | null = null
+let activeTouchId: number | null = null
+
+const TOUCH_THRESHOLD = 10 // Anti-accidental-touch threshold (px)
+const MOBILE_TILT_ANGLE = 8 // Mobile tilt angle in degrees
+const LONG_PRESS_DELAY = 200 // Long-press activation delay (ms)
+
+let longPressTimer: ReturnType<typeof setTimeout> | null = null
+let isTiltMode = false
 
 type NoteCard = {
   title: string
@@ -80,6 +95,163 @@ function resetCardTilt(event: PointerEvent) {
   card.style.setProperty('--note-tilt-x', '0deg')
   card.style.setProperty('--note-tilt-y', '0deg')
 }
+
+// Mobile touch event handlers
+function onCardTouchStart(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card || event.touches.length === 0)
+    return
+
+  // Ignore additional touches while one is already active
+  if (activeTouchId !== null)
+    return
+
+  const touch = event.touches[0]
+  activeTouchId = touch.identifier
+
+  // Record start position, reset state
+  touchStartX = touch.clientX
+  touchStartY = touch.clientY
+  touchIsScrolling = false
+  touchActiveCard = card
+  isTiltMode = false
+
+  // Clear any existing long-press timer
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+
+  // Start long-press timer: activate tilt after 200ms
+  longPressTimer = setTimeout(() => {
+    if (!touchIsScrolling && touchActiveCard === card) {
+      isTiltMode = true
+      touchActiveCard.classList.add('is-pressed')
+      cachedCardRect = card.getBoundingClientRect()
+    }
+  }, LONG_PRESS_DELAY)
+}
+
+function onCardTouchMove(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card || event.touches.length === 0 || !touchActiveCard)
+    return
+
+  // Only track the touch that started the gesture
+  const touch = activeTouchId !== null
+    ? Array.from(event.touches).find(t => t.identifier === activeTouchId)
+    : event.touches[0]
+  if (!touch) return
+
+  // Tilt mode: suppress scroll and track finger position to update tilt angles
+  if (isTiltMode) {
+    if (event.cancelable)
+      event.preventDefault()
+    applyTiltFromTouch(card, touch)
+    return
+  }
+
+  // Not in tilt mode: detect scroll vs tilt intent
+  const deltaX = Math.abs(touch.clientX - touchStartX)
+  const deltaY = Math.abs(touch.clientY - touchStartY)
+  const moveDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+
+  if (moveDistance > TOUCH_THRESHOLD) {
+    // Finger moved beyond threshold -> treat as scroll, cancel long-press
+    touchIsScrolling = true
+    if (longPressTimer !== null) {
+      clearTimeout(longPressTimer)
+      longPressTimer = null
+    }
+  }
+}
+
+function onCardTouchEnd(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card)
+    return
+
+  // Only handle the touch that started the gesture
+  if (activeTouchId !== null) {
+    const stillActive = Array.from(event.touches).some(t => t.identifier === activeTouchId)
+    if (stillActive) return
+  }
+
+  // Clear timer
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+
+  if (isTiltMode) {
+    // Tilt mode ended: spring-back + remove press effect
+    card.style.setProperty('--note-tilt-x', '0deg')
+    card.style.setProperty('--note-tilt-y', '0deg')
+    card.classList.remove('is-pressed')
+  }
+
+  // Reset state
+  touchActiveCard = null
+  activeTouchId = null
+  touchIsScrolling = false
+  isTiltMode = false
+  cachedCardRect = null
+}
+
+function onCardTouchCancel(event: TouchEvent) {
+  const card = event.currentTarget as HTMLElement | null
+  if (!card)
+    return
+
+  // Clear timer
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+
+  // Reset tilt + clean up
+  card.style.setProperty('--note-tilt-x', '0deg')
+  card.style.setProperty('--note-tilt-y', '0deg')
+  card.classList.remove('is-pressed')
+
+  // Reset state
+  touchActiveCard = null
+  activeTouchId = null
+  touchIsScrolling = false
+  isTiltMode = false
+  cachedCardRect = null
+}
+
+function applyTiltFromTouch(card: HTMLElement, touch: Touch) {
+  if (!cachedCardRect) return
+  const px = (touch.clientX - cachedCardRect.left) / cachedCardRect.width
+  const py = (touch.clientY - cachedCardRect.top) / cachedCardRect.height
+
+  // Larger tilt angle on mobile (MOBILE_TILT_ANGLE × 3)
+  const tiltY = ((px - 0.5) * MOBILE_TILT_ANGLE * 3).toFixed(2)
+  const tiltX = ((0.5 - py) * MOBILE_TILT_ANGLE * 3).toFixed(2)
+
+  card.style.setProperty('--note-tilt-x', `${tiltX}deg`)
+  card.style.setProperty('--note-tilt-y', `${tiltY}deg`)
+}
+
+onBeforeUnmount(() => {
+  // Clean up any pending long-press timer and touch state
+  if (longPressTimer !== null) {
+    clearTimeout(longPressTimer)
+    longPressTimer = null
+  }
+  if (touchActiveCard) {
+    touchActiveCard.classList.remove('is-pressed')
+    touchActiveCard.style.setProperty('--note-tilt-x', '0deg')
+    touchActiveCard.style.setProperty('--note-tilt-y', '0deg')
+  }
+  touchActiveCard = null
+  activeTouchId = null
+  cachedCardRect = null
+  touchIsScrolling = false
+  isTiltMode = false
+})
 
 const copy = computed(() => {
   if (isZh.value) {
@@ -262,6 +434,10 @@ const visibleCards = computed(() => {
         class="notes-topic-card"
         @pointermove="onCardPointerMove"
         @pointerleave="resetCardTilt"
+        @touchstart.passive="onCardTouchStart"
+        @touchmove="onCardTouchMove"
+        @touchend="onCardTouchEnd"
+        @touchcancel="onCardTouchCancel"
       >
         <template #title>
           <span class="notes-topic-card__icon">
