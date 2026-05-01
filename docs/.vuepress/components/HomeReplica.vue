@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouteLocale, withBase } from 'vuepress/client'
+import '../styles/home-liquid.css'
 import LazyPerson from './LazyPerson.vue'
 import TypewriterText from './TypewriterText.vue'
 

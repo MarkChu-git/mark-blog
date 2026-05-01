@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount } from 'vue'
 import { useRouteLocale } from '@vuepress/client'
+import '../styles/notes-catalog.css'
 
 const routeLocale = useRouteLocale()
 const isZh = computed(() => routeLocale.value === '/zh/')
