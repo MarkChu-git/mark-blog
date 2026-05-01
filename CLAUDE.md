@@ -86,3 +86,28 @@ docs/
 - **manualChunks** configured in `config.ts` — splits `vendor-vue` (vue/vue-router/pinia) and `vendor-utils` (@vueuse/core)
 - **CSS code splitting** — `home-liquid.css` and `notes-catalog.css` are imported in their respective Vue components (not in `client.ts`) for per-page loading
 - **@iconify/vue** is installed, `<Icon>` component available in `HomeReplica.vue` — currently only used for close button in card reveals
+
+### Content conventions
+
+- `autoFrontmatter: false` in plume config — frontmatter must be written manually
+- Blog posts are auto-discovered from `blog/**/*.md` and `zh/blog/**/*.md`
+- When adding/changing a note chapter, update the corresponding sidebar array in `plume.config.ts` for both `/` and `/zh/` locales
+- Mermaid and KaTeX are enabled. Custom code highlighter langs: `ts, js, vue, json, bash, sh, css, html, python, markdown`
+
+### Deployment gotchas
+
+- Primary: **Vercel** (`vercel.json`: build `npm run build`, output `docs/.vuepress/dist`)
+- Fallback: **Netlify** (`netlify.toml`: build `npm run docs:build`, publish `docs/.vuepress/dist`)
+- `SITE_URL` env var controls canonical URLs and sitemap hostname. If unset, falls back to GitHub Pages URL
+- `docs/.vuepress/.cache/`, `.temp/`, `dist/` are gitignored — never commit them
+- **No tests, lint, or typecheck** — do not attempt to run them
+
+## Workflow Rules (from AGENTS.md)
+
+These rules bind ALL agent sessions operating in this repository.
+
+1. **Commit & Push** — Every change MUST be committed and pushed before declaring a task complete.
+2. **Skill Traversal** — Before executing any task, load every skill that could plausibly apply.
+3. **Multi-Subagent Mode with 3 Auditors** — Every task MUST use 3+ parallel subagents: workers + 3 auditors. Auditors verify code quality, rule adherence, and correctness. Any FAIL requires fixes before completion.
+4. **Web Search Capability** — Use web search before making implementation decisions involving external libraries, best practices, research, or API changes.
+5. **Enforcement** — Violation of any rule is grounds for task rejection and re-execution.
