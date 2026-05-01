@@ -7,7 +7,7 @@ pageClass: about-page
 
 <div class="resume-header">
 
-<img src="/profile.webp" alt="Mark" class="profile-photo" />
+<img src="/profile.jpg" alt="Mark" class="profile-photo" />
 
 # (Mark) 褚瀚阳
 

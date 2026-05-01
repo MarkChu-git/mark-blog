@@ -59,7 +59,7 @@ interface SocialItem {
   title: string
   detail: string
   href?: string
-  iconifyName: string
+  iconSrc: string
   accent: string
   external?: boolean
 }
@@ -368,7 +368,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '工作经历、项目背书和行业人脉。'
       : 'Work experience, project endorsements, and industry connections.',
     href: socialProfiles.linkedin || undefined,
-    iconifyName: 'mdi:linkedin',
+    iconSrc: withBase('/social-icons/linkedin.png'),
     accent: '#5a84da',
     external: true,
   },
@@ -380,7 +380,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '开源项目、代码实验和技术探索。'
       : 'Open source projects, code experiments, and technical explorations.',
     href: socialProfiles.github,
-    iconifyName: 'mdi:github',
+    iconSrc: withBase('/social-icons/github.png'),
     accent: '#78829a',
     external: true,
   },
@@ -392,7 +392,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '生活的片段、灵感和随手拍。'
       : 'Life fragments, inspiration, and casual shots.',
     href: socialProfiles.instagram || undefined,
-    iconifyName: 'mdi:instagram',
+    iconSrc: withBase('/social-icons/instagram.png'),
     accent: '#d67ca8',
     external: true,
   },
@@ -404,7 +404,7 @@ const socialLinks = computed<SocialItem[]>(() => [
       ? '有想法或合作建议？写邮件最快。'
       : 'Have an idea or proposal? Email is fastest.',
     href: socialProfiles.email,
-    iconifyName: 'mdi:email-outline',
+    iconSrc: withBase('/social-icons/email.png'),
     accent: '#c88b68',
   },
 ])
@@ -877,7 +877,7 @@ const routineGradient = computed(() => {
               :style="{ '--social-accent': item.accent }"
               @click.stop
             >
-              <Icon class="social-dock-icon" :icon="item.iconifyName" :width="32" :height="32" />
+              <img class="social-dock-icon" :src="item.iconSrc" :alt="item.label" />
               <span class="social-dock-label">{{ item.label }}</span>
             </component>
           </div>
@@ -903,7 +903,7 @@ const routineGradient = computed(() => {
               @click.stop
             >
               <div class="contact-panel-head">
-                <Icon class="contact-panel-icon" :icon="item.iconifyName" :width="32" :height="32" />
+                <img class="contact-panel-icon" :src="item.iconSrc" :alt="item.label" />
                 <span class="contact-panel-label">{{ item.label }}</span>
               </div>
               <strong>{{ item.title }}</strong>

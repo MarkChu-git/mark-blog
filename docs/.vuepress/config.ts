@@ -182,9 +182,6 @@ export default defineUserConfig({
     }),
   ],
   theme: plumeTheme({
-    plugins: {
-      photoSwipe: false,
-    },
     markdown: {
       mermaid: true,
     },
