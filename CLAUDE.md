@@ -69,3 +69,20 @@ docs/
 - `main` branch is the production source
 - Feature branches are used for optimization work (e.g., `feature/mobile-device-optimization`)
 - PRs against `main` trigger Vercel deployment
+
+### Font management
+
+- **Inter** — self-hosted by vuepress-theme-plume (woff2 in build output), `font-display: swap`
+- **Sora, Manrope, JetBrains Mono** — self-hosted via `@fontsource/*` npm packages, imported in `docs/.vuepress/styles/fonts.css`
+- Google Fonts CDN was removed — do NOT re-add `fonts.googleapis.com` or `fonts.gstatic.com` links to `config.ts` head
+- All fonts served from Vercel CDN after build, browser downloads only needed unicode-range subsets
+
+### Performance notes
+
+- **Social icons** (`docs/.vuepress/public/social-icons/`) are 1024x1024 PNGs (~400-600KB each) rendered at 32px — consider Iconify replacement if optimizing
+- **avatar.png** is 1.7MB (1024x1024) — consider resize/WebP if optimizing
+- **profile.jpg** is 2.5MB — referenced in `docs/more/about/README.md` and `docs/zh/more/about/README.md`
+- **photoSwipe** plugin is enabled globally, preloads 58KB on every page — can be disabled with `photoSwipe: false` in plumeTheme options
+- **manualChunks** configured in `config.ts` — splits `vendor-vue` (vue/vue-router/pinia) and `vendor-utils` (@vueuse/core)
+- **CSS code splitting** — `home-liquid.css` and `notes-catalog.css` are imported in their respective Vue components (not in `client.ts`) for per-page loading
+- **@iconify/vue** is installed, `<Icon>` component available in `HomeReplica.vue` — currently only used for close button in card reveals
