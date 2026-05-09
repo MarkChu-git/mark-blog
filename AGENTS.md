@@ -58,3 +58,22 @@ Violation of any rule is grounds for task rejection and re-execution.
 - Blog posts are auto-discovered from `blog/**/*.md` and `zh/blog/**/*.md`.
 - When adding/changing a note chapter, update the corresponding sidebar array in `plume.config.ts` for both `/` and `/zh/` locales.
 - Mermaid and KaTeX are enabled. Custom code highlighter langs are limited to `ts, js, vue, json, bash, sh, css, html, python, markdown`.
+
+### Font Management
+- **Inter** — self-hosted by vuepress-theme-plume (woff2 in build output). `font-display: swap`.
+- **Sora, Manrope, JetBrains Mono** — self-hosted via `@fontsource/*` npm packages, imported in `docs/.vuepress/styles/fonts.css`.
+- Google Fonts CDN was removed — do NOT re-add `fonts.googleapis.com` or `fonts.gstatic.com` links to `config.ts` head.
+- All fonts served from Vercel CDN after build. Browser downloads only needed unicode-range subsets.
+
+### Performance Constraints
+- **Social icons** (`docs/.vuepress/public/social-icons/`) are 1024x1024 PNGs (~400-600KB each) rendered at 32px. Consider Iconify replacement if optimizing.
+- **avatar.png** is 1.7MB (1024x1024). Consider resize/WebP if optimizing.
+- **profile.jpg** is 2.5MB. Referenced in `docs/more/about/README.md` and `docs/zh/more/about/README.md`.
+- **photoSwipe** plugin is enabled globally — preloads 58KB on every page. Can be disabled with `photoSwipe: false` in plumeTheme options if acceptable.
+- **manualChunks** configured in `config.ts` — splits `vendor-vue` (vue/vue-router/pinia) and `vendor-utils` (@vueuse/core).
+- **CSS code splitting** — `home-liquid.css` and `notes-catalog.css` are imported in their respective Vue components (not in `client.ts`) for per-page loading.
+
+### Icon System
+- `@iconify/vue` is installed. `<Icon>` component available in `HomeReplica.vue`.
+- Iconify icon names follow `mdi:icon-name` or `simple-icons:icon-name` format.
+- Currently only used for the close button in card reveals — social icons still use PNGs.

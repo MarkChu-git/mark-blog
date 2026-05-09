@@ -114,28 +114,6 @@ export default defineUserConfig({
         content: 'Mark',
       },
     ],
-    [
-      'link',
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.googleapis.com',
-      },
-    ],
-    [
-      'link',
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: '',
-      },
-    ],
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap',
-      },
-    ],
   ],
   locales: {
     '/': {
@@ -149,7 +127,24 @@ export default defineUserConfig({
       description: siteDescriptionZH,
     },
   },
-  bundler: viteBundler(),
+  bundler: viteBundler({
+    viteOptions: {
+      build: {
+        rollupOptions: {
+          output: {
+            manualChunks(id) {
+              if (id.includes('node_modules/vue/') || id.includes('node_modules/vue-router/') || id.includes('node_modules/pinia/')) {
+                return 'vendor-vue'
+              }
+              if (id.includes('node_modules/@vueuse/')) {
+                return 'vendor-utils'
+              }
+            },
+          },
+        },
+      },
+    },
+  }),
   plugins: [
     seoPlugin({
       hostname: siteOrigin,
