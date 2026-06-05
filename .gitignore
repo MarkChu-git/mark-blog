@@ -7,3 +7,5 @@ docs/.vuepress/.temp
 docs/.vuepress/dist
 .vercel
 .DS_Store
+.gitnexus
+.claude/
