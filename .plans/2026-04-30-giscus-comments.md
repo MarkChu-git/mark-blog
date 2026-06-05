@@ -171,4 +171,4 @@ After Vercel deploys the preview, check:
 
 If everything works, merge the PR into `main`.
 
-curl "[https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://me.markchu.work\&strategy=mobile](https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://example.com\&strategy=mobile)" -o pagespeed-mobile.json
+curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://me.markchu.work&strategy=mobile" -o pagespeed-mobile.json
