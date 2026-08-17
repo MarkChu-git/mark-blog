@@ -7,7 +7,7 @@
     "bun": ">=1.2.0"
   },
   "scripts": {
-    "preinstall": "bun scripts/only-bun.ts",
+    "preinstall": "sh scripts/only-bun.sh",
     "prepare": "bun scripts/setup-hooks.ts",
     "check:no-npm": "bun scripts/check-no-npm.ts",
     "dev": "vuepress dev docs",

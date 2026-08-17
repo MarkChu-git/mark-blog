@@ -37,7 +37,7 @@ This repository is Bun-only. No exceptions. No "just this once." No fallback.
 - `bunx gitnexus analyze` (never `npx gitnexus`, never `npm i -g gitnexus`)
 - If a generated doc (including the GitNexus block) reintroduces `npx` or `npm` as a runnable command, rewrite it to Bun before committing
 
-Mechanical enforcement: `scripts/only-bun.ts` (preinstall), `scripts/check-no-npm.ts` (pre-commit), `.gitignore`.
+Mechanical enforcement: `scripts/only-bun.sh` (preinstall, reads the parent client UA before Bun can rewrite it), `scripts/check-no-npm.ts` (pre-commit), `.githooks`, `.gitignore`.
 
 Violation is grounds for task rejection and re-execution.
 

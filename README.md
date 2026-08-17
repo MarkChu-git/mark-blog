@@ -180,7 +180,7 @@ Other env the config already understands: `SITE_BASE`, `VERCEL_PROJECT_PRODUCTIO
 | `bunx <pkg>` | `npx <pkg>` |
 | 提交 `bun.lock` | 提交 `package-lock.json` / `.npmrc` |
 
-`scripts/only-bun.ts` 会在安装时拒绝非 Bun 客户端。`scripts/check-no-npm.ts` 会在提交时再查一遍。`.npmrc` 已删除；不要把它加回来。
+`scripts/only-bun.sh` 会在安装时拒绝非 Bun 客户端（先读父进程的 user-agent，不让 Bun 改写后再查）。`scripts/check-no-npm.ts` 会在提交时再查一遍。`.npmrc` 已删除；不要把它加回来。
 
 ---
 
