@@ -1,11 +1,19 @@
 node_modules
 
 # VuePress cache/temp
-
 docs/.vuepress/.cache
 docs/.vuepress/.temp
 docs/.vuepress/dist
+
+# Other package managers — this repo is Bun-only
+package-lock.json
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
 .vercel
 .DS_Store
 .gitnexus
 .claude/
+

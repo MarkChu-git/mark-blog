@@ -608,12 +608,12 @@ const skills = computed<SkillItem[]>(() => [
     detail: isZh.value ? '支撑前端工作流和内容构建链路。' : 'Supports the frontend workflow and site build pipeline.',
   },
   {
-    key: 'npm',
-    label: 'npm',
-    icon: 'mdi:npm',
-    color: '#cf766a',
+    key: 'bun',
+    label: 'Bun',
+    icon: 'simple-icons:bun',
+    color: '#cbb27d',
     group: isZh.value ? '工具' : 'Tooling',
-    detail: isZh.value ? '用于依赖管理、脚本执行和 JavaScript 工具链组织。' : 'Handles dependency management, scripts, and the broader JavaScript toolchain.',
+    detail: isZh.value ? '用于依赖管理、脚本执行和 JavaScript 工具链组织。' : 'Handles dependency management, scripts, and the JavaScript toolchain.',
   },
   {
     key: 'go',

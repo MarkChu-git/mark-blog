@@ -1,0 +1,9 @@
+[install]
+peer = true
+optional = true
+dev = true
+linker = "hoisted"
+saveTextLockfile = true
+
+[install.lockfile]
+save = true
