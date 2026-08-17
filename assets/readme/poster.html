@@ -58,19 +58,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, #0b0d12 0%, #0b0d12 28%, rgba(11, 13, 18, 0.72) 46%, transparent 62%),
-        linear-gradient(180deg, rgba(11, 13, 18, 0.22) 0%, transparent 28%, transparent 78%, rgba(11, 13, 18, 0.28) 100%);
-    }
-
-    .grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(186, 201, 227, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(186, 201, 227, 0.055) 1px, transparent 1px);
-      background-size: 118px 118px;
-      mask-image: radial-gradient(ellipse 70% 80% at 22% 50%, #000 0%, transparent 72%);
-      pointer-events: none;
+        linear-gradient(90deg, #0b0d12 0%, #0b0d12 24%, rgba(11, 13, 18, 0.78) 42%, transparent 58%),
+        linear-gradient(180deg, rgba(11, 13, 18, 0.18) 0%, transparent 22%, transparent 80%, rgba(11, 13, 18, 0.22) 100%);
     }
 
     .rim {
@@ -82,9 +71,9 @@
 
     .type {
       position: absolute;
-      left: 96px;
-      top: 88px;
-      width: 1024px;
+      left: 72px;
+      top: 56px;
+      width: 1120px;
       color: #f4f7fb;
     }
 
@@ -92,64 +81,58 @@
       margin: 0;
       font-family: "JetBrains Mono", ui-monospace, monospace;
       font-weight: 500;
-      font-size: 11px;
-      letter-spacing: 0.28em;
+      font-size: 26px;
+      letter-spacing: 0.18em;
       line-height: 1;
-      color: rgba(142, 224, 227, 0.72);
-      text-transform: none;
+      color: #8ee0e3;
     }
 
     h1 {
-      margin: 56px 0 0;
+      margin: 28px 0 0;
       font-family: "Sora", Inter, system-ui, sans-serif;
       font-weight: 800;
-      font-size: 152px;
-      letter-spacing: -0.055em;
-      line-height: 0.86;
+      font-size: 268px;
+      letter-spacing: -0.06em;
+      line-height: 0.84;
       color: #f4f7fb;
     }
 
     .principles {
-      margin: 36px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 28px;
+      margin: 28px 0 0;
       font-family: "Sora", Inter, system-ui, sans-serif;
       font-weight: 500;
-      font-size: 26px;
-      letter-spacing: 0.06em;
-      line-height: 1.2;
+      font-size: 48px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
     }
 
     .c { color: #8ee0e3; }
     .b { color: #7aa2ff; }
     .v { color: #b28cff; }
-    .dot { color: rgba(244, 247, 251, 0.32); }
-
-    .rule {
-      width: 280px;
-      height: 1px;
-      margin: 20px 0 0;
-      border: 0;
-      background: linear-gradient(90deg, rgba(244, 247, 251, 0.55), rgba(244, 247, 251, 0));
-    }
+    .dot { color: rgba(244, 247, 251, 0.4); }
 
     .stack {
-      margin: 16px 0 0;
+      margin: 22px 0 0;
       font-family: "JetBrains Mono", ui-monospace, monospace;
       font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 0.16em;
-      color: rgba(255, 215, 136, 0.88);
+      font-size: 30px;
+      letter-spacing: 0.08em;
+      color: #ffd788;
     }
 
     .sig {
       position: absolute;
-      right: 96px;
+      right: 72px;
       bottom: 36px;
       margin: 0;
       font-family: "JetBrains Mono", ui-monospace, monospace;
       font-weight: 500;
-      font-size: 10px;
-      letter-spacing: 0.22em;
-      color: rgba(244, 247, 251, 0.28);
+      font-size: 20px;
+      letter-spacing: 0.16em;
+      color: rgba(244, 247, 251, 0.45);
     }
   </style>
 </head>
@@ -157,14 +140,12 @@
   <div class="poster">
     <img class="atmosphere" src="./poster-bg.jpg" alt="" />
     <div class="vignette"></div>
-    <div class="grid"></div>
     <div class="type">
       <p class="eyebrow">01  /  PERSONAL SITE</p>
       <h1>MARK</h1>
       <p class="principles">
         <span class="c">Insight</span><span class="dot"> · </span><span class="b">Realism</span><span class="dot"> · </span><span class="v">Compounding</span>
       </p>
-      <hr class="rule" />
       <p class="stack">VuePress · Bun · EN/ZH</p>
     </div>
     <p class="sig">HANYANG CHU</p>
