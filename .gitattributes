@@ -1,0 +1,12 @@
+# Keep these files in git. Do not let them own the language bar.
+
+# README poster typesetter — only used to export the hero image
+assets/readme/poster.html linguist-generated
+
+# Search Console verification stub
+docs/.vuepress/public/*.html linguist-vendored
+
+# VuePress source lives under docs/, which Linguist treats as documentation
+# by default. Count the actual site code as source.
+docs/.vuepress/** -linguist-documentation
+docs/.vuepress/components/*.vue linguist-language=Vue
