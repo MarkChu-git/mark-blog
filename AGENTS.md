@@ -22,10 +22,29 @@ Use web search before making implementation decisions involving external librari
 
 Violation of any rule is grounds for task rejection and re-execution.
 
+## 6. Bun Only — npm is forbidden (iron law)
+
+This repository is Bun-only. No exceptions. No "just this once." No fallback.
+
+**NEVER**
+- Run `npm`, `npx`, `yarn`, `pnpm`, or `cnpm` in this repository
+- Add `package-lock.json`, `.npmrc`, `yarn.lock`, or `pnpm-lock.yaml`
+- Write `npm run` / `npx` into `package.json`, `vercel.json`, `netlify.toml`, hooks, or agent docs as a command to execute
+- Suggest npm when Bun is missing — install Bun from https://bun.sh instead
+
+**ALWAYS**
+- `bun install`, `bun run <script>`, `bunx <pkg>`
+- `bunx gitnexus analyze` (never `npx gitnexus`, never `npm i -g gitnexus`)
+- If a generated doc (including the GitNexus block) reintroduces `npx` or `npm` as a runnable command, rewrite it to Bun before committing
+
+Mechanical enforcement: `scripts/only-bun.ts` (preinstall), `scripts/check-no-npm.ts` (pre-commit), `.gitignore`.
+
+Violation is grounds for task rejection and re-execution.
+
 ## Repo Context
 
 ### Stack & Commands
-- VuePress 2 + vuepress-theme-plume static blog. Bun >=1.2 (`packageManager`: `bun@1.3.14`). This repo is Bun-only — do not run npm, yarn, or pnpm.
+- VuePress 2 + vuepress-theme-plume static blog. Bun >=1.2 (`packageManager`: `bun@1.3.14`). **Iron law: Bun only. npm is forbidden.**
 - **Dev**: `bun run docs:dev` (localhost:8080)
 - **Build**: `bun run docs:build` (output: `docs/.vuepress/dist`)
 - **Clean cache build**: `bun run docs:clean-build`
@@ -83,7 +102,7 @@ Violation of any rule is grounds for task rejection and re-execution.
 
 This project is indexed by GitNexus as **mark-blog** (1441 symbols, 1454 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
-> Index stale? Run `node .gitnexus/run.cjs analyze` from the project root — it auto-selects an available runner. No `.gitnexus/run.cjs` yet? `npx gitnexus analyze` (npm 11 crash → `npm i -g gitnexus`; #1939).
+> Index stale? Run `bunx gitnexus analyze` from the project root. Never `npx`. Never `npm`.
 
 ## Always Do
 

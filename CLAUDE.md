@@ -111,13 +111,14 @@ These rules bind ALL agent sessions operating in this repository.
 3. **Multi-Subagent Mode with 3 Auditors** — Every task MUST use 3+ parallel subagents: workers + 3 auditors. Auditors verify code quality, rule adherence, and correctness. Any FAIL requires fixes before completion.
 4. **Web Search Capability** — Use web search before making implementation decisions involving external libraries, best practices, research, or API changes.
 5. **Enforcement** — Violation of any rule is grounds for task rejection and re-execution.
+6. **Bun Only — npm is forbidden (iron law)** — Never run `npm` / `npx` / `yarn` / `pnpm`. Never add `package-lock.json` or `.npmrc`. Use `bun install`, `bun run`, `bunx`. If generated docs reintroduce `npx`, rewrite to Bun before committing.
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
 This project is indexed by GitNexus as **mark-blog** (1441 symbols, 1454 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
-> Index stale? Run `node .gitnexus/run.cjs analyze` from the project root — it auto-selects an available runner. No `.gitnexus/run.cjs` yet? `npx gitnexus analyze` (npm 11 crash → `npm i -g gitnexus`; #1939).
+> Index stale? Run `bunx gitnexus analyze` from the project root. Never `npx`. Never `npm`.
 
 ## Always Do
 

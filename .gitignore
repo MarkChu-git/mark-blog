@@ -5,11 +5,13 @@ docs/.vuepress/.cache
 docs/.vuepress/.temp
 docs/.vuepress/dist
 
-# Other package managers — this repo is Bun-only
+# Other package managers — iron law: Bun only, npm is forbidden
 package-lock.json
+npm-shrinkwrap.json
 npm-debug.log*
 yarn.lock
 pnpm-lock.yaml
+.npmrc
 bun.lockb
 
 .vercel

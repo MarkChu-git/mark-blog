@@ -169,16 +169,18 @@ Other env the config already understands: `SITE_BASE`, `VERCEL_PROJECT_PRODUCTIO
 
 ---
 
-## Toolchain rules
+## Toolchain — 铁律
 
-| Do | Don't |
+**本仓库严禁 npm。** 没有例外，没有「就这一次」，没有 fallback。
+
+| 只用 | 禁止 |
 | --- | --- |
 | `bun install` | `npm install` / `yarn` / `pnpm` |
 | `bun run <script>` | `npm run <script>` |
 | `bunx <pkg>` | `npx <pkg>` |
-| Commit `bun.lock` | Commit `package-lock.json` |
+| 提交 `bun.lock` | 提交 `package-lock.json` / `.npmrc` |
 
-`.npmrc` is gone on purpose. Bun installs peer dependencies by default; the old `legacy-peer-deps=true` crutch is not coming back.
+`scripts/only-bun.ts` 会在安装时拒绝非 Bun 客户端。`scripts/check-no-npm.ts` 会在提交时再查一遍。`.npmrc` 已删除；不要把它加回来。
 
 ---
 

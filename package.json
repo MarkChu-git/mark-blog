@@ -8,6 +8,8 @@
   },
   "scripts": {
     "preinstall": "bun scripts/only-bun.ts",
+    "prepare": "bun scripts/setup-hooks.ts",
+    "check:no-npm": "bun scripts/check-no-npm.ts",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
     "preview": "vuepress serve docs",
