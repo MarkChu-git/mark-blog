@@ -6,16 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Dev server (http://localhost:8080)
-npm run docs:dev
+bun run docs:dev
 
 # Production build
-npm run docs:build
+bun run docs:build
 
 # Clean dev (clears VuePress cache)
-npm run docs:clean-dev
+bun run docs:clean-dev
 
 # Preview production build
-npm run docs:preview
+bun run docs:preview
 
 # Build output: docs/.vuepress/dist
 ```
@@ -73,7 +73,7 @@ docs/
 ### Font management
 
 - **Inter** — self-hosted by vuepress-theme-plume (woff2 in build output), `font-display: swap`
-- **Sora, Manrope, JetBrains Mono** — self-hosted via `@fontsource/*` npm packages, imported in `docs/.vuepress/styles/fonts.css`
+- **Sora, Manrope, JetBrains Mono** — self-hosted via `@fontsource/*` packages, imported in `docs/.vuepress/styles/fonts.css`
 - Google Fonts CDN was removed — do NOT re-add `fonts.googleapis.com` or `fonts.gstatic.com` links to `config.ts` head
 - All fonts served from Vercel CDN after build, browser downloads only needed unicode-range subsets
 
@@ -96,8 +96,8 @@ docs/
 
 ### Deployment gotchas
 
-- Primary: **Vercel** (`vercel.json`: build `npm run build`, output `docs/.vuepress/dist`)
-- Fallback: **Netlify** (`netlify.toml`: build `npm run docs:build`, publish `docs/.vuepress/dist`)
+- Primary: **Vercel** (`vercel.json`: install `bun install --frozen-lockfile`, build `bun run build`, output `docs/.vuepress/dist`)
+- Fallback: **Netlify** (`netlify.toml`: build `bun run docs:build`, publish `docs/.vuepress/dist`)
 - `SITE_URL` env var controls canonical URLs and sitemap hostname. If unset, falls back to GitHub Pages URL
 - `docs/.vuepress/.cache/`, `.temp/`, `dist/` are gitignored — never commit them
 - **No tests, lint, or typecheck** — do not attempt to run them
@@ -111,28 +111,30 @@ These rules bind ALL agent sessions operating in this repository.
 3. **Multi-Subagent Mode with 3 Auditors** — Every task MUST use 3+ parallel subagents: workers + 3 auditors. Auditors verify code quality, rule adherence, and correctness. Any FAIL requires fixes before completion.
 4. **Web Search Capability** — Use web search before making implementation decisions involving external libraries, best practices, research, or API changes.
 5. **Enforcement** — Violation of any rule is grounds for task rejection and re-execution.
+6. **Bun Only — npm is forbidden (iron law)** — Never run `npm` / `npx` / `yarn` / `pnpm`. Never add `package-lock.json` or `.npmrc`. Use `bun install`, `bun run`, `bunx`. If generated docs reintroduce `npx`, rewrite to Bun before committing.
 
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **mark-blog** (1420 symbols, 1420 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **mark-blog** (1441 symbols, 1454 relationships, 0 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
-> If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
+> Index stale? Run `bunx gitnexus analyze` from the project root. Never `npx`. Never `npm`.
 
 ## Always Do
 
-- **MUST run impact analysis before editing any symbol.** Before modifying a function, class, or method, run `gitnexus_impact({target: "symbolName", direction: "upstream"})` and report the blast radius (direct callers, affected processes, risk level) to the user.
-- **MUST run `gitnexus_detect_changes()` before committing** to verify your changes only affect expected symbols and execution flows.
+- **MUST run impact analysis before editing any symbol.** Before modifying a function, class, or method, run `impact({target: "symbolName", direction: "upstream"})` and report the blast radius (direct callers, affected processes, risk level) to the user.
+- **MUST run `detect_changes()` before committing** to verify your changes only affect expected symbols and execution flows. For regression review, compare against the default branch: `detect_changes({scope: "compare", base_ref: "main"})`.
 - **MUST warn the user** if impact analysis returns HIGH or CRITICAL risk before proceeding with edits.
-- When exploring unfamiliar code, use `gitnexus_query({query: "concept"})` to find execution flows instead of grepping. It returns process-grouped results ranked by relevance.
-- When you need full context on a specific symbol — callers, callees, which execution flows it participates in — use `gitnexus_context({name: "symbolName"})`.
+- When exploring unfamiliar code, use `query({search_query: "concept"})` to find execution flows instead of grepping. It returns process-grouped results ranked by relevance.
+- When you need full context on a specific symbol — callers, callees, which execution flows it participates in — use `context({name: "symbolName"})`.
+- For security review, `explain({target: "fileOrSymbol"})` lists taint findings (source→sink flows; needs `analyze --pdg`).
 
 ## Never Do
 
-- NEVER edit a function, class, or method without first running `gitnexus_impact` on it.
+- NEVER edit a function, class, or method without first running `impact` on it.
 - NEVER ignore HIGH or CRITICAL risk warnings from impact analysis.
-- NEVER rename symbols with find-and-replace — use `gitnexus_rename` which understands the call graph.
-- NEVER commit changes without running `gitnexus_detect_changes()` to check affected scope.
+- NEVER rename symbols with find-and-replace — use `rename` which understands the call graph.
+- NEVER commit changes without running `detect_changes()` to check affected scope.
 
 ## Resources
 

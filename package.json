@@ -1,22 +1,30 @@
 {
   "name": "mark-blog",
   "version": "1.0.0",
-  "description": "Static blog with VuePress and vuepress-theme-plume",
+  "description": "Bilingual personal site — insight, realism, compounding.",
+  "packageManager": "bun@1.3.14",
   "engines": {
-    "node": ">=18"
+    "bun": ">=1.2.0"
   },
   "scripts": {
-    "dev": "npm run docs:dev",
-    "build": "npm run docs:build",
-    "preview": "npm run docs:preview",
+    "preinstall": "sh scripts/only-bun.sh",
+    "prepare": "bun scripts/setup-hooks.ts",
+    "check:no-npm": "bun scripts/check-no-npm.ts",
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "preview": "vuepress serve docs",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache",
     "docs:clean-build": "vuepress build docs --clean-cache",
     "docs:preview": "vuepress serve docs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "vuepress",
+    "blog",
+    "bun"
+  ],
+  "author": "Mark (Hanyang Chu)",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
